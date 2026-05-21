@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Sports Force Parks · Manteca"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Sports Force Parks · Manteca"
+  heroSub="A West Coast home for weeklong tournament baseball."
+  stats={[
+    { label: 'LOCATION', value: 'Manteca, CA' },
+    { label: 'FORMAT',   value: 'Weekend + week' },
+    { label: 'SETTING',  value: 'Central Valley complex' },
+    { label: 'JOINED',   value: '2023' },
+  ]}
+  storyHeadline="Central Valley baseball, all summer long."
+  storyBody="Sports Force Parks at Manteca brings the Unrivaled tournament model to Northern California, with a multi-field complex purpose-built for youth baseball."
+  upcomingEyebrow="UPCOMING IN MANTECA"
+  upcomingHeadline="This summer in Manteca."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Manteca', month: 'JUL', day: '08', title: 'Sports Parks Manteca Showdown', loc: 'Manteca, CA', age: '10U-14U', dates: 'Jul 8-10'  },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Manteca', month: 'JUL', day: '22', title: 'Manteca Week 3 Tournament',     loc: 'Manteca, CA', age: '10U-14U', dates: 'Jul 22-26' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Manteca', month: 'AUG', day: '12', title: 'Manteca Week 5 Tournament',     loc: 'Manteca, CA', age: '10U-14U', dates: 'Aug 12-16' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by California sun."
+  wteItems={[
+    { title: 'Multi-Field Complex',  desc: 'Modern facility, purpose-built for tournament play.' },
+    { title: 'Year-Round Climate',   desc: 'Reliable Central Valley weather.' },
+    { title: 'On-Site Lodging',      desc: 'Stay where you play, all week.' },
+    { title: 'Closing Awards',       desc: 'A finish to the week families remember.' },
+  ]}
+  galleryHeadline="Inside Manteca."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Cedar Point', meta: 'The amusement park weekend', href: '/sports-force-parks-cedar-point/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Rocker B Ranch',                   meta: 'A Texas weeklong',           href: '/rocker-b/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown',                      meta: 'The original',               href: '/cooperstown/' },
+  ]}
+/>

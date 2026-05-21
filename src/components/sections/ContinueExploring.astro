@@ -1,0 +1,53 @@
+---
+import CsCard from '../cards/CsCard.astro';
+
+interface Card {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string;
+  name: string;
+  meta?: string;
+  href?: string;
+}
+interface Props {
+  eyebrow?: string;
+  title: string;
+  cards: Card[];
+}
+const { eyebrow = 'CONTINUE EXPLORING', title, cards } = Astro.props;
+---
+
+<section class="continue-exploring">
+  <div class="continue-exploring__inner">
+    <p class="continue-exploring__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="continue-exploring__title text-h1">{title}</h2>
+    <div class="continue-exploring__grid">
+      {cards.map(card => <CsCard {...card} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .continue-exploring { background: var(--gray-50); }
+  .continue-exploring__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .continue-exploring__inner { padding: 100px var(--margin-desktop); }
+  }
+  .continue-exploring__eyebrow { color: var(--gray-500); }
+  .continue-exploring__title { color: var(--color-black); max-width: 760px; }
+  .continue-exploring__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .continue-exploring__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

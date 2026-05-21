@@ -1,0 +1,80 @@
+---
+import PillarTag from '../atoms/PillarTag.astro';
+
+interface Props {
+  pillar: 'local' | 'destinations' | 'training';
+  parentTag: string;
+  name: string;
+  meta?: string;
+  line?: string;
+  href: string;
+  imageLabel?: string;
+}
+const { pillar, parentTag, name, meta, line, href, imageLabel = '[ photo ]' } = Astro.props;
+---
+
+<a class="location-card" href={href}>
+  <div class="location-card__img" aria-hidden="true">
+    <span class="location-card__img-label text-meta">{imageLabel}</span>
+  </div>
+  <div class="location-card__content">
+    <PillarTag pillar={pillar} label={parentTag} />
+    <h3 class="location-card__name text-h3">{name}</h3>
+    {meta && <p class="location-card__meta text-meta">{meta}</p>}
+    {line && <p class="location-card__line text-body-sm">{line}</p>}
+    <span class="location-card__cta text-eyebrow">Explore →</span>
+  </div>
+</a>
+
+<style>
+  .location-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  @media (hover: hover) {
+    .location-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+    .location-card:hover .location-card__cta {
+      color: var(--color-red);
+    }
+  }
+  .location-card__img {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+  }
+  .location-card__img-label {
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .location-card__content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .location-card__name {
+    color: var(--color-navy);
+  }
+  .location-card__meta {
+    color: var(--gray-500);
+  }
+  .location-card__line {
+    color: var(--gray-600);
+    flex: 1;
+  }
+  .location-card__cta {
+    color: var(--color-navy);
+    transition: color var(--transition-fast);
+  }
+</style>

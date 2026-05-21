@@ -1,0 +1,55 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: Crumb[];
+  theme?: 'light' | 'dark';
+}
+const { items, theme = 'light' } = Astro.props;
+---
+
+<nav class={`breadcrumb breadcrumb--${theme}`} aria-label="Breadcrumb">
+  {items.map((item, i) => (
+    <>
+      {i > 0 && <span class="breadcrumb__sep text-meta" aria-hidden="true">/</span>}
+      {item.href ? (
+        <a class="breadcrumb__link text-meta" href={item.href}>{item.label}</a>
+      ) : (
+        <span class="breadcrumb__current text-meta">{item.label}</span>
+      )}
+    </>
+  ))}
+</nav>
+
+<style>
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: var(--weight-bold);
+  }
+  .breadcrumb--light .breadcrumb__link,
+  .breadcrumb--light .breadcrumb__current {
+    color: var(--color-navy);
+  }
+  .breadcrumb--light .breadcrumb__sep {
+    color: var(--gray-400);
+  }
+  .breadcrumb--dark .breadcrumb__link,
+  .breadcrumb--dark .breadcrumb__current {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .breadcrumb--dark .breadcrumb__sep {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .breadcrumb__link {
+    transition: color var(--transition-fast);
+  }
+  .breadcrumb__link:hover {
+    color: var(--color-red);
+  }
+</style>

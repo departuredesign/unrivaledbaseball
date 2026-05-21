@@ -1,0 +1,50 @@
+---
+interface Props {
+  handle?: string;
+}
+const { handle = '@UnrivaledBaseball on Instagram' } = Astro.props;
+---
+
+<section class="social-feed">
+  <div class="social-feed__inner">
+    <p class="social-feed__handle text-eyebrow">{handle}</p>
+    <div class="social-feed__grid">
+      {Array.from({ length: 6 }, () => (
+        <div class="social-tile" aria-hidden="true"></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .social-feed { background: var(--color-white); }
+  .social-feed__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .social-feed__inner { padding: 80px var(--margin-desktop); }
+  }
+  .social-feed__handle {
+    color: var(--gray-500);
+  }
+  .social-feed__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 768px) {
+    .social-feed__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .social-feed__grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .social-tile {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+  }
+</style>

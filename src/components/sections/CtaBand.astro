@@ -1,0 +1,43 @@
+---
+import Btn from '../atoms/Btn.astro';
+
+interface Props {
+  headline: string;
+  sub?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+const { headline, sub, ctaLabel = 'SEE ALL EVENTS →', ctaHref = '/events/' } = Astro.props;
+---
+
+<section class="cta-band">
+  <div class="cta-band__inner">
+    <h2 class="cta-band__headline text-display">{headline}</h2>
+    {sub && <p class="cta-band__sub text-body">{sub}</p>}
+    <Btn variant="outline-light" href={ctaHref} label={ctaLabel} />
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    background: var(--color-red);
+    color: var(--color-white);
+    text-align: center;
+  }
+  .cta-band__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .cta-band__inner { padding: 100px var(--margin-desktop); }
+  }
+  .cta-band__sub {
+    max-width: 640px;
+    opacity: 0.9;
+  }
+</style>

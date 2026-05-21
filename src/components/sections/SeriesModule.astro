@@ -1,0 +1,67 @@
+---
+interface Series { title: string; meta: string; href?: string }
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  series: Series[];
+}
+const {
+  eyebrow = 'THE SERIES',
+  headline = 'Stories told in chapters.',
+  series,
+} = Astro.props;
+---
+
+<section class="series-module">
+  <div class="series-module__inner">
+    <p class="series-module__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="series-module__headline text-h1">{headline}</h2>
+    <div class="series-module__grid">
+      {series.map(s => (
+        <a class="series-card" href={s.href ?? '#'}>
+          <p class="series-card__tag text-eyebrow">Series</p>
+          <h3 class="series-card__title text-h3">{s.title}</h3>
+          <p class="series-card__meta text-meta">{s.meta}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .series-module { background: var(--color-white); }
+  .series-module__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .series-module__inner { padding: 100px var(--margin-desktop); }
+  }
+  .series-module__eyebrow { color: var(--gray-500); }
+  .series-module__headline { color: var(--color-black); }
+  .series-module__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .series-module__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .series-card {
+    background: var(--gray-50);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background var(--transition-fast);
+  }
+  .series-card:hover { background: var(--gray-100); }
+  .series-card__tag { color: var(--color-red); }
+  .series-card__title { color: var(--color-navy); }
+  .series-card__meta { color: var(--gray-500); }
+</style>

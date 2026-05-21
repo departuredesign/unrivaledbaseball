@@ -1,0 +1,63 @@
+---
+interface Person { name: string; role: string }
+interface Props {
+  headline?: string;
+  people: Person[];
+}
+const { headline = 'The team behind the standard.', people } = Astro.props;
+---
+
+<section class="leadership">
+  <div class="leadership__inner">
+    <h2 class="leadership__headline text-h1">{headline}</h2>
+    <div class="leadership__grid">
+      {people.map(person => (
+        <article class="leader-card">
+          <div class="leader-card__img" aria-hidden="true"></div>
+          <p class="leader-card__name text-h3">{person.name}</p>
+          <p class="leader-card__role text-body-sm">{person.role}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .leadership { background: var(--color-white); }
+  .leadership__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width: 1024px) {
+    .leadership__inner { padding: 100px var(--margin-desktop); }
+  }
+  .leadership__headline { color: var(--color-black); }
+  .leadership__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .leadership__grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  }
+  .leader-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .leader-card__img {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+  }
+  .leader-card__name {
+    color: var(--color-navy);
+    margin-top: 8px;
+  }
+  .leader-card__role {
+    color: var(--gray-500);
+  }
+</style>

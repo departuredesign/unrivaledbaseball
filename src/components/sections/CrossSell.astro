@@ -1,0 +1,61 @@
+---
+import CsCard from '../cards/CsCard.astro';
+
+interface Card {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string;
+  name: string;
+  meta?: string;
+  href?: string;
+}
+interface Props {
+  eyebrow?: string;
+  title: string;
+  cards: Card[];
+}
+const { eyebrow = 'CONTINUE THE JOURNEY', title, cards } = Astro.props;
+---
+
+<section class="cross-sell">
+  <div class="cross-sell__inner">
+    <p class="cross-sell__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="cross-sell__title text-h1">{title}</h2>
+    <div class="cross-sell__grid">
+      {cards.map(card => <CsCard {...card} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cross-sell {
+    background: var(--color-white);
+    border-top: 1px solid var(--gray-200);
+  }
+  .cross-sell__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .cross-sell__inner { padding: 100px var(--margin-desktop); }
+  }
+  .cross-sell__eyebrow {
+    color: var(--gray-500);
+  }
+  .cross-sell__title {
+    color: var(--color-black);
+    max-width: 760px;
+  }
+  .cross-sell__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .cross-sell__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

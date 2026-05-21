@@ -1,0 +1,81 @@
+---
+import PillarDot from '../atoms/PillarDot.astro';
+
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  pillarLabel: string;
+  month: string;
+  day: string;
+  title: string;
+  loc: string;
+  age: string;
+  dates: string;
+  href?: string;
+}
+const { pillar, pillarLabel, month, day, title, loc, age, dates, href = '#' } = Astro.props;
+---
+
+<article class="list-row" data-pillar={pillar}>
+  <div class="list-row__date">
+    <span class="list-row__month text-eyebrow">{month}</span>
+    <span class="list-row__day text-h1">{day}</span>
+  </div>
+  <div class="list-row__main">
+    <h3 class="list-row__title text-h3">{title}</h3>
+    <div class="list-row__pillar">
+      <PillarDot pillar={pillar} />
+      <span class="text-meta">{pillarLabel}</span>
+    </div>
+  </div>
+  <p class="list-row__loc text-body-sm">{loc}</p>
+  <p class="list-row__age text-body-sm">{age}</p>
+  <p class="list-row__dates text-body-sm">{dates}</p>
+  <a class="list-row__cta text-eyebrow" href={href}>Register →</a>
+</article>
+
+<style>
+  .list-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray-200);
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .list-row {
+      grid-template-columns: 80px 1fr 160px 100px 120px 100px;
+      gap: 24px;
+    }
+  }
+  .list-row__date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .list-row__month { color: var(--gray-500); }
+  .list-row__day { color: var(--color-navy); }
+  .list-row__main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .list-row__title { color: var(--color-navy); }
+  .list-row__pillar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gray-500);
+  }
+  .list-row__loc,
+  .list-row__age,
+  .list-row__dates { color: var(--gray-600); }
+  .list-row__cta {
+    color: var(--color-red);
+    transition: color var(--transition-fast);
+    justify-self: end;
+  }
+  .list-row__cta:hover {
+    color: var(--color-dark-red);
+  }
+</style>

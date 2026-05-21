@@ -1,0 +1,91 @@
+---
+interface Props {
+  name: string;
+  meta: string;
+  line: string;
+  cta: string;
+  href: string;
+  imageLabel?: string;
+}
+const { name, meta, line, cta, href, imageLabel = '[ photo ]' } = Astro.props;
+---
+
+<a class="founding-card" href={href}>
+  <div class="founding-card__img" aria-hidden="true">
+    <span class="founding-card__img-label text-meta">{imageLabel}</span>
+  </div>
+  <div class="founding-card__content">
+    <p class="founding-card__tag">
+      <span class="founding-card__badge" aria-hidden="true">★</span>
+      <span class="text-eyebrow">FOUNDING · DESTINATION EXPERIENCE</span>
+    </p>
+    <h3 class="founding-card__name text-h2">{name}</h3>
+    <p class="founding-card__meta text-meta">{meta}</p>
+    <p class="founding-card__line text-body-sm">{line}</p>
+    <p class="founding-card__cta text-eyebrow">{cta} →</p>
+  </div>
+</a>
+
+<style>
+  .founding-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-navy);
+    color: var(--color-white);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  @media (min-width: 768px) {
+    .founding-card { grid-template-columns: 1fr 1fr; }
+  }
+  @media (hover: hover) {
+    .founding-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+    }
+  }
+  .founding-card__img {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--gray-600), var(--color-black));
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  @media (min-width: 768px) {
+    .founding-card__img {
+      aspect-ratio: auto;
+      min-height: 360px;
+    }
+  }
+  .founding-card__img-label {
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .founding-card__content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+  }
+  .founding-card__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-gold);
+  }
+  .founding-card__badge {
+    font-size: 16px;
+  }
+  .founding-card__meta {
+    opacity: 0.7;
+  }
+  .founding-card__line {
+    opacity: 0.85;
+  }
+  .founding-card__cta {
+    color: var(--color-gold);
+    margin-top: 8px;
+  }
+</style>

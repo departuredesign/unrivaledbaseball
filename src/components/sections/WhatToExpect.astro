@@ -1,0 +1,72 @@
+---
+interface Item { title: string; desc: string }
+interface Props {
+  pillar?: 'local' | 'destinations' | 'training' | 'nationals';
+  eyebrow?: string;
+  headline: string;
+  items: Item[];
+}
+const { pillar = 'destinations', eyebrow = 'WHAT TO EXPECT', headline, items } = Astro.props;
+---
+
+<section class="what-to-expect" data-pillar={pillar}>
+  <div class="what-to-expect__inner">
+    <p class="what-to-expect__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="what-to-expect__headline text-h1">{headline}</h2>
+    <div class="what-to-expect__grid">
+      {items.map(item => (
+        <div class="what-to-expect__item">
+          <span class="what-to-expect__mark" aria-hidden="true">◆</span>
+          <h3 class="what-to-expect__item-title text-h3">{item.title}</h3>
+          <p class="what-to-expect__item-desc text-body-sm">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-to-expect { background: var(--color-white); }
+  .what-to-expect__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .what-to-expect__inner { padding: 100px var(--margin-desktop); }
+  }
+  .what-to-expect__eyebrow { color: var(--gray-500); }
+  .what-to-expect__headline { color: var(--color-black); max-width: 800px; }
+  .what-to-expect__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .what-to-expect__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .what-to-expect__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .what-to-expect__item {
+    background: var(--gray-50);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .what-to-expect__mark {
+    color: var(--pillar);
+    font-size: 18px;
+  }
+  .what-to-expect__item-title {
+    color: var(--color-navy);
+  }
+  .what-to-expect__item-desc {
+    color: var(--gray-600);
+  }
+</style>

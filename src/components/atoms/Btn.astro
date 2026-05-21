@@ -1,0 +1,61 @@
+---
+interface Props {
+  variant?: 'primary' | 'accent' | 'outline' | 'outline-light';
+  href?: string;
+  type?: 'button' | 'submit';
+  label?: string;
+}
+const { variant = 'primary', href, type = 'button', label } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag class={`btn btn--${variant}`} href={href} type={!href ? type : undefined}>
+  {label ? <span class="text-eyebrow">{label}</span> : <span class="text-eyebrow"><slot /></span>}
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 22px;
+    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn--primary {
+    background: var(--color-navy);
+    color: var(--color-white);
+    border: none;
+  }
+  .btn--primary:hover {
+    background: var(--color-red);
+  }
+  .btn--accent {
+    background: var(--color-red);
+    color: var(--color-white);
+    border: none;
+  }
+  .btn--accent:hover {
+    background: var(--color-dark-red);
+  }
+  .btn--outline {
+    background: transparent;
+    color: var(--color-navy);
+    border: 2px solid var(--color-navy);
+  }
+  .btn--outline:hover {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+  .btn--outline-light {
+    background: transparent;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+  }
+  .btn--outline-light:hover {
+    background: var(--color-white);
+    color: var(--color-navy);
+  }
+</style>

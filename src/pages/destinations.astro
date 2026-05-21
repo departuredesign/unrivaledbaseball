@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PillarHero from '../components/heroes/PillarHero.astro';
+import PillarExplainer from '../components/sections/PillarExplainer.astro';
+import LocationCard from '../components/cards/LocationCard.astro';
+import CrossSell from '../components/sections/CrossSell.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+
+const properties = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Cooperstown All Star Village',   meta: 'Oneonta, NY · 12U weeklong',      line: 'A pilgrimage at the birthplace of baseball.', href: '/cooperstown/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Rocker B Ranch',                 meta: 'Graford, TX · weeklong',          line: 'The Texas ranch built for baseball memories.', href: '/rocker-b/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Cedar Point', meta: 'Sandusky, OH · weekend + week', line: 'Where baseball week meets Cedar Point week.', href: '/sports-force-parks-cedar-point/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Manteca',   meta: 'Manteca, CA · weekend + week',   line: 'A West Coast home for weeklong tournament baseball.', href: '/sports-force-parks-manteca/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen',   meta: 'Aberdeen, MD · weeklong',         line: 'Where the Ripken family started.', href: '/ripken-aberdeen/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Myrtle Beach', meta: 'Myrtle Beach, SC · weeklong',   line: 'The baseball vacation built into the season.', href: '/ripken-myrtle-beach/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Pigeon Forge', meta: 'Pigeon Forge, TN · weeklong',    line: 'Big League baseball in the foothills.', href: '/ripken-pigeon-forge/' },
+];
+
+const crossSell = [
+  { pillar: 'local' as const,     parentTag: 'LOCAL TOURNAMENTS', name: 'UBN Network',                meta: 'USSSA-sanctioned weekends', href: '/local/' },
+  { pillar: 'nationals' as const, parentTag: 'NATIONALS',         name: 'Ripken Nationals',           meta: 'The championship round',    href: '/nationals/' },
+  { pillar: 'training' as const,  parentTag: 'TRAINING',          name: 'Prospect Select Showcases',  meta: 'Where players become prospects', href: '/prospect-select/' },
+];
+---
+
+<BaseLayout title="Destination Experiences" activeNav="ways-to-play">
+  <PillarHero
+    pillar="destinations"
+    tag="DESTINATION EXPERIENCES"
+    headline="Where families travel to play."
+    sub="Weeklong tournaments at six premier properties — Cooperstown, the Ripken Experience, Rocker B Ranch, and Sports Force Parks."
+  />
+
+  <PillarExplainer
+    pillar="destinations"
+    eyebrow="OUR WEEKLONG MODEL"
+    headline="Trip + tournament, all in one place."
+    body="Destination Experiences are weeklong baseball tournaments at our owned properties. Lodging, tournaments, opening and closing ceremonies — all coordinated as a single experience for families."
+    bullets={[
+      'Stay on-site at most properties.',
+      'Replica big-league treatment for every team.',
+      'Memories that families plan a year around.',
+    ]}
+  />
+
+  <section class="properties">
+    <div class="properties__inner">
+      <p class="properties__eyebrow text-eyebrow">OUR PROPERTIES</p>
+      <h2 class="properties__headline text-h1">Where families travel to play.</h2>
+      <div class="properties__grid">
+        {properties.map(p => <LocationCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <CrossSell title="Other ways your kid can play in the Unrivaled portfolio:" cards={crossSell} />
+  <CtaBand headline="Ready to find your week?" sub="Browse the full calendar of destination tournaments." />
+</BaseLayout>
+
+<style>
+  .properties { background: var(--gray-50); }
+  .properties__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .properties__inner { padding: 100px var(--margin-desktop); }
+  }
+  .properties__eyebrow { color: var(--gray-500); }
+  .properties__headline { color: var(--color-black); }
+  .properties__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .properties__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .properties__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

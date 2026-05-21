@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Ripken Experience · Aberdeen"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Ripken Experience · Aberdeen"
+  heroSub="Where the Ripken family started."
+  stats={[
+    { label: 'LOCATION', value: 'Aberdeen, MD' },
+    { label: 'FORMAT',   value: 'Weeklong + tournaments' },
+    { label: 'HERITAGE', value: 'Cal and Bill Ripken hometown' },
+    { label: 'STATUS',   value: 'Founding venue' },
+  ]}
+  storyHeadline="The first Big League Experience."
+  storyBody="Built on the ground where Cal and Bill Ripken grew up, Aberdeen is the original Ripken Experience — replica MLB ballparks, walk-up music, and the major-league treatment for every team."
+  upcomingEyebrow="UPCOMING IN ABERDEEN"
+  upcomingHeadline="This summer in Aberdeen."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Aberdeen',  month: 'JUL', day: '12', title: 'Ripken National Championships', loc: 'Aberdeen, MD', age: '12U Division', dates: 'Jul 12-19' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Aberdeen',  month: 'JUL', day: '14', title: 'Aberdeen Week 3 Tournament',     loc: 'Aberdeen, MD', age: '10U-12U',      dates: 'Jul 14-19' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Aberdeen',  month: 'JUL', day: '28', title: 'Aberdeen Week 5 Tournament',     loc: 'Aberdeen, MD', age: '10U-12U',      dates: 'Jul 28-Aug 2' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by the Ripken standard."
+  wteItems={[
+    { title: 'Replica MLB Ballparks', desc: 'Walk-up music, dugouts, and field treatment.' },
+    { title: 'Big-League Treatment',  desc: 'Every team gets the major-league experience.' },
+    { title: 'On-Site Lodging',       desc: 'Stay where you play, all week.' },
+    { title: 'Ripken Heritage',       desc: 'Built on Cal and Bill\'s hometown ground.' },
+  ]}
+  galleryHeadline="Inside Aberdeen."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Myrtle Beach', meta: 'The coastal weeklong',     href: '/ripken-myrtle-beach/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Pigeon Forge', meta: 'The Smoky Mountain week',  href: '/ripken-pigeon-forge/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown',                      meta: 'The original',             href: '/cooperstown/' },
+  ]}
+/>

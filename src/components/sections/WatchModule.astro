@@ -1,0 +1,71 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+}
+const {
+  eyebrow = 'WATCH',
+  headline = 'Highlights, replays, and broadcast features.',
+} = Astro.props;
+---
+
+<section class="watch-module">
+  <div class="watch-module__inner">
+    <p class="watch-module__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="watch-module__headline text-h1">{headline}</h2>
+    <div class="watch-module__video" aria-hidden="true">
+      <span class="watch-module__play">▶</span>
+    </div>
+    <div class="watch-module__thumbs">
+      <div class="watch-thumb" aria-hidden="true"></div>
+      <div class="watch-thumb" aria-hidden="true"></div>
+      <div class="watch-thumb" aria-hidden="true"></div>
+      <div class="watch-thumb" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .watch-module {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+  .watch-module__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .watch-module__inner { padding: 100px var(--margin-desktop); }
+  }
+  .watch-module__eyebrow { color: var(--color-gold); }
+  .watch-module__video {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--color-black), #0a0a0a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 12px;
+  }
+  .watch-module__play {
+    font-size: 56px;
+    opacity: 0.7;
+  }
+  .watch-module__thumbs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 1024px) {
+    .watch-module__thumbs { grid-template-columns: repeat(4, 1fr); }
+  }
+  .watch-thumb {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--color-black), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+</style>

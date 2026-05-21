@@ -1,0 +1,38 @@
+---
+import '../styles/fonts.css';
+import '../styles/reset.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import SiteHeader from '../components/chrome/SiteHeader.astro';
+import SiteFooter from '../components/chrome/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeNav?: 'home' | 'ways-to-play' | 'venues' | 'events' | 'stories' | 'about';
+}
+
+const {
+  title,
+  description = 'Your youth baseball journey lives here.',
+  activeNav,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Unrivaled Baseball</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <SiteHeader activeNav={activeNav} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

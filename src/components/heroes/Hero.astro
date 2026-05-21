@@ -1,0 +1,66 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  sub?: string;
+}
+const { eyebrow = 'UNRIVALED BASEBALL', headline, sub } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <p class="hero__eyebrow text-eyebrow">{eyebrow}</p>
+    <h1 class="hero__headline text-hero">{headline}</h1>
+    {sub && <p class="hero__sub text-body">{sub}</p>}
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--color-navy);
+    color: var(--color-white);
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    .hero { min-height: 720px; }
+  }
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(29, 36, 104, 0.85) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .hero__inner { padding: 120px var(--margin-desktop); }
+  }
+  .hero__eyebrow {
+    opacity: 0.7;
+  }
+  .hero__headline {
+    max-width: 1100px;
+    color: var(--color-white);
+  }
+  .hero__sub {
+    max-width: 640px;
+    opacity: 0.85;
+  }
+</style>

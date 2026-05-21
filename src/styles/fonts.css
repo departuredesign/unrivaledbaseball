@@ -1,0 +1,67 @@
+/* ============================================================
+   UNRIVALED BASEBALL — BRAND FONT FACES
+   Files mirrored from UnrivaledSportsCorporate/assets/fonts/.
+   ============================================================ */
+
+@font-face {
+    font-family: 'Review';
+    src: url('/fonts/review-bold-webfont.woff2') format('woff2'),
+         url('/fonts/review-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Review';
+    src: url('/fonts/review-heavy-webfont.woff2') format('woff2'),
+         url('/fonts/review-heavy-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Review Poster';
+    src: url('/fonts/reviewposter-heavy-webfont.woff2') format('woff2'),
+         url('/fonts/reviewposter-heavy-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neue Plak';
+    src: url('/fonts/neue_plak_regular-webfont.woff2') format('woff2'),
+         url('/fonts/neue_plak_regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neue Plak';
+    src: url('/fonts/neue_plak_bold-webfont.woff2') format('woff2'),
+         url('/fonts/neue_plak_bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neue Plak Text';
+    src: url('/fonts/neue_plak_regular-webfont.woff2') format('woff2'),
+         url('/fonts/neue_plak_regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neue Plak Text';
+    src: url('/fonts/neue_plak_bold-webfont.woff2') format('woff2'),
+         url('/fonts/neue_plak_bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

@@ -1,0 +1,110 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SubPageHero from '../components/heroes/SubPageHero.astro';
+import AtAGlance from '../components/sections/AtAGlance.astro';
+import StoryBlock from '../components/sections/StoryBlock.astro';
+import ListRow from '../components/sections/ListRow.astro';
+import WhatToExpect from '../components/sections/WhatToExpect.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import ContinueExploring from '../components/sections/ContinueExploring.astro';
+
+interface CsCardData {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string;
+  name: string;
+  meta?: string;
+  href?: string;
+}
+interface Stat { label: string; value: string }
+interface Event { pillar: 'local' | 'destinations' | 'training' | 'nationals' | 'ripken'; pillarLabel: string; month: string; day: string; title: string; loc: string; age: string; dates: string }
+interface WteItem { title: string; desc: string }
+
+interface Props {
+  title: string;
+  parentLabel: string;
+  parentHref: string;
+  parentPillar: 'destinations' | 'training';
+  pageTitle: string;
+  heroSub: string;
+  stats: Stat[];
+  storyHeadline: string;
+  storyBody: string;
+  upcomingEyebrow: string;
+  upcomingHeadline: string;
+  upcomingEvents: Event[];
+  wtePillar: 'local' | 'destinations' | 'training' | 'nationals';
+  wteHeadline: string;
+  wteItems: WteItem[];
+  galleryHeadline: string;
+  continueCards: CsCardData[];
+}
+
+const {
+  title,
+  parentLabel,
+  parentHref,
+  parentPillar,
+  pageTitle,
+  heroSub,
+  stats,
+  storyHeadline,
+  storyBody,
+  upcomingEyebrow,
+  upcomingHeadline,
+  upcomingEvents,
+  wtePillar,
+  wteHeadline,
+  wteItems,
+  galleryHeadline,
+  continueCards,
+} = Astro.props;
+---
+
+<BaseLayout title={title} activeNav="ways-to-play">
+  <SubPageHero
+    parentLabel={parentLabel}
+    parentHref={parentHref}
+    parentPillar={parentPillar}
+    headline={pageTitle}
+    sub={heroSub}
+  />
+  <AtAGlance items={stats} />
+  <StoryBlock headline={storyHeadline} body={storyBody} />
+
+  <section class="upcoming">
+    <div class="upcoming__inner">
+      <p class="upcoming__eyebrow text-eyebrow">{upcomingEyebrow}</p>
+      <h2 class="upcoming__headline text-h2">{upcomingHeadline}</h2>
+      <div class="upcoming__list">
+        {upcomingEvents.map(e => <ListRow {...e} href="/events/" />)}
+      </div>
+    </div>
+  </section>
+
+  <WhatToExpect pillar={wtePillar} headline={wteHeadline} items={wteItems} />
+  <Gallery headline={galleryHeadline} />
+  <ContinueExploring title={`More from ${parentLabel}.`} cards={continueCards} />
+</BaseLayout>
+
+<style>
+  .upcoming {
+    background: var(--gray-50);
+  }
+  .upcoming__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .upcoming__inner { padding: 80px var(--margin-desktop); }
+  }
+  .upcoming__eyebrow { color: var(--gray-500); }
+  .upcoming__headline { color: var(--color-black); margin-bottom: 16px; }
+  .upcoming__list {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

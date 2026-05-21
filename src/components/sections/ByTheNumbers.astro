@@ -1,0 +1,51 @@
+---
+interface Stat { number: string; label: string }
+interface Props {
+  stats: Stat[];
+}
+const { stats } = Astro.props;
+---
+
+<section class="by-the-numbers">
+  <div class="by-the-numbers__inner">
+    {stats.map(stat => (
+      <div class="by-the-numbers__stat">
+        <p class="by-the-numbers__num text-hero">{stat.number}</p>
+        <p class="by-the-numbers__label text-body-sm">{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .by-the-numbers {
+    background: var(--color-white);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .by-the-numbers__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .by-the-numbers__inner { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .by-the-numbers__inner { padding: 80px var(--margin-desktop); }
+  }
+  .by-the-numbers__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .by-the-numbers__num {
+    color: var(--color-red);
+  }
+  .by-the-numbers__label {
+    color: var(--gray-600);
+  }
+</style>

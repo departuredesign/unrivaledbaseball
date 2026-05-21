@@ -1,0 +1,56 @@
+---
+interface Props {
+  category: string;
+  title: string;
+  byline?: string;
+  href?: string;
+}
+const { category, title, byline, href = '#' } = Astro.props;
+---
+
+<a class="story-card" href={href}>
+  <div class="story-card__img" aria-hidden="true"></div>
+  <div class="story-card__content">
+    <p class="story-card__category text-eyebrow">{category}</p>
+    <h3 class="story-card__title text-h3">{title}</h3>
+    {byline && <p class="story-card__byline text-meta">{byline}</p>}
+  </div>
+</a>
+
+<style>
+  .story-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  @media (hover: hover) {
+    .story-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+  }
+  .story-card__img {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+  }
+  .story-card__content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .story-card__category {
+    color: var(--color-red);
+  }
+  .story-card__title {
+    color: var(--color-navy);
+    flex: 1;
+  }
+  .story-card__byline {
+    color: var(--gray-500);
+  }
+</style>

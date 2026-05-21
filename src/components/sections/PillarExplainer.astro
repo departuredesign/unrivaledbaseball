@@ -1,0 +1,71 @@
+---
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'nationals';
+  eyebrow: string;
+  headline: string;
+  body: string;
+  bullets?: string[];
+}
+const { pillar, eyebrow, headline, body, bullets = [] } = Astro.props;
+---
+
+<section class="pillar-explainer" data-pillar={pillar}>
+  <div class="pillar-explainer__inner">
+    <p class="pillar-explainer__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="pillar-explainer__headline text-h1">{headline}</h2>
+    <p class="pillar-explainer__body text-body">{body}</p>
+    {bullets.length > 0 && (
+      <ul class="pillar-explainer__bullets">
+        {bullets.map(b => <li class="text-body-sm">{b}</li>)}
+      </ul>
+    )}
+  </div>
+</section>
+
+<style>
+  .pillar-explainer {
+    background: var(--color-white);
+  }
+  .pillar-explainer__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 960px;
+  }
+  @media (min-width: 1024px) {
+    .pillar-explainer__inner { padding: 100px var(--margin-desktop); }
+  }
+  .pillar-explainer__eyebrow {
+    color: var(--pillar);
+  }
+  .pillar-explainer__headline {
+    color: var(--color-black);
+  }
+  .pillar-explainer__body {
+    color: var(--gray-600);
+    max-width: 720px;
+  }
+  .pillar-explainer__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .pillar-explainer__bullets li {
+    color: var(--gray-600);
+    position: relative;
+    padding-left: 20px;
+  }
+  .pillar-explainer__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 8px;
+    height: 2px;
+    background: var(--pillar);
+  }
+</style>

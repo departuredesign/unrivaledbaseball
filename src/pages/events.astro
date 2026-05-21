@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/heroes/PageHeader.astro';
+import FeaturedRail from '../components/sections/FeaturedRail.astro';
+import FilterBar from '../components/sections/FilterBar.astro';
+import ListRow from '../components/sections/ListRow.astro';
+import CrossSell from '../components/sections/CrossSell.astro';
+
+const featured = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATION EXPERIENCES', title: 'Ripken National Championships', meta: 'Jul 12-19 · Aberdeen, MD', href: '/nationals/' },
+  { pillar: 'training'     as const, parentTag: 'TRAINING & DEVELOPMENT', title: 'Prospect Select Las Vegas',     meta: 'Jul 18 · 14U-16U',         href: '/prospect-select/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATION EXPERIENCES', title: 'Cooperstown Week 7',            meta: 'Aug 3-9 · 11U-12U',        href: '/cooperstown/' },
+];
+
+const chips = [
+  { pillar: 'all' as const,          label: 'All Events',     active: true },
+  { pillar: 'local' as const,        label: 'Local'           },
+  { pillar: 'destinations' as const, label: 'Destinations'    },
+  { pillar: 'training' as const,     label: 'Training'        },
+  { pillar: 'nationals' as const,    label: 'Nationals'       },
+];
+
+const events = [
+  { pillar: 'local' as const,        pillarLabel: 'Local · UBN Network',             month: 'JUN', day: '07', title: 'UBN Mid-Atlantic Spring Classic',   loc: 'Baltimore, MD',  age: '10U-14U',     dates: 'Jun 7-9' },
+  { pillar: 'destinations' as const, pillarLabel: 'Destinations · Myrtle Beach',     month: 'JUN', day: '23', title: 'Ripken Experience Myrtle Beach Wk 1', loc: 'Myrtle Beach, SC', age: '10U-12U',    dates: 'Jun 23-28' },
+  { pillar: 'training' as const,     pillarLabel: 'Training · Baseball Factory',     month: 'JUL', day: '06', title: 'Baseball Factory Texas Camp',       loc: 'Dallas, TX',     age: '10U-14U',     dates: 'Jul 6-8' },
+  { pillar: 'destinations' as const, pillarLabel: 'Destinations · Manteca',          month: 'JUL', day: '08', title: 'Sports Parks Manteca Showdown',      loc: 'Manteca, CA',    age: '10U-14U',     dates: 'Jul 8-10' },
+  { pillar: 'destinations' as const, pillarLabel: 'Destinations · Aberdeen',         month: 'JUL', day: '12', title: 'Ripken National Championships',      loc: 'Aberdeen, MD',   age: '12U Division', dates: 'Jul 12-19' },
+  { pillar: 'training' as const,     pillarLabel: 'Training · Prospect Select',      month: 'JUL', day: '18', title: 'Prospect Select Las Vegas',          loc: 'Las Vegas, NV',  age: '14U-16U',     dates: 'Jul 18-20' },
+  { pillar: 'destinations' as const, pillarLabel: 'Destinations · Rocker B',         month: 'JUL', day: '21', title: 'Rocker B Summer Invitational',       loc: 'Andrews, TX',    age: '12U-16U',     dates: 'Jul 21-26' },
+  { pillar: 'destinations' as const, pillarLabel: 'Destinations · Cooperstown',      month: 'AUG', day: '03', title: 'Cooperstown Week 7 Tournament',      loc: 'Cooperstown, NY', age: '11U-12U',    dates: 'Aug 3-9' },
+];
+
+const spotlight = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience Aberdeen — Week 3', meta: 'Jul 14-19 · 12U · Limited spots',  href: '/ripken-aberdeen/' },
+  { pillar: 'training' as const,     parentTag: 'TRAINING',     name: 'Baseball Factory Northeast Eval',     meta: 'Aug 22 · 12U-14U · Open',          href: '/baseball-factory/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Cooperstown All Star Village — Wk 9', meta: 'Aug 17-23 · 11U · Filling fast',   href: '/cooperstown/' },
+];
+---
+
+<BaseLayout title="Events" activeNav="events">
+  <PageHeader
+    headline="Every Unrivaled Event. One Calendar."
+    sub="Browse the full portfolio — local play, development, weeklong experiences, and elite showcases — across every owned destination."
+    breadcrumb={{ label: 'Events' }}
+  />
+
+  <FeaturedRail items={featured} />
+
+  <FilterBar chips={chips} />
+
+  <section class="events-list">
+    <div class="events-list__inner">
+      <p class="events-list__eyebrow text-eyebrow">UPCOMING — SUMMER 2026 · ALL EVENTS</p>
+      <div class="events-list__rows">
+        {events.map(e => <ListRow {...e} href="#" />)}
+      </div>
+    </div>
+  </section>
+
+  <CrossSell
+    eyebrow="SPOTLIGHT"
+    title="Don't miss these events this season."
+    cards={spotlight}
+  />
+</BaseLayout>
+
+<style>
+  .events-list { background: var(--color-white); }
+  .events-list__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 40px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .events-list__inner { padding: 40px var(--margin-desktop) 80px; }
+  }
+  .events-list__eyebrow { color: var(--gray-500); }
+  .events-list__rows {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

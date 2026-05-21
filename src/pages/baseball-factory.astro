@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Baseball Factory"
+  parentLabel="Training & Development"
+  parentHref="/training/"
+  parentPillar="training"
+  pageTitle="Baseball Factory"
+  heroSub="Where players unlock their full potential."
+  stats={[
+    { label: 'PROGRAM TYPE', value: 'Evaluations · Camps · Tournaments' },
+    { label: 'NATIONAL', value: 'Coast to coast' },
+    { label: 'AGE RANGE', value: '10U-18U' },
+    { label: 'EXPOSURE', value: 'College and pro scouts' },
+  ]}
+  storyHeadline="Skill development, evaluation, and exposure."
+  storyBody="Baseball Factory is the development engine of Unrivaled — a national network of evaluations, camps, and tournaments designed to find the right next step for every player."
+  upcomingEyebrow="UPCOMING EVALUATIONS"
+  upcomingHeadline="Upcoming evaluations and showcases."
+  upcomingEvents={[
+    { pillar: 'training', pillarLabel: 'Training · Baseball Factory', month: 'JUL', day: '06', title: 'Baseball Factory Texas Camp',       loc: 'Dallas, TX',  age: '10U-14U', dates: 'Jul 6-8' },
+    { pillar: 'training', pillarLabel: 'Training · Baseball Factory', month: 'AUG', day: '09', title: 'Baseball Factory West Coast Eval',  loc: 'Manteca, CA', age: '12U-14U', dates: 'Aug 9'    },
+    { pillar: 'training', pillarLabel: 'Training · Baseball Factory', month: 'AUG', day: '22', title: 'Baseball Factory Northeast Eval',   loc: 'Aberdeen, MD', age: '12U-14U', dates: 'Aug 22'  },
+  ]}
+  wtePillar="training"
+  wteHeadline="A week shaped by development."
+  wteItems={[
+    { title: 'Evaluation',  desc: 'Skill assessment by experienced staff.' },
+    { title: 'Instruction', desc: 'Targeted instruction at every level.' },
+    { title: 'Game Reps',   desc: 'Real game situations against quality competition.' },
+    { title: 'Exposure',    desc: 'College and pro scouts in attendance.' },
+  ]}
+  galleryHeadline="Inside the Factory."
+  continueCards={[
+    { pillar: 'training', parentTag: 'TRAINING', name: 'All-Ripken Games',  meta: 'Invitation-only showcase', href: '/all-ripken/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Prospect Select',   meta: 'The 14U-16U tour',          href: '/prospect-select/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Spring Training',   meta: 'Preseason kickoff',         href: '/spring-training/' },
+  ]}
+/>

@@ -1,0 +1,141 @@
+---
+const columns = [
+  {
+    heading: 'WAYS TO PLAY',
+    links: [
+      { label: 'Local Tournaments', href: '/local/' },
+      { label: 'Destinations',      href: '/destinations/' },
+      { label: 'Nationals',         href: '/nationals/' },
+      { label: 'Training',          href: '/training/' },
+    ],
+  },
+  {
+    heading: 'PROPERTIES',
+    links: [
+      { label: 'Cooperstown',          href: '/cooperstown/' },
+      { label: 'Rocker B Ranch',       href: '/rocker-b/' },
+      { label: 'Sports Force Parks',   href: '/sports-force-parks-cedar-point/' },
+      { label: 'Ripken Experience',    href: '/ripken-aberdeen/' },
+      { label: 'Baseball Factory',     href: '/baseball-factory/' },
+    ],
+  },
+  {
+    heading: 'FOR YOU',
+    links: [
+      { label: 'Players',  href: '#' },
+      { label: 'Parents',  href: '#' },
+      { label: 'Coaches',  href: '#' },
+    ],
+  },
+  {
+    heading: 'COMPANY',
+    links: [
+      { label: 'About',    href: '/about/' },
+      { label: 'Careers',  href: 'https://unrivaledsports.com/careers/' },
+      { label: 'Press',    href: 'https://unrivaledsports.com/press/' },
+      { label: 'Contact',  href: 'https://unrivaledsports.com/contact/' },
+    ],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a href="/" class="site-footer__logo text-h3">UNRIVALED BASEBALL</a>
+      <p class="site-footer__tag text-body-sm">Your youth baseball journey lives here.</p>
+    </div>
+
+    <nav class="site-footer__columns" aria-label="Footer">
+      {columns.map(col => (
+        <div class="site-footer__col">
+          <h3 class="site-footer__heading text-eyebrow">{col.heading}</h3>
+          <ul class="site-footer__list">
+            {col.links.map(link => (
+              <li><a class="site-footer__link" href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+
+  <div class="site-footer__base">
+    <p class="text-meta">© 2026 Unrivaled Baseball. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-navy);
+    color: var(--color-white);
+    width: 100%;
+  }
+  .site-footer__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 56px var(--margin-mobile) 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  @media (min-width: 1024px) {
+    .site-footer__inner {
+      padding: 64px var(--margin-desktop) 32px;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 64px;
+    }
+  }
+
+  .site-footer__brand {
+    flex: 1;
+    max-width: 320px;
+  }
+  .site-footer__logo {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .site-footer__tag {
+    opacity: 0.6;
+    max-width: 240px;
+  }
+
+  .site-footer__columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    flex: 2;
+  }
+  @media (min-width: 1024px) {
+    .site-footer__columns {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .site-footer__heading {
+    opacity: 0.5;
+    margin-bottom: 14px;
+  }
+  .site-footer__list { display: flex; flex-direction: column; gap: 8px; }
+  .site-footer__link {
+    font-family: var(--font-body);
+    font-size: var(--fs-meta);
+    opacity: 0.85;
+    transition: opacity var(--transition-fast), color var(--transition-fast);
+  }
+  .site-footer__link:hover {
+    opacity: 1;
+    color: var(--color-red);
+  }
+
+  .site-footer__base {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px var(--margin-mobile);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  @media (min-width: 1024px) {
+    .site-footer__base { padding: 20px var(--margin-desktop); }
+  }
+</style>

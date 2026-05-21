@@ -1,0 +1,62 @@
+---
+interface Props {
+  headline: string;
+  count?: number;
+}
+const { headline, count = 6 } = Astro.props;
+---
+
+<section class="gallery">
+  <div class="gallery__inner">
+    <h2 class="gallery__headline text-h1">{headline}</h2>
+    <div class="gallery__grid">
+      {Array.from({ length: count }, (_, i) => (
+        <div class="gallery__tile" aria-hidden="true" data-tile={i + 1}></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery { background: var(--color-white); }
+  .gallery__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width: 1024px) {
+    .gallery__inner { padding: 80px var(--margin-desktop); }
+  }
+  .gallery__headline {
+    color: var(--color-black);
+  }
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 768px) {
+    .gallery__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .gallery__grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 16px;
+    }
+    .gallery__tile[data-tile="1"] { grid-column: span 2; grid-row: span 2; }
+  }
+  .gallery__tile {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+  }
+  @media (min-width: 1024px) {
+    .gallery__tile {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
+</style>

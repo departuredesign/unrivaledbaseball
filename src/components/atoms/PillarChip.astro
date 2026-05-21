@@ -1,0 +1,44 @@
+---
+import PillarDot from './PillarDot.astro';
+
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals' | 'all';
+  label: string;
+  active?: boolean;
+  href?: string;
+}
+const { pillar, label, active = false, href } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag class="pillar-chip" data-pillar={pillar !== 'all' ? pillar : undefined} aria-pressed={active.toString()} href={href}>
+  {pillar !== 'all' && <PillarDot pillar={pillar} />}
+  <span class="text-body-sm">{label}</span>
+</Tag>
+
+<style>
+  .pillar-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    color: var(--color-navy);
+    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+  }
+  .pillar-chip:hover {
+    border-color: var(--color-navy);
+  }
+  .pillar-chip[aria-pressed="true"] {
+    background: var(--pillar, var(--color-navy));
+    border-color: var(--pillar, var(--color-navy));
+    color: var(--color-white);
+  }
+  .pillar-chip[aria-pressed="true"] :global(.pillar-dot) {
+    background: var(--color-white);
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+interface Item { text: string; href?: string }
+interface Props {
+  label?: string;
+  items: Item[];
+}
+const { label = 'SEASON IN MOTION', items } = Astro.props;
+---
+
+<section class="ticker" aria-label="Upcoming events ticker">
+  <div class="ticker__label">
+    <span class="text-eyebrow">{label}</span>
+  </div>
+  <div class="ticker__viewport">
+    <div class="ticker__track">
+      {[...items, ...items].map(item => (
+        <span class="ticker__item">
+          <span class="ticker__diamond" aria-hidden="true">◆</span>
+          <span class="text-body-sm">{item.text}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ticker {
+    background: var(--color-black);
+    color: var(--color-white);
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .ticker__label {
+    background: var(--color-red);
+    color: var(--color-white);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .ticker__viewport {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .ticker__track {
+    display: flex;
+    gap: 40px;
+    padding: 0 24px;
+    white-space: nowrap;
+    animation: ticker-scroll 40s linear infinite;
+  }
+  .ticker__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.85);
+  }
+  .ticker__diamond {
+    color: var(--color-red);
+    font-size: 8px;
+  }
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker__track { animation: none; }
+  }
+</style>

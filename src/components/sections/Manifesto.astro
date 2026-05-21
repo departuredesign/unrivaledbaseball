@@ -1,0 +1,39 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  body?: string;
+}
+const { eyebrow = 'UNRIVALED BASEBALL', headline, body } = Astro.props;
+---
+
+<section class="manifesto">
+  <div class="manifesto__inner">
+    <p class="manifesto__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="manifesto__headline text-hero">{headline}</h2>
+    {body && <p class="manifesto__body text-body">{body}</p>}
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    background: var(--color-navy);
+    color: var(--color-white);
+    text-align: center;
+  }
+  .manifesto__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 100px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .manifesto__inner { padding: 140px var(--margin-desktop); }
+  }
+  .manifesto__eyebrow { color: var(--color-gold); }
+  .manifesto__headline { max-width: 1100px; }
+  .manifesto__body { max-width: 720px; opacity: 0.85; }
+</style>

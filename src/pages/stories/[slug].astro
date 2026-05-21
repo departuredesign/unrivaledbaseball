@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/atoms/Breadcrumb.astro';
+import NewsletterSignup from '../../components/sections/NewsletterSignup.astro';
+import StoryCard from '../../components/cards/StoryCard.astro';
+
+export async function getStaticPaths() {
+  const stories = [
+    {
+      slug: 'long-road',
+      category: 'FEATURED · ATHLETE',
+      title: "A long road from a Northeast UBN field to Cooperstown's center diamond.",
+      byline: 'By the editorial team · 5 min read',
+      body:
+        "It started on a Saturday morning in Connecticut, where the player's first UBN tournament felt like a regional showcase. Six years later, the same player stood on the center diamond at Cooperstown All Star Village — the road from regional weekends to the championship round in his rear view.",
+    },
+    {
+      slug: 'inside-nationals',
+      category: 'INSIDE · NATIONALS',
+      title: 'Behind the scenes at Ripken Aberdeen during Nationals week.',
+      byline: 'Editorial · 4 min read',
+      body:
+        'A day-by-day look inside the operations of Nationals week at Aberdeen — from the field staff who arrive at 5 a.m. to the closing-night fireworks that send 16 teams home with stories.',
+    },
+  ];
+  return stories.map(s => ({ params: { slug: s.slug }, props: { story: s } }));
+}
+
+const { story } = Astro.props;
+const s = story as { category: string; title: string; byline: string; body: string };
+
+const related = [
+  { category: 'PARENT · GUIDE',  title: 'What every parent should pack for a week at Cooperstown.', byline: 'Editorial · 6 min read', href: '/stories/cooperstown-pack/' },
+  { category: 'INSIDE · ROCKER B', title: 'How Rocker B Ranch is rewriting what a Texas baseball week looks like.', byline: 'Editorial · 5 min read', href: '/stories/rocker-b/' },
+  { category: 'DEVELOPMENT',     title: "A 12U pitcher's journey through the developmental ladder.",       byline: 'Editorial · 7 min read', href: '/stories/pitcher-journey/' },
+];
+---
+
+<BaseLayout title={s.title} activeNav="stories">
+  <section class="story-hero">
+    <div class="story-hero__media" aria-hidden="true"></div>
+    <div class="story-hero__inner">
+      <Breadcrumb
+        theme="dark"
+        items={[
+          { label: 'Unrivaled Baseball', href: '/' },
+          { label: 'Stories', href: '/stories/' },
+        ]}
+      />
+      <p class="story-hero__category text-eyebrow">{s.category}</p>
+      <h1 class="story-hero__title text-hero">{s.title}</h1>
+      <p class="story-hero__byline text-body-sm">{s.byline}</p>
+    </div>
+  </section>
+
+  <article class="story-body">
+    <div class="story-body__inner">
+      <p class="text-body">{s.body}</p>
+      <p class="text-body">Long-form article copy renders in a centered measure that supports comfortable reading. Pull quotes, inline images, and video embeds compose at the section level. The body sits inside a 720-pixel-max content column for readability.</p>
+      <blockquote class="story-quote">
+        <p class="text-display">"You see the kids walk in on day one. They're different by day seven."</p>
+        <cite class="text-eyebrow">— Coach · Texas</cite>
+      </blockquote>
+      <p class="text-body">More body copy continues the narrative. Multiple paragraphs build into the closing reflection — the moment the story has been pointing toward from the opening line.</p>
+    </div>
+  </article>
+
+  <section class="related">
+    <div class="related__inner">
+      <p class="related__eyebrow text-eyebrow">CONTINUE READING</p>
+      <h2 class="related__headline text-h1">More from the series.</h2>
+      <div class="related__grid">
+        {related.map(r => <StoryCard {...r} />)}
+      </div>
+    </div>
+  </section>
+
+  <NewsletterSignup />
+</BaseLayout>
+
+<style>
+  .story-hero {
+    position: relative;
+    background: var(--color-navy);
+    color: var(--color-white);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .story-hero__media {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-black) 100%);
+  }
+  .story-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .story-hero__inner { padding: 100px var(--margin-desktop); }
+  }
+  .story-hero__category { color: var(--color-gold); }
+  .story-hero__title { max-width: 1000px; }
+  .story-hero__byline { opacity: 0.7; }
+
+  .story-body { background: var(--color-white); }
+  .story-body__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: var(--gray-700, var(--gray-600));
+  }
+  @media (min-width: 1024px) {
+    .story-body__inner { padding: 100px var(--margin-desktop); }
+  }
+  .story-body__inner .text-body { color: var(--gray-600); }
+
+  .story-quote {
+    border-left: 4px solid var(--color-red);
+    padding: 8px 0 8px 24px;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .story-quote .text-display { color: var(--color-navy); }
+  .story-quote cite {
+    color: var(--gray-500);
+    font-style: normal;
+  }
+
+  .related { background: var(--gray-50); }
+  .related__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .related__inner { padding: 100px var(--margin-desktop); }
+  }
+  .related__eyebrow { color: var(--gray-500); }
+  .related__headline { color: var(--color-black); }
+  .related__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .related__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

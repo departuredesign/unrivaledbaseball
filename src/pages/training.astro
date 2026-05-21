@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PillarHero from '../components/heroes/PillarHero.astro';
+import PillarExplainer from '../components/sections/PillarExplainer.astro';
+import LocationCard from '../components/cards/LocationCard.astro';
+import CrossSell from '../components/sections/CrossSell.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+
+const programs = [
+  { pillar: 'training' as const, parentTag: 'BASEBALL FACTORY', name: 'Baseball Factory',    meta: 'Evaluations · Camps · Tournaments', line: 'Where players unlock their full potential.', href: '/baseball-factory/' },
+  { pillar: 'training' as const, parentTag: 'ALL-RIPKEN',       name: 'All-Ripken Games',    meta: 'Invitation-only showcase',          line: 'Where the best players in each class meet.', href: '/all-ripken/' },
+  { pillar: 'training' as const, parentTag: 'PROSPECT SELECT',  name: 'Prospect Select',     meta: '14U-16U touring showcase',          line: 'Where middle school becomes high school.', href: '/prospect-select/' },
+  { pillar: 'training' as const, parentTag: 'SPRING TRAINING',  name: 'Spring Training',     meta: 'Preseason kickoff week',            line: 'Where the season starts.', href: '/spring-training/' },
+];
+
+const crossSell = [
+  { pillar: 'local' as const,        parentTag: 'LOCAL TOURNAMENTS', name: 'UBN Weekend Play',     meta: 'Sanctioned tournament play', href: '/local/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS',      name: 'Ripken Experience',    meta: 'Big-league weeklong play',   href: '/ripken-aberdeen/' },
+  { pillar: 'nationals' as const,    parentTag: 'NATIONALS',         name: 'Ripken Nationals',     meta: 'The championship round',    href: '/nationals/' },
+];
+---
+
+<BaseLayout title="Training & Development" activeNav="ways-to-play">
+  <PillarHero
+    pillar="training"
+    tag="TRAINING & DEVELOPMENT"
+    headline="Where players become prospects."
+    sub="Evaluation, instruction, showcase, exposure — the development side of the Unrivaled portfolio."
+  />
+
+  <PillarExplainer
+    pillar="training"
+    eyebrow="THE PATHWAY"
+    headline="From first evaluation to high school recruiting."
+    body="Training & Development is the connective tissue of the player journey — a national network of evaluations, camps, and showcases that helps every player find the right next step."
+    bullets={[
+      'Skill assessment at every age class.',
+      'Targeted instruction by experienced staff.',
+      'Visibility into the high school and college recruiting pathway.',
+    ]}
+  />
+
+  <section class="programs">
+    <div class="programs__inner">
+      <p class="programs__eyebrow text-eyebrow">OUR PROGRAMS</p>
+      <h2 class="programs__headline text-h1">Where players become prospects.</h2>
+      <div class="programs__grid">
+        {programs.map(p => <LocationCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <CrossSell title="Other ways your kid can play in the Unrivaled portfolio:" cards={crossSell} />
+  <CtaBand headline="Find your next step." sub="Browse the full calendar of evaluations and showcases." />
+</BaseLayout>
+
+<style>
+  .programs { background: var(--gray-50); }
+  .programs__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .programs__inner { padding: 100px var(--margin-desktop); }
+  }
+  .programs__eyebrow { color: var(--gray-500); }
+  .programs__headline { color: var(--color-black); }
+  .programs__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .programs__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .programs__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

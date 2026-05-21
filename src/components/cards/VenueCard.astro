@@ -1,0 +1,61 @@
+---
+interface Props {
+  name: string;
+  loc: string;
+  href: string;
+  founding?: boolean;
+}
+const { name, loc, href, founding = false } = Astro.props;
+---
+
+<a class="venue-card" href={href}>
+  <div class="venue-card__img" aria-hidden="true"></div>
+  <div class="venue-card__content">
+    <p class="venue-card__name text-body-sm">{name}</p>
+    <p class="venue-card__loc text-meta">{loc}</p>
+  </div>
+  {founding && <span class="venue-card__badge text-eyebrow">★ Founding</span>}
+</a>
+
+<style>
+  .venue-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+  @media (hover: hover) {
+    .venue-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-navy);
+    }
+  }
+  .venue-card__img {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+  }
+  .venue-card__content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .venue-card__name {
+    color: var(--color-navy);
+    font-weight: var(--weight-bold);
+  }
+  .venue-card__loc {
+    color: var(--gray-500);
+  }
+  .venue-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    background: var(--color-gold);
+    color: var(--color-white);
+  }
+</style>

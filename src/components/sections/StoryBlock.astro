@@ -1,0 +1,34 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  body: string;
+}
+const { eyebrow = 'THE STORY', headline, body } = Astro.props;
+---
+
+<section class="story-block">
+  <div class="story-block__inner">
+    <p class="story-block__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="story-block__headline text-h1">{headline}</h2>
+    <p class="story-block__body text-body">{body}</p>
+  </div>
+</section>
+
+<style>
+  .story-block { background: var(--color-white); }
+  .story-block__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .story-block__inner { padding: 100px var(--margin-desktop); }
+  }
+  .story-block__eyebrow { color: var(--gray-500); }
+  .story-block__headline { color: var(--color-black); max-width: 800px; }
+  .story-block__body { color: var(--gray-600); max-width: 720px; }
+</style>

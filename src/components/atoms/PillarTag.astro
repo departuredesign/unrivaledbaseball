@@ -1,0 +1,36 @@
+---
+import PillarDot from './PillarDot.astro';
+
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  label: string;
+  color?: 'pillar' | 'white' | 'navy' | 'black' | 'gold';
+}
+const { pillar, label, color = 'pillar' } = Astro.props;
+
+const colorMap = {
+  pillar: 'var(--pillar)',
+  white:  'var(--color-white)',
+  navy:   'var(--color-navy)',
+  black:  'var(--color-black)',
+  gold:   'var(--color-gold)',
+};
+const textColor = colorMap[color];
+---
+
+<span class="pillar-tag" data-pillar={pillar} style={`--tag-color: ${textColor};`}>
+  <PillarDot pillar={pillar} />
+  <span class="pillar-tag__label text-eyebrow">{label}</span>
+</span>
+
+<style>
+  .pillar-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--tag-color);
+  }
+  .pillar-tag__label {
+    color: inherit;
+  }
+</style>

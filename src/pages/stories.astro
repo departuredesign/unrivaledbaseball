@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/heroes/PageHeader.astro';
+import EditorialLead from '../components/sections/EditorialLead.astro';
+import FilterBar from '../components/sections/FilterBar.astro';
+import StoryCard from '../components/cards/StoryCard.astro';
+import SeriesModule from '../components/sections/SeriesModule.astro';
+import WatchModule from '../components/sections/WatchModule.astro';
+import VoicesModule from '../components/sections/VoicesModule.astro';
+import NewsletterSignup from '../components/sections/NewsletterSignup.astro';
+import SocialFeed from '../components/sections/SocialFeed.astro';
+
+const chips = [
+  { pillar: 'all' as const,        label: 'All Stories', active: true },
+  { pillar: 'destinations' as const, label: 'Athletes' },
+  { pillar: 'training' as const,   label: 'Development' },
+  { pillar: 'nationals' as const,  label: 'Nationals' },
+];
+
+const featuredStories = [
+  { category: 'FEATURED · ATHLETE',    title: 'A long road from a Northeast UBN field to Cooperstown.', byline: 'Editorial · 5 min read', href: '/stories/long-road/' },
+  { category: 'INSIDE · NATIONALS',    title: 'Behind the scenes at Ripken Aberdeen during Nationals week.', byline: 'Editorial · 4 min read', href: '/stories/inside-nationals/' },
+  { category: 'PRESS · BROADCAST',     title: 'Unrivaled Baseball announces broadcast partnership with CBS Sports.', byline: 'Press · 2 min read',     href: '/stories/cbs-partnership/' },
+  { category: 'PARENT · GUIDE',        title: 'What every parent should pack for a week at Cooperstown.',         byline: 'Editorial · 6 min read', href: '/stories/cooperstown-pack/' },
+  { category: 'DEVELOPMENT · PITCHER', title: "A 12U pitcher's journey through the developmental ladder.",          byline: 'Editorial · 7 min read', href: '/stories/pitcher-journey/' },
+  { category: 'INSIDE · ROCKER B',     title: 'How Rocker B Ranch is rewriting what a Texas baseball week looks like.', byline: 'Editorial · 5 min read', href: '/stories/rocker-b/' },
+];
+
+const series = [
+  { title: 'A Week at Cooperstown',       meta: '5 chapters · ongoing', href: '/stories/cooperstown-week/' },
+  { title: 'Path to Prospect Select',     meta: '4 chapters · ongoing', href: '/stories/prospect-path/' },
+  { title: 'Inside the Ripken Experience', meta: '6 chapters · ongoing', href: '/stories/inside-ripken/' },
+];
+
+const voices = [
+  { quote: 'This is the first place where my son felt like he was part of something bigger.', attribution: 'Parent · Massachusetts' },
+  { quote: "You see the kids walk in on day one, and walk out on day seven. They're different.", attribution: 'Coach · Texas' },
+  { quote: 'I played here in 2019. Came back five years later as staff. The place stays with you.', attribution: 'Alum · 2019' },
+];
+---
+
+<BaseLayout title="Stories" activeNav="stories">
+  <PageHeader
+    eyebrow="STORIES"
+    headline="From the field, in their own words."
+    breadcrumb={{ label: 'Stories' }}
+  />
+
+  <EditorialLead
+    category="FEATURED · ATHLETE"
+    headline="A long road from a Northeast UBN field to Cooperstown's center diamond."
+    byline="By the editorial team · 5 min read"
+    href="/stories/long-road/"
+  />
+
+  <FilterBar chips={chips} moreFiltersLabel="+ More Filters (Topic · Date · Author)" />
+
+  <section class="featured-grid">
+    <div class="featured-grid__inner">
+      <p class="featured-grid__eyebrow text-eyebrow">FEATURED STORIES</p>
+      <div class="featured-grid__grid">
+        {featuredStories.map(s => <StoryCard {...s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="athlete-spotlight">
+    <div class="athlete-spotlight__inner">
+      <p class="athlete-spotlight__eyebrow text-eyebrow">ATHLETE SPOTLIGHT</p>
+      <h2 class="athlete-spotlight__headline text-display">Behind the scenes at Ripken Aberdeen during Nationals week.</h2>
+      <p class="athlete-spotlight__byline text-body-sm">Editorial · 4 min read</p>
+    </div>
+  </section>
+
+  <SeriesModule series={series} />
+  <WatchModule />
+  <VoicesModule voices={voices} />
+  <NewsletterSignup />
+  <SocialFeed />
+</BaseLayout>
+
+<style>
+  .featured-grid { background: var(--color-white); }
+  .featured-grid__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .featured-grid__inner { padding: 80px var(--margin-desktop); }
+  }
+  .featured-grid__eyebrow { color: var(--gray-500); }
+  .featured-grid__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .featured-grid__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .featured-grid__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .athlete-spotlight {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+  .athlete-spotlight__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .athlete-spotlight__inner { padding: 100px var(--margin-desktop); }
+  }
+  .athlete-spotlight__eyebrow { color: var(--color-gold); }
+  .athlete-spotlight__headline { max-width: 900px; }
+  .athlete-spotlight__byline { opacity: 0.7; }
+</style>

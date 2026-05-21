@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PillarHero from '../components/heroes/PillarHero.astro';
+import PillarExplainer from '../components/sections/PillarExplainer.astro';
+import LocationCard from '../components/cards/LocationCard.astro';
+import CrossSell from '../components/sections/CrossSell.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+
+const regions = [
+  { pillar: 'local' as const, parentTag: 'NORTHEAST',     name: 'Northeast Region',     meta: 'MA · CT · NY · NJ · PA',     line: 'Sanctioned weekend play across the Northeast.', href: '#' },
+  { pillar: 'local' as const, parentTag: 'MID-ATLANTIC',  name: 'Mid-Atlantic',         meta: 'MD · DE · DC · VA',          line: 'The hometown circuit through the Mid-Atlantic.', href: '#' },
+  { pillar: 'local' as const, parentTag: 'SOUTHEAST',     name: 'Southeast',            meta: 'GA · NC · SC · FL · TN',     line: 'Weekend tournament play across the Southeast.',  href: '#' },
+  { pillar: 'local' as const, parentTag: 'MIDWEST',       name: 'Midwest',              meta: 'OH · MI · IN · IL · WI',     line: 'Heartland baseball weekend after weekend.',      href: '#' },
+  { pillar: 'local' as const, parentTag: 'MOUNTAIN WEST', name: 'Mountain West',        meta: 'CO · UT · NM · AZ',          line: 'Mountain-state tournament play.',                href: '#' },
+  { pillar: 'local' as const, parentTag: 'WEST COAST',    name: 'West Coast',           meta: 'CA · OR · WA · NV',          line: 'West Coast weekends, year-round.',               href: '#' },
+];
+
+const crossSell = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS',        name: 'Cooperstown All Star Village', meta: 'A weeklong rite of passage', href: '/cooperstown/' },
+  { pillar: 'nationals' as const,    parentTag: 'NATIONALS',           name: 'Ripken Nationals',             meta: 'The championship round',     href: '/nationals/' },
+  { pillar: 'training' as const,     parentTag: 'TRAINING',            name: 'Prospect Select Showcases',    meta: 'Where 14U-16U gets seen',   href: '/prospect-select/' },
+];
+---
+
+<BaseLayout title="Local Tournaments" activeNav="ways-to-play">
+  <PillarHero
+    pillar="local"
+    tag="LOCAL AND REGIONAL WEEKEND TOURNAMENTS"
+    headline="Local play. Regional reach. Year round."
+    sub="The Unrivaled Baseball Network — USSSA-sanctioned weekend tournament play, region by region."
+  />
+
+  <PillarExplainer
+    pillar="local"
+    eyebrow="WHAT IS UBN"
+    headline="Sanctioned weekend play, region by region."
+    body="UBN is the regional weekend tournament network inside Unrivaled. Every event runs under USSSA rules, with the qualifying ladder leading toward Ripken Nationals."
+    bullets={[
+      'Built on the UBN qualifying ladder.',
+      'Year-round play across every region.',
+      'The pathway into Ripken Nationals.',
+    ]}
+  />
+
+  <section class="regions">
+    <div class="regions__inner">
+      <p class="regions__eyebrow text-eyebrow">OUR REGIONS</p>
+      <h2 class="regions__headline text-h1">Local play. Regional reach.</h2>
+      <div class="regions__grid">
+        {regions.map(r => <LocationCard {...r} />)}
+      </div>
+    </div>
+  </section>
+
+  <CrossSell
+    title="Other ways your kid can play in the Unrivaled portfolio:"
+    cards={crossSell}
+  />
+
+  <CtaBand
+    headline="Ready to find what fits?"
+    sub="Browse the full calendar or start planning the season."
+  />
+</BaseLayout>
+
+<style>
+  .regions { background: var(--gray-50); }
+  .regions__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .regions__inner { padding: 100px var(--margin-desktop); }
+  }
+  .regions__eyebrow { color: var(--gray-500); }
+  .regions__headline { color: var(--color-black); }
+  .regions__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .regions__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .regions__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

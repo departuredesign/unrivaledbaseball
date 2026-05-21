@@ -1,0 +1,96 @@
+/* ============================================================
+   UNRIVALED BASEBALL — DESIGN TOKENS
+   Source of truth: ../UnrivaledBaseball/DESIGN_SYSTEM.md (§1)
+   ============================================================ */
+
+:root {
+    /* === COLOR — Primary palette === */
+    --color-red:         #FF0000;
+    --color-navy:        #1D2468;
+    --color-black:       #000000;
+    --color-white:       #FFFFFF;
+
+    /* === COLOR — Secondary palette === */
+    --color-gold:        #C1A556;
+    --color-blue:        #0062FF;
+    --color-dark-red:    #BB0101;
+    --color-white-smoke: #F2F2F2;
+
+    /* === COLOR — UI grays (not brand) === */
+    --gray-50:  #fafafa;
+    --gray-100: #f4f4f4;
+    --gray-200: #ededed;
+    --gray-300: #d4d4d4;
+    --gray-400: #aaaaaa;
+    --gray-500: #777777;
+    --gray-600: #555555;
+
+    /* === COLOR — Pillar palette === */
+    --pillar-1: var(--color-red);    /* Local */
+    --pillar-2: var(--color-navy);   /* Destinations */
+    --pillar-3: var(--color-blue);   /* Training */
+    --pillar-4: var(--color-black);  /* Ripken sub-brand */
+    --pillar-5: var(--color-gold);   /* Nationals */
+
+    /* === TYPE — Families === */
+    --font-display:        'Review', 'Arial Black', sans-serif;
+    --font-display-poster: 'Review Poster', 'Review', 'Arial Black', sans-serif;
+    --font-ui:             'Neue Plak', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body:           'Neue Plak Text', 'Neue Plak', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* === TYPE — Weights === */
+    --weight-regular:      400;
+    --weight-medium:       500;
+    --weight-semibold:     600;
+    --weight-bold:         700;
+    --weight-poster-heavy: 800;
+
+    /* === TYPE — Sizes (mobile defaults) === */
+    --fs-hero:      40px;
+    --fs-display:   28px;
+    --fs-h1:        26px;
+    --fs-h2:        22px;
+    --fs-h3:        18px;
+    --fs-body:      15px;
+    --fs-body-sm:   13px;
+    --fs-meta:      12px;
+    --fs-eyebrow:   10px;
+
+    /* === LAYOUT === */
+    --page-max-width:    1440px;
+    --content-max-width: 1320px;
+    --margin-desktop:    40px;
+    --margin-mobile:     20px;
+
+    /* === SPACING === */
+    --space-section-y-mobile:  56px;
+    --space-section-y-desktop: 80px;
+    --space-block-y:           48px;
+    --space-card-pad:          24px;
+    --space-card-gap:          14px;
+
+    /* === MOTION === */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --ease-out:        cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* === FOCUS === */
+    --focus-ring-width:  2px;
+    --focus-ring-color:  var(--color-blue);
+    --focus-ring-offset: 2px;
+}
+
+/* Type sizes scale up at desktop */
+@media (min-width: 1024px) {
+    :root {
+        --fs-hero:    56px;
+        --fs-display: 36px;
+        --fs-h1:      32px;
+        --fs-h2:      26px;
+        --fs-h3:      20px;
+        --fs-body:    16px;
+        --fs-body-sm: 14px;
+        --fs-meta:    12px;
+        --fs-eyebrow: 11px;
+    }
+}

@@ -1,0 +1,64 @@
+---
+interface Props {
+  category: string;
+  headline: string;
+  byline?: string;
+  href?: string;
+}
+const { category, headline, byline, href = '#' } = Astro.props;
+---
+
+<section class="editorial-lead">
+  <div class="editorial-lead__media" aria-hidden="true"></div>
+  <a class="editorial-lead__content" href={href}>
+    <p class="editorial-lead__category text-eyebrow">{category}</p>
+    <h2 class="editorial-lead__headline text-display">{headline}</h2>
+    {byline && <p class="editorial-lead__byline text-body-sm">{byline}</p>}
+    <span class="editorial-lead__cta text-eyebrow">Read the story →</span>
+  </a>
+</section>
+
+<style>
+  .editorial-lead {
+    position: relative;
+    min-height: 480px;
+    background: var(--color-black);
+    color: var(--color-white);
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) {
+    .editorial-lead { min-height: 600px; }
+  }
+  .editorial-lead__media {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--color-navy) 0%, var(--color-black) 100%);
+  }
+  .editorial-lead__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent 60%);
+  }
+  .editorial-lead__content {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    height: 100%;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    color: var(--color-white);
+  }
+  @media (min-width: 1024px) {
+    .editorial-lead__content { padding: 100px var(--margin-desktop); min-height: 600px; }
+  }
+  .editorial-lead__category { color: var(--color-red); }
+  .editorial-lead__headline { max-width: 900px; }
+  .editorial-lead__byline { opacity: 0.7; }
+  .editorial-lead__cta { color: var(--color-white); margin-top: 8px; }
+</style>

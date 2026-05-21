@@ -1,0 +1,164 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+}
+const {
+  eyebrow = 'FIND YOUR PATH',
+  headline = "Tell us about your player. We'll point you to a fit.",
+} = Astro.props;
+---
+
+<section class="fyp">
+  <div class="fyp__inner">
+    <p class="fyp__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="fyp__headline text-h1">{headline}</h2>
+
+    <div class="fyp__grid">
+      <form class="fyp__form" onsubmit="event.preventDefault();">
+        <fieldset class="fyp__field">
+          <legend class="text-eyebrow">Age</legend>
+          <div class="fyp__chips">
+            <button type="button" class="fyp__chip">8U</button>
+            <button type="button" class="fyp__chip is-active">10U</button>
+            <button type="button" class="fyp__chip">12U</button>
+            <button type="button" class="fyp__chip">14U+</button>
+          </div>
+        </fieldset>
+        <fieldset class="fyp__field">
+          <legend class="text-eyebrow">Region</legend>
+          <div class="fyp__chips">
+            <button type="button" class="fyp__chip is-active">Northeast</button>
+            <button type="button" class="fyp__chip">Southeast</button>
+            <button type="button" class="fyp__chip">Mountain West</button>
+            <button type="button" class="fyp__chip">West Coast</button>
+          </div>
+        </fieldset>
+        <fieldset class="fyp__field">
+          <legend class="text-eyebrow">Goal</legend>
+          <div class="fyp__chips">
+            <button type="button" class="fyp__chip is-active">Weekend Play</button>
+            <button type="button" class="fyp__chip">Vacation + Baseball</button>
+            <button type="button" class="fyp__chip">Player Development</button>
+          </div>
+        </fieldset>
+        <button type="submit" class="fyp__submit text-eyebrow">Show my path →</button>
+      </form>
+
+      <aside class="fyp__result">
+        <p class="fyp__result-eyebrow text-eyebrow">RECOMMENDED FOR YOU</p>
+        <a class="fyp__result-card" href="/events/">
+          <div>
+            <p class="text-body-sm" style="font-weight: var(--weight-bold); color: var(--color-navy);">Cooperstown Week 7 Tournament</p>
+            <p class="text-meta" style="color: var(--gray-500);">Aug 3-9 · 11U-12U · Filling fast</p>
+          </div>
+          <span class="text-h3" aria-hidden="true">→</span>
+        </a>
+        <a class="fyp__result-card" href="/events/">
+          <div>
+            <p class="text-body-sm" style="font-weight: var(--weight-bold); color: var(--color-navy);">UBN Mid-Atlantic Spring Classic</p>
+            <p class="text-meta" style="color: var(--gray-500);">Jun 7-9 · 10U-14U · Open registration</p>
+          </div>
+          <span class="text-h3" aria-hidden="true">→</span>
+        </a>
+        <a class="fyp__result-card" href="/events/">
+          <div>
+            <p class="text-body-sm" style="font-weight: var(--weight-bold); color: var(--color-navy);">Prospect Select Las Vegas</p>
+            <p class="text-meta" style="color: var(--gray-500);">Jul 18 · 14U-16U · Open registration</p>
+          </div>
+          <span class="text-h3" aria-hidden="true">→</span>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fyp {
+    background: var(--gray-50);
+  }
+  .fyp__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .fyp__inner { padding: 100px var(--margin-desktop); }
+  }
+  .fyp__eyebrow { color: var(--gray-500); }
+  .fyp__headline { color: var(--color-black); max-width: 720px; }
+
+  .fyp__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  @media (min-width: 1024px) {
+    .fyp__grid { grid-template-columns: 1fr 1.2fr; }
+  }
+  .fyp__form, .fyp__result {
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .fyp__field {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fyp__field legend {
+    color: var(--gray-500);
+  }
+  .fyp__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fyp__chip {
+    padding: 7px 13px;
+    background: var(--color-white);
+    border: 1px solid var(--gray-300);
+    font-size: var(--fs-body-sm);
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  }
+  .fyp__chip:hover { border-color: var(--color-navy); }
+  .fyp__chip.is-active {
+    background: var(--color-navy);
+    color: var(--color-white);
+    border-color: var(--color-navy);
+  }
+  .fyp__submit {
+    margin-top: 8px;
+    background: var(--color-red);
+    color: var(--color-white);
+    padding: 14px 22px;
+    transition: background var(--transition-fast);
+  }
+  .fyp__submit:hover {
+    background: var(--color-dark-red);
+  }
+  .fyp__result-eyebrow {
+    color: var(--gray-500);
+    margin-bottom: 4px;
+  }
+  .fyp__result-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border: 1px solid var(--gray-200);
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+  }
+  .fyp__result-card:hover {
+    background: var(--gray-50);
+    border-color: var(--color-navy);
+  }
+</style>

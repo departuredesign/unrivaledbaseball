@@ -1,0 +1,42 @@
+---
+import PillarTag from '../atoms/PillarTag.astro';
+
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string;
+  name: string;
+  meta?: string;
+  href?: string;
+}
+const { pillar, parentTag, name, meta, href = '#' } = Astro.props;
+---
+
+<a class="cs-card" href={href}>
+  <PillarTag pillar={pillar} label={parentTag} />
+  <h3 class="cs-card__name text-h3">{name}</h3>
+  {meta && <p class="cs-card__meta text-body-sm">{meta}</p>}
+</a>
+
+<style>
+  .cs-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+  @media (hover: hover) {
+    .cs-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-navy);
+    }
+  }
+  .cs-card__name {
+    color: var(--color-navy);
+  }
+  .cs-card__meta {
+    color: var(--gray-500);
+  }
+</style>

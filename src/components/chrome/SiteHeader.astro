@@ -1,0 +1,182 @@
+---
+interface Props {
+  activeNav?: 'home' | 'ways-to-play' | 'venues' | 'events' | 'stories' | 'about';
+}
+const { activeNav } = Astro.props;
+
+const pillars = [
+  { slug: 'local',        name: 'Local Tournaments',       meta: 'UBN · USSSA-Sanctioned Play',              pillar: 'local' },
+  { slug: 'destinations', name: 'Destination Experiences', meta: 'Cooperstown · Ripken · Rocker B · Parks',  pillar: 'destinations' },
+  { slug: 'nationals',    name: 'Ripken Nationals',        meta: '16-team Championship · Cooperstown',       pillar: 'nationals' },
+  { slug: 'training',     name: 'Training & Development',  meta: 'Baseball Factory · Prospect Select',       pillar: 'training' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <span class="text-eyebrow">UNRIVALED BASEBALL</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      <div class="nav-dropdown">
+        <button class="nav-link" aria-expanded="false">
+          Ways to Play
+          <span aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dropdown__menu" role="menu">
+          {pillars.map(p => (
+            <a class="nav-dropdown__item" role="menuitem" href={`/${p.slug}/`}>
+              <span class="pillar-dot" data-pillar={p.pillar} aria-hidden="true"></span>
+              <span class="nav-dropdown__item-content">
+                <span class="nav-dropdown__item-name">{p.name}</span>
+                <span class="nav-dropdown__item-meta">{p.meta}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'venues' }]} href="/venues/">Our Venues</a>
+      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'events' }]} href="/events/">Events</a>
+      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'stories' }]} href="/stories/">Stories</a>
+      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'about' }]} href="/about/">About</a>
+    </nav>
+
+    <a class="nav-cta" href="/events/">Start Planning</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .site-header__inner {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 14px var(--margin-mobile);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .site-header__inner { padding: 16px var(--margin-desktop); }
+  }
+  .site-header__logo {
+    flex-shrink: 0;
+  }
+  .site-header__logo .text-eyebrow {
+    color: var(--color-navy);
+    font-weight: var(--weight-poster-heavy);
+  }
+
+  .site-header__nav {
+    display: none;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .site-header__nav { display: flex; }
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: var(--fs-meta);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link:hover {
+    color: var(--color-red);
+  }
+  .nav-link.is-active {
+    border-bottom-color: var(--color-red);
+  }
+
+  .nav-dropdown {
+    position: relative;
+  }
+  .nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    min-width: 320px;
+    background: var(--color-white);
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 8px 0;
+    z-index: 10;
+  }
+  .nav-dropdown:hover .nav-dropdown__menu,
+  .nav-dropdown:focus-within .nav-dropdown__menu {
+    display: block;
+  }
+  .nav-dropdown__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 20px;
+    font-size: var(--fs-body-sm);
+    color: var(--color-navy);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+  .nav-dropdown__item:hover {
+    background: var(--gray-50);
+    color: var(--color-red);
+  }
+  .nav-dropdown__item .pillar-dot {
+    margin-top: 6px;
+  }
+  .nav-dropdown__item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-dropdown__item-name {
+    font-weight: var(--weight-semibold);
+  }
+  .nav-dropdown__item-meta {
+    font-size: var(--fs-meta);
+    color: var(--gray-500);
+    font-weight: var(--weight-regular);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta {
+    flex-shrink: 0;
+    padding: 9px 18px;
+    background: var(--color-navy);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: var(--fs-meta);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background var(--transition-fast);
+  }
+  .nav-cta:hover {
+    background: var(--color-red);
+  }
+
+  .pillar-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    background: var(--pillar, var(--gray-400));
+  }
+</style>

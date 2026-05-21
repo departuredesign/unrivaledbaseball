@@ -1,0 +1,70 @@
+---
+interface Step { year: string; label: string; detail?: string }
+interface Props {
+  headline?: string;
+  steps: Step[];
+}
+const { headline = 'Decades in the making.', steps } = Astro.props;
+---
+
+<section class="dynamic-timeline">
+  <div class="dynamic-timeline__inner">
+    <h2 class="dynamic-timeline__headline text-h1">{headline}</h2>
+    <ol class="dynamic-timeline__track">
+      {steps.map(step => (
+        <li class="dynamic-timeline__step">
+          <time class="dynamic-timeline__year text-h1">{step.year}</time>
+          <p class="dynamic-timeline__label text-body-sm">{step.label}</p>
+          {step.detail && <p class="dynamic-timeline__detail text-meta">{step.detail}</p>}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .dynamic-timeline { background: var(--gray-50); }
+  .dynamic-timeline__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @media (min-width: 1024px) {
+    .dynamic-timeline__inner { padding: 100px var(--margin-desktop); }
+  }
+  .dynamic-timeline__headline {
+    color: var(--color-black);
+  }
+  .dynamic-timeline__track {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    counter-reset: timeline;
+  }
+  @media (min-width: 768px) {
+    .dynamic-timeline__track {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+  }
+  .dynamic-timeline__step {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 16px;
+    border-top: 3px solid var(--color-red);
+  }
+  .dynamic-timeline__year {
+    color: var(--color-red);
+  }
+  .dynamic-timeline__label {
+    color: var(--color-navy);
+    font-weight: var(--weight-bold);
+  }
+  .dynamic-timeline__detail {
+    color: var(--gray-500);
+  }
+</style>

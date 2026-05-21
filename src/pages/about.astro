@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/heroes/Hero.astro';
+import StoryBlock from '../components/sections/StoryBlock.astro';
+import ByTheNumbers from '../components/sections/ByTheNumbers.astro';
+import DynamicTimeline from '../components/sections/DynamicTimeline.astro';
+import Leadership from '../components/sections/Leadership.astro';
+
+const stats = [
+  { number: '20+',     label: 'Years of unforgettable tournaments' },
+  { number: '7',       label: 'Destination properties' },
+  { number: '12K+',    label: 'Teams every summer' },
+  { number: '1',       label: 'Standard, end to end' },
+];
+
+const timeline = [
+  { year: '1985', label: 'Cooperstown All Star Village', detail: 'The original pilgrimage' },
+  { year: '1996', label: 'Ripken Experience Aberdeen',   detail: 'The first Big League Experience' },
+  { year: '2003', label: 'Ripken Myrtle Beach',          detail: 'Coastal weeklong play' },
+  { year: '2011', label: 'Ripken Pigeon Forge',          detail: 'Smoky Mountain baseball' },
+  { year: '2022', label: 'Sports Force Parks · Cedar Point', detail: 'Theme-park weekend' },
+  { year: '2024', label: 'Unrivaled portfolio',           detail: 'One name, end to end' },
+];
+
+const leadership = [
+  { name: '[ Name ]', role: 'CEO' },
+  { name: '[ Name ]', role: 'President' },
+  { name: '[ Name ]', role: 'COO' },
+  { name: '[ Name ]', role: 'CMO' },
+];
+
+const promise = [
+  { title: 'Communication',        desc: 'Clear, timely, accurate. You always know what is happening with your week.' },
+  { title: 'Customer Service',     desc: 'A real person, on the ground, every day. The standard families have come to expect.' },
+  { title: 'Standard of Excellence', desc: 'The bar that founded the brand. Every property, every event, every season.' },
+];
+---
+
+<BaseLayout title="About" activeNav="about">
+  <Hero
+    eyebrow="ABOUT UNRIVALED"
+    headline="One name across the entire arc of the youth baseball journey."
+    sub="The most trusted names in youth baseball, together under one banner."
+  />
+
+  <StoryBlock
+    eyebrow="OUR STORY"
+    headline="Built over decades. Brought together for the next generation."
+    body="Unrivaled Baseball brings the most trusted names in youth baseball — Cooperstown All Star Village, the Ripken Experience, Baseball Factory — together under one banner. One standard. One journey."
+  />
+
+  <ByTheNumbers stats={stats} />
+
+  <section class="promise">
+    <div class="promise__inner">
+      <p class="promise__eyebrow text-eyebrow">OUR PROMISE</p>
+      <h2 class="promise__headline text-h1">The standard parents and coaches can count on.</h2>
+      <div class="promise__grid">
+        {promise.map(p => (
+          <article class="promise-card">
+            <h3 class="promise-card__title text-h3">{p.title}</h3>
+            <p class="promise-card__desc text-body-sm">{p.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <DynamicTimeline steps={timeline} />
+
+  <Leadership people={leadership} />
+
+  <section class="partners">
+    <p class="partners__label text-eyebrow">Our Partners</p>
+    <div class="partners__row">
+      {Array.from({ length: 6 }, () => <div class="partners__cell" aria-hidden="true"></div>)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .promise { background: var(--gray-50); }
+  .promise__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .promise__inner { padding: 100px var(--margin-desktop); }
+  }
+  .promise__eyebrow { color: var(--gray-500); }
+  .promise__headline { color: var(--color-black); }
+  .promise__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  @media (min-width: 768px) {
+    .promise__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .promise-card {
+    background: var(--color-white);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid var(--gray-200);
+  }
+  .promise-card__title { color: var(--color-navy); }
+  .promise-card__desc { color: var(--gray-600); }
+
+  .partners {
+    background: var(--color-white);
+    padding: 60px var(--margin-mobile);
+    text-align: center;
+  }
+  @media (min-width: 1024px) {
+    .partners { padding: 80px var(--margin-desktop); }
+  }
+  .partners__label {
+    color: var(--gray-500);
+    margin-bottom: 24px;
+  }
+  .partners__row {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .partners__row { grid-template-columns: repeat(6, 1fr); }
+  }
+  .partners__cell {
+    aspect-ratio: 5 / 2;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+  }
+</style>

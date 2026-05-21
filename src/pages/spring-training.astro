@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Spring Training"
+  parentLabel="Training & Development"
+  parentHref="/training/"
+  parentPillar="training"
+  pageTitle="Spring Training"
+  heroSub="Where the season starts."
+  stats={[
+    { label: 'TIMING',   value: 'Preseason' },
+    { label: 'FORMAT',   value: 'Week-long camp' },
+    { label: 'AGE RANGE', value: '10U-18U' },
+    { label: 'FOCUS',    value: 'Skills · scrimmages · prep' },
+  ]}
+  storyHeadline="Get game-ready before opening day."
+  storyBody="Unrivaled Spring Training is the preseason kickoff — a development-focused week that sharpens skills, builds team chemistry, and sets the tone for the season ahead."
+  upcomingEyebrow="2026 SPRING TRAINING"
+  upcomingHeadline="2026 Spring Training."
+  upcomingEvents={[
+    { pillar: 'training', pillarLabel: 'Training · Spring',  month: 'MAR', day: '10', title: 'Spring Training Week 1', loc: 'Aberdeen, MD',  age: '10U-18U', dates: 'Mar 10-15' },
+    { pillar: 'training', pillarLabel: 'Training · Spring',  month: 'MAR', day: '17', title: 'Spring Training Week 2', loc: 'Myrtle Beach, SC', age: '10U-18U', dates: 'Mar 17-22' },
+    { pillar: 'training', pillarLabel: 'Training · Spring',  month: 'MAR', day: '24', title: 'Spring Training Week 3', loc: 'Manteca, CA',   age: '10U-18U', dates: 'Mar 24-29' },
+  ]}
+  wtePillar="training"
+  wteHeadline="A week shaped by the season ahead."
+  wteItems={[
+    { title: 'Skill Sessions',   desc: 'Daily drills with experienced coaches.' },
+    { title: 'Scrimmages',       desc: 'Live game reps before the season starts.' },
+    { title: 'Team Chemistry',   desc: 'Off-field time builds the on-field unit.' },
+    { title: 'Season Prep',      desc: 'A finish that sets up opening day.' },
+  ]}
+  galleryHeadline="Inside Spring Training."
+  continueCards={[
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Baseball Factory',  meta: 'Skill evaluations',           href: '/baseball-factory/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'All-Ripken Games',  meta: 'Top players by class',         href: '/all-ripken/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Prospect Select',   meta: '14U-16U touring showcase',     href: '/prospect-select/' },
+  ]}
+/>

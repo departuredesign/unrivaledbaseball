@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Prospect Select"
+  parentLabel="Training & Development"
+  parentHref="/training/"
+  parentPillar="training"
+  pageTitle="Prospect Select"
+  heroSub="Where middle school becomes high school."
+  stats={[
+    { label: 'AGE RANGE', value: '14U-16U' },
+    { label: 'FORMAT',    value: 'Touring showcase' },
+    { label: 'STOPS',     value: 'National tour' },
+    { label: 'EXPOSURE',  value: 'High school + college coaches' },
+  ]}
+  storyHeadline="The bridge to the high school pathway."
+  storyBody="Prospect Select is the touring showcase series that prepares 14U-16U players for the next chapter — high school tryouts, summer travel ball, and the recruiting visibility that comes with it."
+  upcomingEyebrow="THE 2026 TOUR"
+  upcomingHeadline="The 2026 Tour."
+  upcomingEvents={[
+    { pillar: 'training', pillarLabel: 'Training · Prospect Select', month: 'JUL', day: '18', title: 'Prospect Select Las Vegas',      loc: 'Las Vegas, NV', age: '14U-16U', dates: 'Jul 18-20' },
+    { pillar: 'training', pillarLabel: 'Training · Prospect Select', month: 'AUG', day: '05', title: 'Prospect Select Aberdeen',       loc: 'Aberdeen, MD',  age: '14U-16U', dates: 'Aug 5-7' },
+    { pillar: 'training', pillarLabel: 'Training · Prospect Select', month: 'AUG', day: '19', title: 'Prospect Select Manteca',        loc: 'Manteca, CA',   age: '14U-16U', dates: 'Aug 19-21' },
+  ]}
+  wtePillar="training"
+  wteHeadline="A week shaped by the next step."
+  wteItems={[
+    { title: 'Evaluation Reps', desc: 'Skills tested against a strong national field.' },
+    { title: 'Recruiting Visibility', desc: 'College coaches and scouts on every diamond.' },
+    { title: 'Tour Format',     desc: 'Multi-city tour, players choose stops.' },
+    { title: 'Closing Awards',  desc: 'A finish that opens doors.' },
+  ]}
+  galleryHeadline="Inside the Tour."
+  continueCards={[
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Baseball Factory',  meta: 'Where evaluations begin',  href: '/baseball-factory/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'All-Ripken Games',  meta: 'Top players by class',     href: '/all-ripken/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Spring Training',   meta: 'Preseason kickoff',        href: '/spring-training/' },
+  ]}
+/>

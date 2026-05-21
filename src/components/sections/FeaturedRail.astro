@@ -1,0 +1,85 @@
+---
+import PillarTag from '../atoms/PillarTag.astro';
+
+interface Item {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string;
+  title: string;
+  meta: string;
+  href?: string;
+}
+interface Props {
+  eyebrow?: string;
+  items: Item[];
+}
+const { eyebrow = 'FEATURED THIS SEASON', items } = Astro.props;
+---
+
+<section class="featured-rail">
+  <div class="featured-rail__inner">
+    <p class="featured-rail__eyebrow text-eyebrow">{eyebrow}</p>
+    <div class="featured-rail__track">
+      {items.map(item => (
+        <a class="featured-card" href={item.href ?? '#'}>
+          <div class="featured-card__bg" aria-hidden="true"></div>
+          <div class="featured-card__content">
+            <PillarTag pillar={item.pillar} label={item.parentTag} color="white" />
+            <h3 class="featured-card__title text-h3">{item.title}</h3>
+            <p class="featured-card__meta text-meta">{item.meta}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-rail { background: var(--color-white); border-bottom: 1px solid var(--gray-200); }
+  .featured-rail__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .featured-rail__inner { padding: 80px var(--margin-desktop) 60px; }
+  }
+  .featured-rail__eyebrow { color: var(--gray-500); }
+  .featured-rail__track {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .featured-rail__track { grid-template-columns: repeat(3, 1fr); }
+  }
+  .featured-card {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    display: block;
+    transition: transform var(--transition-fast);
+  }
+  @media (hover: hover) {
+    .featured-card:hover { transform: translateY(-4px); }
+  }
+  .featured-card__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--color-navy) 0%, var(--color-black) 100%);
+  }
+  .featured-card__content {
+    position: relative;
+    z-index: 1;
+    padding: 24px;
+    color: var(--color-white);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .featured-card__meta { opacity: 0.7; }
+</style>

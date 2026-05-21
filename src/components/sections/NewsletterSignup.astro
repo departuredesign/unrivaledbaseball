@@ -1,0 +1,78 @@
+---
+interface Props {
+  headline?: string;
+}
+const { headline = 'Stories from the field, in your inbox.' } = Astro.props;
+---
+
+<section class="newsletter">
+  <div class="newsletter__inner">
+    <h2 class="newsletter__headline text-h1">{headline}</h2>
+    <form class="newsletter__form" onsubmit="event.preventDefault();">
+      <label for="newsletter-email" class="visually-hidden">Email address</label>
+      <input
+        id="newsletter-email"
+        type="email"
+        class="newsletter__input"
+        placeholder="your@email.com"
+        required
+      />
+      <button type="submit" class="newsletter__submit text-eyebrow">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .newsletter {
+    background: var(--color-red);
+    color: var(--color-white);
+    text-align: center;
+  }
+  .newsletter__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .newsletter__inner { padding: 100px var(--margin-desktop); }
+  }
+  .newsletter__headline {
+    max-width: 720px;
+  }
+  .newsletter__form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 520px;
+  }
+  @media (min-width: 768px) {
+    .newsletter__form { flex-direction: row; }
+  }
+  .newsletter__input {
+    flex: 1;
+    background: var(--color-white);
+    border: none;
+    padding: 14px 18px;
+    font-size: var(--fs-body);
+    color: var(--color-navy);
+  }
+  .newsletter__input::placeholder {
+    color: var(--gray-400);
+  }
+  .newsletter__submit {
+    padding: 14px 24px;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    transition: background var(--transition-fast);
+    cursor: pointer;
+  }
+  .newsletter__submit:hover {
+    background: var(--color-navy);
+  }
+</style>

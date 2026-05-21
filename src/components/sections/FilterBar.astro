@@ -1,0 +1,59 @@
+---
+import PillarChip from '../atoms/PillarChip.astro';
+
+interface Chip {
+  pillar: 'local' | 'destinations' | 'training' | 'nationals' | 'all';
+  label: string;
+  active?: boolean;
+}
+interface Props {
+  chips: Chip[];
+  moreFiltersLabel?: string;
+}
+const { chips, moreFiltersLabel = '+ More Filters (Age · Region · Date)' } = Astro.props;
+---
+
+<section class="filter-bar">
+  <div class="filter-bar__inner">
+    <div class="filter-bar__chips" role="group" aria-label="Filter by pillar">
+      {chips.map(chip => <PillarChip {...chip} />)}
+    </div>
+    <button class="filter-bar__more text-body-sm">{moreFiltersLabel}</button>
+  </div>
+</section>
+
+<style>
+  .filter-bar {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 76px;
+    z-index: 30;
+  }
+  .filter-bar__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 20px var(--margin-mobile);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .filter-bar__inner { padding: 20px var(--margin-desktop); }
+  }
+  .filter-bar__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-bar__more {
+    color: var(--gray-500);
+    text-decoration: underline;
+    transition: color var(--transition-fast);
+  }
+  .filter-bar__more:hover {
+    color: var(--color-red);
+  }
+</style>

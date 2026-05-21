@@ -1,0 +1,151 @@
+/* ============================================================
+   GLOBAL STYLES — typography utility classes + global rules
+   ============================================================ */
+
+/* Brand text styles — map 1:1 to DESIGN_SYSTEM.md §1.2 hierarchy */
+.text-hero {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    font-size: var(--fs-hero);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+.text-display {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    font-size: var(--fs-display);
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.text-h1 {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    font-size: var(--fs-h1);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.text-h2 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--fs-h2);
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.text-h3 {
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: var(--fs-h3);
+    line-height: 1.25;
+}
+
+.text-large {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+}
+
+.text-body {
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+}
+
+.text-body-sm {
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: var(--fs-body-sm);
+    line-height: 1.45;
+}
+
+.text-meta {
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: var(--fs-meta);
+    line-height: 1.35;
+}
+
+.text-eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* Pillar color lookup — components reference var(--pillar) */
+[data-pillar="local"]        { --pillar: var(--pillar-1); }
+[data-pillar="destinations"] { --pillar: var(--pillar-2); }
+[data-pillar="training"]     { --pillar: var(--pillar-3); }
+[data-pillar="ripken"]       { --pillar: var(--pillar-4); }
+[data-pillar="nationals"]    { --pillar: var(--pillar-5); }
+
+/* Visually hidden — for accessible labels */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Section wrapper — universal section shell */
+.section-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.section-wrapper__inner {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+}
+
+@media (min-width: 768px) {
+    .section-wrapper__inner { padding: 80px 30px; }
+}
+
+@media (min-width: 1024px) {
+    .section-wrapper__inner { padding: 80px var(--margin-desktop); }
+}
+
+.section-wrapper[data-variant="light"]  { background: var(--color-white); color: var(--color-black); }
+.section-wrapper[data-variant="dark"]   { background: var(--color-navy); color: var(--color-white); }
+.section-wrapper[data-variant="accent"] { background: var(--color-red); color: var(--color-white); }
+.section-wrapper[data-variant="surface"]{ background: var(--gray-50); color: var(--color-black); }
+.section-wrapper[data-variant="black"]  { background: var(--color-black); color: var(--color-white); }
+
+.section-wrapper[data-bleed="true"] .section-wrapper__inner {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Focus styles */
+:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

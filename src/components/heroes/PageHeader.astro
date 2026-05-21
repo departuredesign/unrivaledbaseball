@@ -1,0 +1,57 @@
+---
+import Breadcrumb from '../atoms/Breadcrumb.astro';
+
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  sub?: string;
+  breadcrumb?: { label: string };
+}
+const { eyebrow, headline, sub, breadcrumb } = Astro.props;
+---
+
+<section class="page-header">
+  <div class="page-header__inner">
+    {breadcrumb && (
+      <Breadcrumb
+        theme="light"
+        items={[
+          { label: 'Unrivaled Baseball', href: '/' },
+          { label: breadcrumb.label },
+        ]}
+      />
+    )}
+    {eyebrow && <p class="page-header__eyebrow text-eyebrow">{eyebrow}</p>}
+    <h1 class="page-header__title text-h1">{headline}</h1>
+    {sub && <p class="page-header__sub text-body">{sub}</p>}
+  </div>
+</section>
+
+<style>
+  .page-header {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .page-header__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 60px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  @media (min-width: 1024px) {
+    .page-header__inner { padding: 80px var(--margin-desktop) 60px; }
+  }
+  .page-header__eyebrow {
+    color: var(--gray-500);
+  }
+  .page-header__title {
+    max-width: 900px;
+    color: var(--color-black);
+  }
+  .page-header__sub {
+    max-width: 720px;
+    color: var(--gray-600);
+  }
+</style>

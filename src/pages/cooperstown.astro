@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Cooperstown All Star Village"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Cooperstown All Star Village"
+  heroSub="A world-class tournament at the birthplace of baseball."
+  stats={[
+    { label: 'LOCATION', value: 'Oneonta, NY' },
+    { label: 'FORMAT',   value: '12U weeklong' },
+    { label: 'WEEKS',    value: '12 summer weeks' },
+    { label: 'CAPACITY', value: 'Hundreds of teams' },
+  ]}
+  storyHeadline="A pilgrimage at the birthplace of baseball."
+  storyBody="Cooperstown All Star Village is the original Unrivaled destination — a 12U weeklong tournament that draws hundreds of teams to Oneonta every summer. Opening ceremonies, on-site lodging, replica ballparks, and the Hall of Fame combine into the defining youth baseball memory."
+  upcomingEyebrow="UPCOMING AT THE VILLAGE"
+  upcomingHeadline="This summer at the Village."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cooperstown', month: 'AUG', day: '03', title: 'Cooperstown Week 7 Tournament', loc: 'Cooperstown, NY', age: '11U-12U', dates: 'Aug 3-9' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cooperstown', month: 'AUG', day: '17', title: 'Cooperstown Week 9 Tournament', loc: 'Cooperstown, NY', age: '11U-12U', dates: 'Aug 17-23' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cooperstown', month: 'AUG', day: '24', title: 'Cooperstown Week 10 Tournament', loc: 'Cooperstown, NY', age: '11U-12U', dates: 'Aug 24-30' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by legendary moments."
+  wteItems={[
+    { title: 'Opening Ceremonies', desc: 'Every team is recognized at the start of their week.' },
+    { title: 'On-Site Lodging',    desc: 'Stay where you play, all week.' },
+    { title: 'The Hall of Fame',   desc: 'Visit the National Baseball Hall of Fame.' },
+    { title: 'Closing Awards',     desc: 'Memories that last a lifetime.' },
+  ]}
+  galleryHeadline="Inside the Village."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Rocker B Ranch',                 meta: 'A Texas-sized weeklong',     href: '/rocker-b/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen',   meta: 'Where Ripken started',       href: '/ripken-aberdeen/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Myrtle Beach', meta: 'A coastal weeklong',       href: '/ripken-myrtle-beach/' },
+  ]}
+/>

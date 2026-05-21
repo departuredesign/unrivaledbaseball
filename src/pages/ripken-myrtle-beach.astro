@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Ripken Experience · Myrtle Beach"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Ripken Experience · Myrtle Beach"
+  heroSub="The baseball vacation built into the season."
+  stats={[
+    { label: 'LOCATION', value: 'Myrtle Beach, SC' },
+    { label: 'FORMAT',   value: 'Weeklong tournaments' },
+    { label: 'SETTING',  value: 'Coastal South Carolina' },
+    { label: 'WEEKS',    value: 'Summer + early fall' },
+  ]}
+  storyHeadline="Sand, sun, and tournament baseball."
+  storyBody="The Myrtle Beach Ripken Experience pairs world-class tournament baseball with the coastal vacation families plan around it. Stay, play, and make memories all in one trip."
+  upcomingEyebrow="UPCOMING IN MYRTLE BEACH"
+  upcomingHeadline="This summer in Myrtle Beach."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Myrtle Beach', month: 'JUN', day: '23', title: 'Myrtle Beach Week 1 Tournament', loc: 'Myrtle Beach, SC', age: '10U-12U', dates: 'Jun 23-28' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Myrtle Beach', month: 'JUL', day: '07', title: 'Myrtle Beach Week 3 Tournament', loc: 'Myrtle Beach, SC', age: '10U-12U', dates: 'Jul 7-12'  },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Myrtle Beach', month: 'JUL', day: '21', title: 'Myrtle Beach Week 5 Tournament', loc: 'Myrtle Beach, SC', age: '10U-12U', dates: 'Jul 21-26' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by the beach."
+  wteItems={[
+    { title: 'Coastal Setting',     desc: 'Tournament play steps from the Atlantic.' },
+    { title: 'Family Vacation',     desc: 'Built around the family trip.' },
+    { title: 'Ripken Standard',     desc: 'Big-league treatment for every team.' },
+    { title: 'Closing Awards',      desc: 'A finish that feels like vacation.' },
+  ]}
+  galleryHeadline="Inside Myrtle Beach."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen',     meta: 'Where Ripken started',     href: '/ripken-aberdeen/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Pigeon Forge', meta: 'The Smoky Mountain week',  href: '/ripken-pigeon-forge/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown',                      meta: 'The original',             href: '/cooperstown/' },
+  ]}
+/>

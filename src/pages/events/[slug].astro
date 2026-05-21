@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/atoms/Breadcrumb.astro';
+import PillarTag from '../../components/atoms/PillarTag.astro';
+import Btn from '../../components/atoms/Btn.astro';
+import CrossSell from '../../components/sections/CrossSell.astro';
+
+export async function getStaticPaths() {
+  const events = [
+    {
+      slug: 'ripken-national-championships-2026',
+      title: 'Ripken National Championships',
+      loc: 'Aberdeen, MD',
+      dates: 'Jul 12-19, 2026',
+      age: '12U Division',
+      pillar: 'destinations',
+      parentTag: 'DESTINATION EXPERIENCES',
+      description:
+        'The pinnacle of the Unrivaled tournament season. Sixteen of the best 12U teams in the country meet at Cooperstown All Star Village for the championship round.',
+    },
+    {
+      slug: 'cooperstown-week-7',
+      title: 'Cooperstown Week 7 Tournament',
+      loc: 'Cooperstown, NY',
+      dates: 'Aug 3-9, 2026',
+      age: '11U-12U',
+      pillar: 'destinations',
+      parentTag: 'DESTINATION EXPERIENCES',
+      description:
+        'A weeklong 12U tournament at Cooperstown All Star Village. Opening ceremonies, replica MLB ballparks, on-site lodging, and closing awards.',
+    },
+  ];
+  return events.map(e => ({ params: { slug: e.slug }, props: { event: e } }));
+}
+
+const { event } = Astro.props;
+const e = event as {
+  title: string; loc: string; dates: string; age: string;
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  parentTag: string; description: string;
+};
+
+const related = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Cooperstown Week 9', meta: 'Aug 17-23 · 11U', href: '/cooperstown/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Aberdeen Week 5', meta: 'Jul 28-Aug 2 · 10U-12U', href: '/ripken-aberdeen/' },
+  { pillar: 'training' as const,     parentTag: 'TRAINING',     name: 'Prospect Select Aberdeen', meta: 'Aug 5-7 · 14U-16U', href: '/prospect-select/' },
+];
+---
+
+<BaseLayout title={e.title} activeNav="events">
+  <section class="event-hero">
+    <div class="event-hero__overlay" aria-hidden="true"></div>
+    <div class="event-hero__inner">
+      <Breadcrumb
+        theme="dark"
+        items={[
+          { label: 'Unrivaled Baseball', href: '/' },
+          { label: 'Events', href: '/events/' },
+        ]}
+      />
+      <PillarTag pillar={e.pillar} label={e.parentTag} color="white" />
+      <h1 class="event-hero__title text-hero">{e.title}</h1>
+      <p class="event-hero__meta text-body">{e.loc} · {e.dates} · {e.age}</p>
+      <div class="event-hero__cta">
+        <Btn variant="accent" href="#" label="REGISTER →" />
+      </div>
+    </div>
+  </section>
+
+  <section class="event-details">
+    <div class="event-details__inner">
+      <p class="event-details__eyebrow text-eyebrow">EVENT DETAILS</p>
+      <h2 class="event-details__headline text-h1">What is included.</h2>
+      <p class="event-details__body text-body">{e.description}</p>
+      <div class="event-details__grid">
+        <article class="detail-card">
+          <p class="detail-card__tag text-eyebrow">INCLUDED</p>
+          <p class="detail-card__body text-body-sm">Lodging, meals, all games, opening and closing ceremonies, awards.</p>
+        </article>
+        <article class="detail-card">
+          <p class="detail-card__tag text-eyebrow">SCHEDULE</p>
+          <p class="detail-card__body text-body-sm">Six days of pool play and bracket play. Daily schedule released two weeks out.</p>
+        </article>
+        <article class="detail-card">
+          <p class="detail-card__tag text-eyebrow">FORMAT</p>
+          <p class="detail-card__body text-body-sm">16-team bracket. Two pathways to the championship round.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <CrossSell title="Other events you may like." cards={related} />
+</BaseLayout>
+
+<style>
+  .event-hero {
+    position: relative;
+    background: var(--color-navy);
+    color: var(--color-white);
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .event-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(29,36,104,0.9) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 0;
+  }
+  .event-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .event-hero__inner { padding: 100px var(--margin-desktop); }
+  }
+  .event-hero__title { max-width: 1000px; }
+  .event-hero__meta { opacity: 0.85; }
+  .event-hero__cta { margin-top: 16px; }
+
+  .event-details { background: var(--color-white); }
+  .event-details__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media (min-width: 1024px) {
+    .event-details__inner { padding: 100px var(--margin-desktop); }
+  }
+  .event-details__eyebrow { color: var(--gray-500); }
+  .event-details__headline { color: var(--color-black); }
+  .event-details__body { color: var(--gray-600); max-width: 800px; }
+  .event-details__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  @media (min-width: 768px) {
+    .event-details__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .detail-card {
+    background: var(--gray-50);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .detail-card__tag { color: var(--pillar, var(--color-navy)); }
+  .detail-card__body { color: var(--gray-600); }
+</style>

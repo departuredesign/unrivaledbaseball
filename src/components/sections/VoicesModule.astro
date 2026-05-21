@@ -1,0 +1,74 @@
+---
+interface Voice { quote: string; attribution: string }
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  voices: Voice[];
+}
+const {
+  eyebrow = 'VOICES',
+  headline = 'From a coach. From a parent. From an alum.',
+  voices,
+} = Astro.props;
+---
+
+<section class="voices-module">
+  <div class="voices-module__inner">
+    <p class="voices-module__eyebrow text-eyebrow">{eyebrow}</p>
+    <h2 class="voices-module__headline text-h1">{headline}</h2>
+    <div class="voices-module__grid">
+      {voices.map(v => (
+        <blockquote class="voice-card">
+          <p class="voice-card__quote text-body">{v.quote}</p>
+          <cite class="voice-card__attr text-meta">{v.attribution}</cite>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .voices-module { background: var(--color-white); }
+  .voices-module__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 80px var(--margin-mobile);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .voices-module__inner { padding: 100px var(--margin-desktop); }
+  }
+  .voices-module__eyebrow { color: var(--gray-500); }
+  .voices-module__headline { color: var(--color-black); max-width: 800px; }
+  .voices-module__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (min-width: 768px) {
+    .voices-module__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .voice-card {
+    background: var(--gray-50);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+  .voice-card__quote {
+    color: var(--color-navy);
+    font-weight: var(--weight-bold);
+  }
+  .voice-card__attr {
+    color: var(--gray-500);
+    font-style: normal;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

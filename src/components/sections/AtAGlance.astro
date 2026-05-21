@@ -1,0 +1,51 @@
+---
+interface Item { label: string; value: string }
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<section class="at-a-glance">
+  <div class="at-a-glance__inner">
+    {items.map(item => (
+      <div class="at-a-glance__item">
+        <p class="at-a-glance__label text-eyebrow">{item.label}</p>
+        <p class="at-a-glance__value text-h3">{item.value}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .at-a-glance {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .at-a-glance__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 32px var(--margin-mobile);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .at-a-glance__inner { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .at-a-glance__inner { padding: 40px var(--margin-desktop); gap: 48px; }
+  }
+  .at-a-glance__item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .at-a-glance__label {
+    color: var(--gray-500);
+  }
+  .at-a-glance__value {
+    color: var(--color-navy);
+  }
+</style>

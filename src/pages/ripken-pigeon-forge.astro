@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Ripken Experience · Pigeon Forge"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Ripken Experience · Pigeon Forge"
+  heroSub="Big League baseball in the foothills."
+  stats={[
+    { label: 'LOCATION', value: 'Pigeon Forge, TN' },
+    { label: 'FORMAT',   value: 'Weeklong tournaments' },
+    { label: 'SETTING',  value: 'Smoky Mountain foothills' },
+    { label: 'WEEKS',    value: 'Summer' },
+  ]}
+  storyHeadline="Smoky Mountain baseball."
+  storyBody="Pigeon Forge brings the Ripken Experience to the Tennessee foothills, surrounded by the Smoky Mountains. A unique tournament setting with the same Big League treatment."
+  upcomingEyebrow="UPCOMING IN PIGEON FORGE"
+  upcomingHeadline="This summer in the foothills."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Pigeon Forge', month: 'JUL', day: '14', title: 'Pigeon Forge Week 1 Tournament', loc: 'Pigeon Forge, TN', age: '10U-12U', dates: 'Jul 14-19' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Pigeon Forge', month: 'JUL', day: '28', title: 'Pigeon Forge Week 2 Tournament', loc: 'Pigeon Forge, TN', age: '10U-12U', dates: 'Jul 28-Aug 2' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Pigeon Forge', month: 'AUG', day: '11', title: 'Pigeon Forge Week 4 Tournament', loc: 'Pigeon Forge, TN', age: '10U-12U', dates: 'Aug 11-16' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by the mountains."
+  wteItems={[
+    { title: 'Smoky Mountain Setting', desc: 'Tournament play with the Smokies as backdrop.' },
+    { title: 'Family Destination',     desc: 'Pigeon Forge entertainment minutes away.' },
+    { title: 'Ripken Standard',        desc: 'Big-league treatment for every team.' },
+    { title: 'Closing Awards',         desc: 'A finish to remember.' },
+  ]}
+  galleryHeadline="Inside Pigeon Forge."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen',    meta: 'Where Ripken started',  href: '/ripken-aberdeen/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Myrtle Beach', meta: 'The coastal weeklong', href: '/ripken-myrtle-beach/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown',                       meta: 'The original',          href: '/cooperstown/' },
+  ]}
+/>

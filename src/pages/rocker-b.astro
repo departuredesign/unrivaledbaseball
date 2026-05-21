@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Rocker B Ranch"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Rocker B Ranch"
+  heroSub="The Texas ranch built for baseball memories."
+  stats={[
+    { label: 'LOCATION', value: 'Graford, TX' },
+    { label: 'FORMAT',   value: 'Weeklong tournaments' },
+    { label: 'SETTING',  value: 'Working ranch' },
+    { label: 'JOINED',   value: '2024' },
+  ]}
+  storyHeadline="A Texas-sized take on the weeklong experience."
+  storyBody="Rocker B Ranch is the newest addition to the Unrivaled portfolio — a working Texas ranch transformed into a baseball destination. Big skies, wide-open spaces, and a tournament week unlike anywhere else."
+  upcomingEyebrow="UPCOMING AT THE RANCH"
+  upcomingHeadline="This summer at the ranch."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Rocker B', month: 'JUL', day: '21', title: 'Rocker B Summer Invitational', loc: 'Andrews, TX', age: '12U-16U', dates: 'Jul 21-26' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Rocker B', month: 'AUG', day: '04', title: 'Rocker B Week 3 Tournament',   loc: 'Andrews, TX', age: '12U-16U', dates: 'Aug 4-9'  },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Rocker B', month: 'AUG', day: '18', title: 'Rocker B Week 5 Tournament',   loc: 'Andrews, TX', age: '12U-16U', dates: 'Aug 18-23' },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by Texas."
+  wteItems={[
+    { title: 'Ranch Setting',     desc: 'Tournament play on a working Texas ranch.' },
+    { title: 'On-Site Lodging',   desc: 'Stay where you play, all week.' },
+    { title: 'Texas Tradition',   desc: 'Friday-night BBQ, cowboy hat-tipping.' },
+    { title: 'Closing Awards',    desc: 'A finish that fits the setting.' },
+  ]}
+  galleryHeadline="Inside the ranch."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown All Star Village', meta: 'The original',         href: '/cooperstown/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience',            meta: 'Big-league treatment', href: '/ripken-aberdeen/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Sports Force Parks',           meta: 'Two-park weekend',     href: '/sports-force-parks-cedar-point/' },
+  ]}
+/>

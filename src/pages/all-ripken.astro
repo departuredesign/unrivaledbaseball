@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="All-Ripken Games"
+  parentLabel="Training & Development"
+  parentHref="/training/"
+  parentPillar="training"
+  pageTitle="All-Ripken Games"
+  heroSub="Where the best players in each class meet."
+  stats={[
+    { label: 'FORMAT',    value: 'Invitation-only showcase' },
+    { label: 'CLASSES',   value: 'Multiple age divisions' },
+    { label: 'EXPOSURE',  value: 'High school and college coaches' },
+    { label: 'HOSTED AT', value: 'Ripken Experience venues' },
+  ]}
+  storyHeadline="An invitational showcase, by class."
+  storyBody="The All-Ripken Games are the invitation-only showcase that brings the top players in each age class together for elite competition and high-level exposure."
+  upcomingEyebrow="UPCOMING ALL-RIPKEN GAMES"
+  upcomingHeadline="Upcoming All-Ripken Games."
+  upcomingEvents={[
+    { pillar: 'training', pillarLabel: 'Training · All-Ripken',  month: 'JUL', day: '05', title: 'All-Ripken Games 12U Class', loc: 'Aberdeen, MD',  age: '12U', dates: 'Jul 5-7' },
+    { pillar: 'training', pillarLabel: 'Training · All-Ripken',  month: 'JUL', day: '19', title: 'All-Ripken Games 14U Class', loc: 'Aberdeen, MD',  age: '14U', dates: 'Jul 19-21' },
+    { pillar: 'training', pillarLabel: 'Training · All-Ripken',  month: 'AUG', day: '02', title: 'All-Ripken Games 16U Class', loc: 'Aberdeen, MD',  age: '16U', dates: 'Aug 2-4' },
+  ]}
+  wtePillar="training"
+  wteHeadline="A week shaped by the best of the class."
+  wteItems={[
+    { title: 'Invitation Only',  desc: 'Selected from a season of evaluations.' },
+    { title: 'Class-Specific',   desc: 'Dedicated divisions by age class.' },
+    { title: 'High-Level Reps',  desc: 'Compete against the best in your class.' },
+    { title: 'Visible Exposure', desc: 'Coaches and scouts on every field.' },
+  ]}
+  galleryHeadline="Inside All-Ripken."
+  continueCards={[
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Baseball Factory',  meta: 'Where players are evaluated', href: '/baseball-factory/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Prospect Select',   meta: '14U-16U touring showcase',     href: '/prospect-select/' },
+    { pillar: 'training', parentTag: 'TRAINING', name: 'Spring Training',   meta: 'Preseason kickoff',            href: '/spring-training/' },
+  ]}
+/>

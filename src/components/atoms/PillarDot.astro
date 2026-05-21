@@ -1,0 +1,20 @@
+---
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
+  size?: number;
+}
+const { pillar, size = 8 } = Astro.props;
+---
+
+<span class="pillar-dot" data-pillar={pillar} aria-hidden="true" style={`--size: ${size}px;`}></span>
+
+<style>
+  .pillar-dot {
+    width: var(--size, 8px);
+    height: var(--size, 8px);
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    background: var(--pillar, var(--gray-400));
+  }
+</style>

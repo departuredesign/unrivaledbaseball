@@ -1,0 +1,41 @@
+---
+import SubPropertyLayout from '../layouts/SubPropertyLayout.astro';
+---
+
+<SubPropertyLayout
+  title="Sports Force Parks · Cedar Point"
+  parentLabel="Destination Experiences"
+  parentHref="/destinations/"
+  parentPillar="destinations"
+  pageTitle="Sports Force Parks · Cedar Point"
+  heroSub="Where baseball week meets Cedar Point week."
+  stats={[
+    { label: 'LOCATION', value: 'Sandusky, OH' },
+    { label: 'FORMAT',   value: 'Weekend + week' },
+    { label: 'NEARBY',   value: 'Cedar Point amusement park' },
+    { label: 'JOINED',   value: '2022' },
+  ]}
+  storyHeadline="Tournament play next door to America's Roller Coast."
+  storyBody="Sports Force Parks at Cedar Point pairs a multi-field complex with the unrivaled Cedar Point amusement park experience. Play your tournament, then ride world-class coasters minutes away."
+  upcomingEyebrow="UPCOMING AT CEDAR POINT"
+  upcomingHeadline="This summer at Cedar Point."
+  upcomingEvents={[
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cedar Point', month: 'JUL', day: '12', title: 'Cedar Point Week 1 Tournament', loc: 'Sandusky, OH', age: '10U-14U', dates: 'Jul 12-17' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cedar Point', month: 'JUL', day: '26', title: 'Cedar Point Showdown',          loc: 'Sandusky, OH', age: '10U-14U', dates: 'Jul 26-28' },
+    { pillar: 'destinations', pillarLabel: 'Destinations · Cedar Point', month: 'AUG', day: '09', title: 'Cedar Point Week 5 Tournament', loc: 'Sandusky, OH', age: '10U-14U', dates: 'Aug 9-14'  },
+  ]}
+  wtePillar="destinations"
+  wteHeadline="A week shaped by play and thrill."
+  wteItems={[
+    { title: 'Multi-Field Complex',    desc: 'Purpose-built for youth tournament baseball.' },
+    { title: 'Cedar Point Access',     desc: 'World-class amusement park minutes away.' },
+    { title: 'On-Site Lodging',        desc: 'Stay where you play, all week.' },
+    { title: 'Closing Awards',         desc: 'A finish to the week families remember.' },
+  ]}
+  galleryHeadline="Inside Cedar Point."
+  continueCards={[
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Manteca', meta: 'The West Coast home', href: '/sports-force-parks-manteca/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Cooperstown',                  meta: 'The original',         href: '/cooperstown/' },
+    { pillar: 'destinations', parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen', meta: 'Big-league treatment', href: '/ripken-aberdeen/' },
+  ]}
+/>
