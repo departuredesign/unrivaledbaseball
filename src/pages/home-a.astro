@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ticker from '../components/sections/Ticker.astro';
+import PillarCard from '../components/cards/PillarCard.astro';
+import FoundingCard from '../components/cards/FoundingCard.astro';
+import VoicesModule from '../components/sections/VoicesModule.astro';
+import '../styles/variants.css';
+
+const PILLARS = [
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong at our properties',          href: '/destinations/' },
+  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16-team Championship · Cooperstown',  href: '/nationals/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
+];
+
+const TICKER_ITEMS = [
+  { text: 'Ripken National Championships — Aberdeen, MD — Jul 12' },
+  { text: 'Prospect Select Showcase — Las Vegas — Jul 18' },
+  { text: 'Cooperstown Week 7 Tournament — Aug 3' },
+  { text: 'Baseball Factory Eval — Manteca, CA — Aug 9' },
+  { text: 'UBN Mid-Atlantic Spring Classic — Aberdeen, MD — May 31' },
+];
+
+const TESTIMONIALS = [
+  { quote: 'This is the first place where my son felt like he was part of something bigger.', attribution: 'Parent · Massachusetts' },
+  { quote: "You see the kids walk in on day one, and you see them walk out on day seven. They're different.", attribution: 'Coach · Texas' },
+  { quote: 'I played here in 2019. Came back five years later as staff. The place stays with you.', attribution: 'Alum · 2019' },
+];
+
+const MONTHS = ['MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT'];
+const CALENDAR_ROWS = [
+  {
+    label: 'NORTHEAST',
+    events: [
+      { start: 0.05, len: 0.10, pillar: 'local'        as const, title: 'UBN Spring Classic' },
+      { start: 0.30, len: 0.18, pillar: 'destinations' as const, title: 'Cooperstown Wk 4' },
+      { start: 0.55, len: 0.22, pillar: 'nationals'    as const, title: 'Ripken Nationals · Aberdeen' },
+      { start: 0.85, len: 0.10, pillar: 'training'     as const, title: 'Prospect Select NE' },
+    ],
+  },
+  {
+    label: 'SOUTHEAST',
+    events: [
+      { start: 0.00, len: 0.13, pillar: 'local'        as const, title: 'UBN Carolina Classic' },
+      { start: 0.20, len: 0.22, pillar: 'destinations' as const, title: 'Ripken Myrtle Beach' },
+      { start: 0.50, len: 0.12, pillar: 'training'     as const, title: 'BB Factory Camp' },
+      { start: 0.70, len: 0.22, pillar: 'destinations' as const, title: 'Ripken Pigeon Forge' },
+    ],
+  },
+  {
+    label: 'WEST',
+    events: [
+      { start: 0.08, len: 0.14, pillar: 'training'     as const, title: 'Prospect Select Vegas' },
+      { start: 0.30, len: 0.20, pillar: 'destinations' as const, title: 'Sports Force · Manteca' },
+      { start: 0.58, len: 0.18, pillar: 'destinations' as const, title: 'Rocker B Ranch Week' },
+      { start: 0.82, len: 0.14, pillar: 'local'        as const, title: 'UBN West Finals' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Direction A · Field Poster" activeNav="home">
+  <div class="variant-root variant-a">
+    {/* ===== POSTER HERO ===== */}
+    <section class="poster-hero">
+      <div class="poster-hero__pattern" aria-hidden="true"></div>
+      <div class="poster-hero__inner">
+        <div class="poster-hero__top">
+          <p class="poster-hero__eyebrow text-eyebrow">
+            <span>UNRIVALED BASEBALL</span>
+            <span class="poster-hero__rule" aria-hidden="true"></span>
+            <span>SEASON 2026</span>
+          </p>
+          <p class="poster-hero__caption text-eyebrow">A SUB-PROPERTY OF UNRIVALED SPORTS · EST. 2024</p>
+        </div>
+
+        <h1 class="poster-hero__headline">
+          <span class="poster-hero__line">Your youth</span>
+          <span class="poster-hero__line">baseball</span>
+          <span class="poster-hero__line poster-hero__line--accent">journey<span class="poster-hero__dash">—</span></span>
+          <span class="poster-hero__line">lives here.</span>
+        </h1>
+
+        <div class="poster-hero__foot">
+          <p class="poster-hero__sub text-body">
+            From a first weekend tournament to a 12U championship at Cooperstown — one banner across every age, every region.
+          </p>
+          <div class="poster-hero__ctas">
+            <a class="btn btn--accent" href="/events/"><span class="text-eyebrow">FIND AN EVENT →</span></a>
+            <a class="btn btn--outline-light" href="/destinations/"><span class="text-eyebrow">PLAN A DESTINATION</span></a>
+          </div>
+        </div>
+
+        <div class="poster-hero__matrix" aria-hidden="true">
+          {PILLARS.map(p => (
+            <div class="poster-hero__matrix-cell" data-pillar={p.pillar}>
+              <span class="poster-hero__matrix-dot"></span>
+              <span class="text-eyebrow">{p.num} / {p.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Ticker items={TICKER_ITEMS} />
+
+    {/* ===== SEASON AT A GLANCE ===== */}
+    <section class="saag">
+      <div class="saag__inner">
+        <div class="saag__head">
+          <p class="saag__eyebrow text-eyebrow">SEASON AT A GLANCE</p>
+          <h2 class="saag__headline">Six months. Three regions. One banner.</h2>
+          <a class="saag__view-all text-eyebrow" href="/events/">FULL CALENDAR →</a>
+        </div>
+
+        <div class="saag__legend">
+          {PILLARS.map(p => (
+            <span class="saag__legend-item" data-pillar={p.pillar}>
+              <span class="saag__legend-swatch" aria-hidden="true"></span>
+              <span class="text-eyebrow">{p.name.toUpperCase()}</span>
+            </span>
+          ))}
+        </div>
+
+        <div class="saag__grid">
+          <div class="saag__months">
+            <div class="saag__region-spacer"></div>
+            {MONTHS.map(m => <div class="saag__month text-eyebrow">{m}</div>)}
+          </div>
+
+          {CALENDAR_ROWS.map(row => (
+            <div class="saag__row">
+              <div class="saag__region">{row.label}</div>
+              <div class="saag__track">
+                {MONTHS.map(() => <div class="saag__col-line" aria-hidden="true"></div>)}
+                {row.events.map(e => (
+                  <a
+                    href="/events/"
+                    class="saag__event"
+                    data-pillar={e.pillar}
+                    style={`left: ${e.start * 100}%; width: ${e.len * 100}%;`}
+                  >
+                    <span class="saag__event-title text-body-sm">{e.title}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== PORTFOLIO ===== */}
+    <section class="portfolio">
+      <div class="portfolio__inner">
+        <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
+        <h2 class="portfolio__headline text-h1">One brand across the entire arc of the journey.</h2>
+        <div class="portfolio__grid">
+          {PILLARS.map(p => <PillarCard {...p} />)}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== FOUNDING ===== */}
+    <section class="founding-wrap">
+      <div class="founding-wrap__inner">
+        <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
+        <h2 class="founding-wrap__headline text-h1">A world-class tournament at the birthplace of baseball.</h2>
+        <FoundingCard
+          name="Cooperstown All Star Village"
+          meta="Cooperstown, NY · Founded 2001"
+          line="The bar that founded the brand. Every property, every event, every season."
+          cta="Plan Cooperstown"
+          href="/cooperstown/"
+        />
+      </div>
+    </section>
+
+    {/* ===== TESTIMONIALS ===== */}
+    <section class="testimonials">
+      <div class="testimonials__inner">
+        <p class="testimonials__eyebrow text-eyebrow">VOICES FROM THE STANDS</p>
+        <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
+        <VoicesModule voices={TESTIMONIALS} eyebrow="" headline="" />
+      </div>
+    </section>
+  </div>
+</BaseLayout>

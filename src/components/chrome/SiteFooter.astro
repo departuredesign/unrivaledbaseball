@@ -42,7 +42,9 @@ const columns = [
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__brand">
-      <a href="/" class="site-footer__logo text-h3">UNRIVALED BASEBALL</a>
+      <a href="/" class="site-footer__logo" aria-label="Unrivaled Baseball — Home">
+        <img class="site-footer__logo-img" src="/images/logo.png" alt="Unrivaled Baseball" width="141" height="84" />
+      </a>
       <p class="site-footer__tag text-body-sm">Your youth baseball journey lives here.</p>
     </div>
 
@@ -93,8 +95,15 @@ const columns = [
     max-width: 320px;
   }
   .site-footer__logo {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .site-footer__logo-img {
+    height: 84px;
+    width: auto;
     display: block;
-    margin-bottom: 12px;
+    /* Footer is navy; tint logo to white */
+    filter: brightness(0) invert(1);
   }
   .site-footer__tag {
     opacity: 0.6;

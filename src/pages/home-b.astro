@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ticker from '../components/sections/Ticker.astro';
+import FoundingCard from '../components/cards/FoundingCard.astro';
+import CsCard from '../components/cards/CsCard.astro';
+import ByTheNumbers from '../components/sections/ByTheNumbers.astro';
+import PillarDot from '../components/atoms/PillarDot.astro';
+import PillarTag from '../components/atoms/PillarTag.astro';
+import '../styles/variants.css';
+
+const PILLARS = [
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'Sanctioned weekend play, region by region. Built on the UBN qualifying ladder.',
+    bullets: ['USSSA-sanctioned', 'Regional ladders', '8U–14U'], href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong baseball at the most-trusted parks in the country.',
+    bullets: ['7 founding parks', 'Weeklong format', '8U–14U'],  href: '/destinations/' },
+  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16 teams. One champion. A pinnacle finish at Aberdeen.',
+    bullets: ['Aberdeen, MD', 'Qualifiers required', '12U Division'], href: '/nationals/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Where 14U–16U gets seen. Prospect Select & Baseball Factory.',
+    bullets: ['Showcases & camps', 'Scout exposure', '14U–16U'], href: '/training/' },
+];
+
+const TICKER_ITEMS = [
+  { text: 'Ripken National Championships — Aberdeen, MD — Jul 12' },
+  { text: 'Prospect Select Showcase — Las Vegas — Jul 18' },
+  { text: 'Cooperstown Week 7 Tournament — Aug 3' },
+  { text: 'Baseball Factory Eval — Manteca, CA — Aug 9' },
+  { text: 'UBN Mid-Atlantic Spring Classic — Aberdeen, MD — May 31' },
+];
+
+const STATS = [
+  { number: '7',    label: 'Founding destination experiences' },
+  { number: '20+',  label: 'UBN tournament weekends' },
+  { number: '12K+', label: 'Players each season' },
+  { number: '1',    label: 'Unrivaled banner' },
+];
+
+const CROSS = [
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Myrtle Beach',     meta: 'Myrtle Beach, SC · 9U–14U', href: '/ripken-myrtle-beach/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Rocker B Ranch',          meta: 'West Texas · 11U–14U',      href: '/rocker-b/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Sports Force Cedar Point',meta: 'Sandusky, OH · 8U–14U',     href: '/sports-force-parks-cedar-point/' },
+];
+
+const PLANNER_AGES   = ['8U', '10U', '12U', '14U+'];
+const PLANNER_REGION = ['Northeast', 'Southeast', 'Mountain West', 'West Coast'];
+const PLANNER_GOAL   = ['Weekend Play', 'Vacation + Baseball', 'Player Development'];
+---
+
+<BaseLayout title="Direction B · Concierge" activeNav="home">
+  <div class="variant-root variant-b">
+    {/* ===== CONCIERGE HERO ===== */}
+    <section class="ch">
+      <div class="ch__overlay" aria-hidden="true"></div>
+      <div class="ch__inner">
+        <div class="ch__left">
+          <p class="ch__eyebrow text-eyebrow">UNRIVALED BASEBALL · 2026</p>
+          <h1 class="ch__headline text-hero">Your youth baseball journey lives here.</h1>
+          <p class="ch__sub text-body">Tell us about your player. We'll point you to a fit — a local UBN weekend, a destination week, a championship, or a training showcase.</p>
+          <div class="ch__brand-bar">
+            {['Cooperstown', 'Ripken Experience', 'Rocker B', 'Sports Force', 'Baseball Factory'].map(b => (
+              <span class="ch__brand text-eyebrow">{b}</span>
+            ))}
+          </div>
+        </div>
+
+        <aside class="ch__planner" aria-label="Find your path">
+          <p class="ch__planner-eyebrow text-eyebrow">FIND YOUR PATH</p>
+
+          <div class="ch__step">
+            <p class="ch__step-eyebrow text-eyebrow"><span class="ch__step-num">1.</span>AGE</p>
+            <div class="ch__chips" data-step="age">
+              {PLANNER_AGES.map((opt, i) => (
+                <button type="button" class:list={["ch__chip", { 'is-active': i === 1 }]} data-value={opt}>{opt}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="ch__step">
+            <p class="ch__step-eyebrow text-eyebrow"><span class="ch__step-num">2.</span>REGION</p>
+            <div class="ch__chips" data-step="region">
+              {PLANNER_REGION.map((opt, i) => (
+                <button type="button" class:list={["ch__chip", { 'is-active': i === 0 }]} data-value={opt}>{opt}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="ch__step">
+            <p class="ch__step-eyebrow text-eyebrow"><span class="ch__step-num">3.</span>GOAL</p>
+            <div class="ch__chips" data-step="goal">
+              {PLANNER_GOAL.map((opt, i) => (
+                <button type="button" class:list={["ch__chip", { 'is-active': i === 0 }]} data-value={opt}>{opt}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="ch__rec">
+            <p class="ch__rec-eyebrow text-eyebrow">RECOMMENDED FOR YOU</p>
+            <a class="ch__rec-card" href="/local/" data-pillar="local">
+              <div class="ch__rec-card-side"></div>
+              <div class="ch__rec-card-body">
+                <PillarTag pillar="local" label="LOCAL · UBN" />
+                <h3 class="ch__rec-card-title">UBN Northeast Summer Series</h3>
+                <p class="ch__rec-card-meta text-meta">10U · Open registration</p>
+              </div>
+              <span class="ch__rec-card-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="ch__rec-cta text-eyebrow" href="/events/">SEE ALL THREE PATHS →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <Ticker items={TICKER_ITEMS} />
+
+    {/* ===== PILLAR BLOCK GRID ===== */}
+    <section class="portfolio">
+      <div class="portfolio__inner">
+        <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
+        <h2 class="portfolio__headline text-h1">Pinnacle moments across the journey — pick the one that fits.</h2>
+        <div class="variant-b__pillar-grid">
+          {PILLARS.map(p => (
+            <article class="pillar-block" data-pillar={p.pillar}>
+              <div class="pillar-block__top">
+                <span class="pillar-block__num text-eyebrow">{p.num}</span>
+                <span class="pillar-block__rule" aria-hidden="true"></span>
+                <span class="pillar-block__tag text-eyebrow">
+                  <PillarDot pillar={p.pillar} /> {p.name.toUpperCase()}
+                </span>
+              </div>
+              <h3 class="pillar-block__name">{p.name}</h3>
+              <p class="pillar-block__desc text-body">{p.desc}</p>
+              <ul class="pillar-block__bullets">
+                {p.bullets.map(b => (
+                  <li class="text-body-sm"><span aria-hidden="true">◆</span>{b}</li>
+                ))}
+              </ul>
+              <a class="pillar-block__cta text-eyebrow" href={p.href}>EXPLORE {p.name.toUpperCase()} →</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== FOUNDING ===== */}
+    <section class="founding-wrap founding-wrap--light">
+      <div class="founding-wrap__inner">
+        <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
+        <h2 class="founding-wrap__headline text-h1">The bar that founded the brand.</h2>
+        <FoundingCard
+          name="Cooperstown All Star Village"
+          meta="Cooperstown, NY · Founded 2001"
+          line="Every property, every event, every season — measured against this one week."
+          cta="Plan Cooperstown"
+          href="/cooperstown/"
+        />
+      </div>
+    </section>
+
+    <ByTheNumbers stats={STATS} />
+
+    {/* ===== CROSS SELL ===== */}
+    <section class="cross-sell">
+      <div class="cross-sell__inner">
+        <p class="cross-sell__eyebrow text-eyebrow">CONTINUE EXPLORING</p>
+        <h2 class="cross-sell__title text-h1">Other destinations on the journey.</h2>
+        <div class="cross-sell__grid">
+          {CROSS.map(c => <CsCard {...c} />)}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  // Step chips — single-select per group, decorative for now
+  document.querySelectorAll('.variant-b .ch__chips').forEach((group) => {
+    group.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.classList.contains('ch__chip')) return;
+      group.querySelectorAll('.ch__chip').forEach(c => c.classList.remove('is-active'));
+      target.classList.add('is-active');
+    });
+  });
+</script>

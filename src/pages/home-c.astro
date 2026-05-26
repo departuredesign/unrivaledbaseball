@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ticker from '../components/sections/Ticker.astro';
+import PillarCard from '../components/cards/PillarCard.astro';
+import VenueCard from '../components/cards/VenueCard.astro';
+import VoicesModule from '../components/sections/VoicesModule.astro';
+import PillarTag from '../components/atoms/PillarTag.astro';
+import '../styles/variants.css';
+
+const PILLARS = [
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong at our properties',          href: '/destinations/' },
+  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16-team Championship · Cooperstown',  href: '/nationals/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
+];
+
+const TICKER_ITEMS = [
+  { text: 'Ripken National Championships — Aberdeen, MD — Jul 12' },
+  { text: 'Prospect Select Showcase — Las Vegas — Jul 18' },
+  { text: 'Cooperstown Week 7 Tournament — Aug 3' },
+  { text: 'Baseball Factory Eval — Manteca, CA — Aug 9' },
+  { text: 'UBN Mid-Atlantic Spring Classic — Aberdeen, MD — May 31' },
+];
+
+const STATS = [
+  { number: '7',    label: 'Founding destination experiences' },
+  { number: '20+',  label: 'UBN tournament weekends' },
+  { number: '12K+', label: 'Players each season' },
+  { number: '1',    label: 'Unrivaled banner' },
+];
+
+const FEATURED = [
+  { pillar: 'nationals'    as const, parentTag: 'NATIONALS',    title: 'Ripken National Championships', meta: 'Jul 12–19 · Aberdeen, MD', href: '/nationals/' },
+  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', title: 'Cooperstown Week 7',            meta: 'Aug 3–9 · 11U–12U',         href: '/cooperstown/' },
+  { pillar: 'training'     as const, parentTag: 'TRAINING',     title: 'Prospect Select Las Vegas',     meta: 'Jul 18 · 14U–16U',          href: '/prospect-select/' },
+];
+
+const VENUES = [
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: '/cooperstown/' },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: '/ripken-aberdeen/' },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: '/ripken-myrtle-beach/' },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: '/ripken-pigeon-forge/' },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: '/sports-force-parks-cedar-point/' },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: '/sports-force-parks-manteca/' },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: '/rocker-b/' },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: '/baseball-factory/' },
+];
+
+const TESTIMONIALS = [
+  { quote: 'This is the first place where my son felt like he was part of something bigger.', attribution: 'Parent · Massachusetts' },
+  { quote: "You see the kids walk in on day one, and you see them walk out on day seven. They're different.", attribution: 'Coach · Texas' },
+  { quote: 'I played here in 2019. Came back five years later as staff. The place stays with you.', attribution: 'Alum · 2019' },
+];
+---
+
+<BaseLayout title="Direction C · Field First" activeNav="home">
+  <div class="variant-root variant-c">
+    {/* ===== FIELD HERO ===== */}
+    <section class="fh">
+      <div class="fh__bg" aria-hidden="true">
+        <span class="fh__bg-label text-meta">[ photo · golden-hour stadium, kids walking out of dugout ]</span>
+      </div>
+      <div class="fh__overlay" aria-hidden="true"></div>
+      <div class="fh__inner">
+        <div class="fh__top">
+          <p class="fh__eyebrow text-eyebrow">UNRIVALED BASEBALL · SEASON 2026</p>
+          <p class="fh__crumbs text-eyebrow">
+            <span>LOCAL</span>
+            <span class="fh__crumb-sep" aria-hidden="true">·</span>
+            <span>DESTINATIONS</span>
+            <span class="fh__crumb-sep" aria-hidden="true">·</span>
+            <span>NATIONALS</span>
+            <span class="fh__crumb-sep" aria-hidden="true">·</span>
+            <span>TRAINING</span>
+          </p>
+        </div>
+        <h1 class="fh__headline">One banner.<br />Every age.<br />Every region.</h1>
+        <div class="fh__foot">
+          <p class="fh__sub text-body">Pinnacle moments across the journey, all under one banner — Cooperstown to Cedar Point, Aberdeen to Manteca.</p>
+          <div class="fh__ctas">
+            <a class="btn btn--accent" href="/events/"><span class="text-eyebrow">FIND AN EVENT →</span></a>
+            <a class="btn btn--outline-light" href="/venues/"><span class="text-eyebrow">OUR VENUES</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="fh__pinned">
+        <div class="fh__pin">
+          <p class="fh__pin-eyebrow text-eyebrow">★ FOUNDING</p>
+          <p class="fh__pin-name">Cooperstown<br />All Star Village</p>
+          <p class="fh__pin-meta text-meta">EST. 2001 · NY</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ===== BIG STATS ===== */}
+    <section class="big-stats">
+      <div class="big-stats__inner">
+        {STATS.map(s => (
+          <div class="big-stats__stat">
+            <p class="big-stats__num">{s.number}</p>
+            <p class="big-stats__label text-body-sm">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <Ticker items={TICKER_ITEMS} />
+
+    {/* ===== RAIL DARK ===== */}
+    <section class="rail-dark">
+      <div class="rail-dark__inner">
+        <div class="rail-dark__head">
+          <p class="rail-dark__eyebrow text-eyebrow">FEATURED THIS SEASON</p>
+          <h2 class="rail-dark__headline">Pinnacle moments, on the calendar.</h2>
+          <a class="rail-dark__view text-eyebrow" href="/events/">VIEW ALL EVENTS →</a>
+        </div>
+        <div class="rail-dark__grid">
+          {FEATURED.map(f => (
+            <a href={f.href} class="rail-dark__card" data-pillar={f.pillar}>
+              <div class="rail-dark__card-img" aria-hidden="true">
+                <span class="rail-dark__card-img-label text-meta">[ photo ]</span>
+              </div>
+              <div class="rail-dark__card-body">
+                <PillarTag pillar={f.pillar} label={f.parentTag} color="white" />
+                <h3 class="rail-dark__card-title">{f.title}</h3>
+                <p class="rail-dark__card-meta text-meta">{f.meta}</p>
+                <span class="rail-dark__card-arrow text-eyebrow">REGISTER →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== PORTFOLIO ===== */}
+    <section class="portfolio">
+      <div class="portfolio__inner">
+        <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
+        <h2 class="portfolio__headline text-h1">One brand across the entire arc of the journey.</h2>
+        <div class="portfolio__grid">
+          {PILLARS.map(p => <PillarCard {...p} />)}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== VENUE WALL ===== */}
+    <section class="venue-wall">
+      <div class="venue-wall__inner">
+        <div class="venue-wall__head">
+          <p class="venue-wall__eyebrow text-eyebrow">OUR VENUES</p>
+          <h2 class="venue-wall__headline text-h1">Eight properties. One standard.</h2>
+        </div>
+        <div class="venue-wall__grid">
+          {VENUES.map(v => <VenueCard {...v} />)}
+        </div>
+      </div>
+    </section>
+
+    {/* ===== TESTIMONIALS ===== */}
+    <section class="testimonials">
+      <div class="testimonials__inner">
+        <p class="testimonials__eyebrow text-eyebrow">VOICES FROM THE STANDS</p>
+        <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
+        <VoicesModule voices={TESTIMONIALS} eyebrow="" headline="" />
+      </div>
+    </section>
+  </div>
+</BaseLayout>

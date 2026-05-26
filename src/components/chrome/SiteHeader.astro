@@ -14,8 +14,8 @@ const pillars = [
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="site-header__logo" href="/">
-      <span class="text-eyebrow">UNRIVALED BASEBALL</span>
+    <a class="site-header__logo" href="/" aria-label="Unrivaled Baseball — Home">
+      <img class="site-header__logo-img" src="/images/logo.png" alt="Unrivaled Baseball" width="74" height="44" />
     </a>
 
     <nav class="site-header__nav" aria-label="Primary">
@@ -68,10 +68,14 @@ const pillars = [
   }
   .site-header__logo {
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
   }
-  .site-header__logo .text-eyebrow {
-    color: var(--color-navy);
-    font-weight: var(--weight-poster-heavy);
+  .site-header__logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
   }
 
   .site-header__nav {
