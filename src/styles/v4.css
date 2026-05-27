@@ -31,6 +31,12 @@ body.v4[data-transparent-nav] .site-header__inner {
     padding-top: 22px;
     padding-bottom: 22px;
 }
+/* Bump the logo size on the v4 transparent nav so the wordmark has
+   the editorial presence the Claude Design comp calls for. */
+body.v4[data-transparent-nav] .site-header__logo,
+body.v4[data-transparent-nav] .site-header__logo-img {
+    height: 64px;
+}
 body.v4[data-transparent-nav] .site-header__logo-img {
     filter: brightness(0) invert(1);
 }
@@ -120,10 +126,10 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
     text-transform: uppercase;
     color: var(--color-white);
     margin: 0;
-    font-size: clamp(72px, 9.2vw, 148px);
+    font-size: clamp(72px, 10vw, 180px);
     line-height: 0.92;
     letter-spacing: -0.025em;
-    max-width: 1240px;
+    max-width: 1320px;
     display: grid;
     row-gap: 6px;
 }
@@ -420,9 +426,9 @@ body.v4 .v4__pillar-grid {
     text-transform: uppercase;
     color: var(--color-white);
     margin: 0;
-    max-width: 1000px;
+    max-width: 1240px;
     letter-spacing: -0.015em;
-    font-size: clamp(48px, 6vw, 92px);
+    font-size: clamp(48px, 5.4vw, 86px);
     line-height: 0.95;
 }
 .pm__body {
