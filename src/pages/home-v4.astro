@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FoundingCard from '../components/cards/FoundingCard.astro';
+import VenueCard from '../components/cards/VenueCard.astro';
+import PillarTag from '../components/atoms/PillarTag.astro';
+import PillarDot from '../components/atoms/PillarDot.astro';
+import '../styles/v4.css';
+
+const PILLARS = [
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong at our properties',          href: '/destinations/' },
+  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16-team Championship · Aberdeen',     href: '/nationals/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
+];
+
+const NEXT_UP = [
+  { pillar: 'local'        as const, title: 'UBN Mid-Atlantic Spring Classic', loc: 'Aberdeen, MD',    date: 'May 17' },
+  { pillar: 'destinations' as const, title: 'Cooperstown Week 7',              loc: 'Cooperstown, NY', date: 'Aug 3–9' },
+  { pillar: 'nationals'    as const, title: 'Ripken National Championships',   loc: 'Aberdeen, MD',    date: 'Jul 12–19' },
+  { pillar: 'training'     as const, title: 'Prospect Select Las Vegas',       loc: 'Las Vegas, NV',   date: 'Jul 18' },
+];
+
+const PINNACLE_PROGRAMS = [
+  {
+    pillar: 'nationals' as const,
+    tag: 'NATIONALS · CHAMPIONSHIP',
+    name: 'Ripken Nationals',
+    meta: 'Aberdeen, MD · Jun 30 – Jul 5 · 12U',
+    photoBrief: '[ Ripken Nationals image · trophy round under the lights ]',
+    photo: '/images/v4/photo-celebrate.png',
+    blurb: "The 16-team 12U bracket at the Ripken Experience Aberdeen. Cal and Bill's hometown. The national championship round of the youth baseball year.",
+    href: '/nationals/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Rocker B Ranch',
+    meta: 'Graford, TX · Summer Invitational · 12U–16U',
+    photoBrief: '[ Rocker B Ranch image · Byrd Family Field at golden hour ]',
+    photo: '/images/v4/photo-flags.png',
+    blurb: 'The 325-acre Texas ranch where weekend tournaments meet resort lodging. Pool. Pond. Music venue. The Byrd Family Field at the center of all of it.',
+    href: '/rocker-b/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Cooperstown All Star Village',
+    meta: 'Oneonta, NY · 12 Summer Weeks · 11U–12U',
+    photoBrief: '[ Cooperstown All Star Village image · opening pin trade ]',
+    photo: '/images/v4/photo-dugout.png',
+    blurb: 'The 12U pilgrimage. Twelve weeks every summer, hundreds of teams, the Hall of Fame minutes away. The week families plan around for years.',
+    href: '/cooperstown/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Myrtle Beach Madness at Ripken',
+    meta: 'Myrtle Beach, SC · Summer Week · 10U–12U',
+    photoBrief: '[ Myrtle Beach Madness image · the nine-field complex from above ]',
+    photo: '/images/v4/photo-running.png',
+    blurb: 'The Big League Experience a few stoplights from the beach. Nine replica MLB fields. A coastal vacation week the family plans around.',
+    href: '/ripken-myrtle-beach/',
+  },
+];
+
+const VOICES = [
+  { name: 'The Marchetti Family', role: 'PARENTS · WESTBOROUGH, MA', photo: '/images/v4/photo-dugout.png',    pillar: 'destinations' as const },
+  { name: 'Coach Davis',          role: 'HEAD COACH · PLANO, TX',    photo: '/images/v4/photo-celebrate.png', pillar: 'local'        as const },
+  { name: 'Jordan Reyes',         role: 'ALUM · 2019 · PHOENIX, AZ', photo: '/images/v4/photo-pitcher.png',   pillar: 'training'     as const },
+];
+
+const VENUES = [
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: '/cooperstown/' },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: '/ripken-aberdeen/' },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: '/ripken-myrtle-beach/' },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: '/ripken-pigeon-forge/' },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: '/sports-force-parks-cedar-point/' },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: '/sports-force-parks-manteca/' },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: '/rocker-b/' },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: '/baseball-factory/' },
+];
+
+const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', 'Marucci'];
+---
+
+<BaseLayout title="Home" activeNav="home" bodyClass="v4" transparentNav={true}>
+
+  {/* ===== HERO B — photographic + 2-line poster headline ===== */}
+  <section class="v4-hero v4-hero-b">
+    <div class="v4-hero__bg" aria-hidden="true"></div>
+    <div class="v4-hero__overlay" aria-hidden="true"></div>
+    <div class="v4-hero__inner">
+      <div class="v4-hero__top">
+        <p class="v4-hero__eyebrow text-eyebrow">
+          <span>UNRIVALED BASEBALL</span>
+          <span class="v4-hero__rule" aria-hidden="true"></span>
+          <span>SEASON 2026</span>
+        </p>
+        <p class="v4-hero__caption text-eyebrow">EST. 2024 · A SUB-PROPERTY OF UNRIVALED SPORTS</p>
+      </div>
+
+      <div class="v4-hero__body">
+        <h1 class="v4-hero__headline">
+          <span class="v4-hero__line">Your youth baseball</span>
+          <span class="v4-hero__line v4-hero__line--accent">journey lives here.</span>
+        </h1>
+
+        <div class="v4-hero__ctas">
+          <a class="v4-hero__cta" href="#manifesto">
+            <span>Read the manifesto</span>
+            <span class="v4-hero__cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="v4-hero__matrix">
+        {PILLARS.map(p => (
+          <a class="v4-hero__matrix-cell" data-pillar={p.pillar} href={p.href}>
+            <span class="v4-hero__matrix-dot" aria-hidden="true"></span>
+            <span class="text-eyebrow">
+              <span class="v4-hero__matrix-num">{p.num} /</span> {p.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ===== NEXT UP ticker ===== */}
+  <section class="next-up" aria-label="Next up">
+    <div class="next-up__inner">
+      <a class="next-up__label" href="/events/" aria-label="See all events">
+        <span class="next-up__label-line">NEXT</span>
+        <span class="next-up__label-line">UP</span>
+        <span class="next-up__arrow" aria-hidden="true">→</span>
+      </a>
+      <ul class="next-up__grid">
+        {NEXT_UP.map((e, i) => (
+          <li class="next-up__item" data-pillar={e.pillar}>
+            <p class="next-up__num text-eyebrow">{String(i + 1).padStart(2, '0')}</p>
+            <span class="next-up__tag"><PillarDot pillar={e.pillar} /></span>
+            <p class="next-up__title">{e.title}</p>
+            <p class="next-up__meta text-meta">{e.loc} · {e.date}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* ===== FOUR WAYS TO PLAY — pillar cards with photo top half ===== */}
+  <section class="portfolio">
+    <div class="portfolio__inner">
+      <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
+      <h2 class="portfolio__headline">One brand across the entire arc of the journey.</h2>
+      <div class="v4__pillar-grid">
+        {PILLARS.map(p => (
+          <a class="pcv4" data-pillar={p.pillar} href={p.href}>
+            <div class="pcv4__photo" aria-hidden="true"></div>
+            <div class="pcv4__body">
+              <span class="pcv4__num text-eyebrow">{p.num}</span>
+              <h3 class="pcv4__name">{p.name}</h3>
+              <p class="pcv4__desc">{p.desc}</p>
+              <span class="pcv4__arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ===== PINNACLE MANIFESTO — combined editorial moment on navy ===== */}
+  <section class="pm" id="manifesto">
+    <div class="pm__inner">
+      <div class="pm__head">
+        <p class="pm__eyebrow text-eyebrow">WHY WE BUILT THIS</p>
+        <h2 class="pm__headline">Pinnacle moments across the journey.</h2>
+        <p class="pm__body text-body">
+          [ Manifesto paragraph placeholder — one short paragraph (40–60 words). Every event we run is built around a single moment a family will remember years later. The bracket, the bus trip, the trophy round, the week at the village. The brand exists to put those moments within reach of more families, more often — under one banner, on one schedule, run to one standard. ]
+        </p>
+      </div>
+    </div>
+    <div class="pm__carousel" role="region" aria-label="Featured programs">
+      <div class="pm__track">
+        <span class="pm__track-leadin" aria-hidden="true"></span>
+        {PINNACLE_PROGRAMS.map(c => (
+          <a class="pm-card" data-pillar={c.pillar} href={c.href}>
+            <div class="pm-card__photo" aria-hidden="true" style={`background-image: url(${c.photo});`}>
+              <span class="pm-card__photo-caption text-meta">{c.photoBrief}</span>
+            </div>
+            <div class="pm-card__body">
+              <PillarTag pillar={c.pillar} label={c.tag} color="white" />
+              <h3 class="pm-card__name">{c.name}</h3>
+              <p class="pm-card__meta text-meta">{c.meta}</p>
+              <p class="pm-card__blurb text-body-sm">{c.blurb}</p>
+              <span class="pm-card__cta text-eyebrow">EXPLORE →</span>
+            </div>
+          </a>
+        ))}
+        <span class="pm__track-tailout" aria-hidden="true"></span>
+      </div>
+      <div class="pm__fade" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  {/* ===== FOUNDING ===== */}
+  <section class="founding-wrap">
+    <div class="founding-wrap__inner">
+      <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
+      <h2 class="founding-wrap__headline text-h1">A world-class tournament at the birthplace of baseball.</h2>
+      <FoundingCard
+        name="Cooperstown All Star Village"
+        meta="Cooperstown, NY · Founded 2001"
+        line="The bar that founded the brand. Every property, every event, every season."
+        cta="Plan Cooperstown"
+        href="/cooperstown/"
+      />
+    </div>
+  </section>
+
+  {/* ===== VENUE WALL ===== */}
+  <section class="venue-wall">
+    <div class="venue-wall__inner">
+      <div class="venue-wall__head">
+        <p class="venue-wall__eyebrow text-eyebrow">OUR VENUES</p>
+        <h2 class="venue-wall__headline text-h1">Eight properties. One standard.</h2>
+      </div>
+      <div class="venue-wall__grid">
+        {VENUES.map(v => <VenueCard {...v} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ===== TESTIMONIALS — video voice cards ===== */}
+  <section class="testimonials">
+    <div class="testimonials__inner">
+      <div class="testimonials__head">
+        <p class="testimonials__eyebrow text-eyebrow">VOICES FROM THE STANDS</p>
+        <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
+        <a class="testimonials__view" href="/stories/">SEE ALL STORIES →</a>
+      </div>
+      <div class="vv-grid">
+        {VOICES.map(v => (
+          <a class="vvc" data-pillar={v.pillar} href="/stories/">
+            <img class="vvc__img" src={v.photo} alt="" loading="lazy" />
+            <div class="vvc__shade" aria-hidden="true"></div>
+            <span class="vvc__play">
+              <span>PLAY</span>
+              <span class="vvc__play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="10" height="10"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+              </span>
+            </span>
+            <div class="vvc__caption">
+              <p class="vvc__name">{v.name}</p>
+              <p class="vvc__role">{v.role}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ===== PARTNERS ===== */}
+  <section class="partners-strip">
+    <div class="partners-strip__inner">
+      <p class="partners-strip__label text-eyebrow">PARTNERS</p>
+      <div class="partners-strip__row">
+        {PARTNERS.map(p => <span class="partners-strip__name">{p}</span>)}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

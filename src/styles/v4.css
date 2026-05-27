@@ -1,0 +1,709 @@
+/* =============================================================
+   HOMEPAGE V4 — FINAL
+   Merge of Direction A (Field Poster typography) +
+              Direction C (Photographic field-first hero)
+   Scoped under body.v4. Hero variant locked to v4-hero-b.
+   Asset paths point at /images/v4/ (Astro public folder).
+   ============================================================= */
+
+body.v4 {
+    --margin: var(--margin-desktop);
+    background: var(--color-white);
+}
+@media (max-width: 767px) {
+    body.v4 { --margin: var(--margin-mobile); }
+}
+
+/* ============================================================
+   TRANSPARENT NAV — homepage-only override
+   The SiteHeader floats over the hero photograph at the top of the
+   page. On a real site we'd toggle the attribute via a scroll
+   observer past the hero; for this build it stays on throughout.
+   ============================================================ */
+body.v4[data-transparent-nav] .site-header {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+body.v4[data-transparent-nav] .site-header__inner {
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+body.v4[data-transparent-nav] .site-header__logo-img {
+    filter: brightness(0) invert(1);
+}
+body.v4[data-transparent-nav] .site-header .nav-link,
+body.v4[data-transparent-nav] .site-header .nav-dropdown__trigger {
+    color: rgba(255,255,255,0.92);
+}
+body.v4[data-transparent-nav] .site-header .nav-link:hover,
+body.v4[data-transparent-nav] .site-header .nav-link.is-active {
+    color: var(--color-red);
+}
+body.v4[data-transparent-nav] .site-header .nav-cta {
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+body.v4[data-transparent-nav] .site-header .nav-cta:hover {
+    background: var(--color-red);
+    border-color: var(--color-red);
+}
+
+/* ============================================================
+   HERO V4-B — photographic backdrop + 2-line poster typography
+   ============================================================ */
+.v4-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy);
+    color: var(--color-white);
+    min-height: 880px;
+    display: flex;
+    flex-direction: column;
+}
+.v4-hero__bg {
+    position: absolute; inset: 0;
+    background-image: url('/images/v4/hero.png');
+    background-size: cover;
+    background-position: 50% 45%;
+    filter: contrast(1.05) brightness(0.85) saturate(1.05);
+}
+.v4-hero__overlay {
+    position: absolute; inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(0,0,0,0.55) 0%,
+            rgba(0,0,0,0.18) 30%,
+            rgba(29,36,104,0.35) 65%,
+            rgba(0,0,0,0.85) 100%),
+        radial-gradient(circle at 18% 110%, rgba(255,0,0,0.18), transparent 55%);
+    pointer-events: none;
+}
+.v4-hero__inner {
+    position: relative; z-index: 1;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    width: 100%;
+    padding: 220px var(--margin) 0;
+    display: flex; flex-direction: column;
+    flex: 1;
+}
+.v4-hero__top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap; gap: 16px;
+}
+.v4-hero__eyebrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    color: rgba(255,255,255,0.92);
+}
+.v4-hero__rule {
+    display: inline-block; width: 60px; height: 1px;
+    background: var(--color-red);
+}
+.v4-hero__caption { color: rgba(255,255,255,0.55); }
+
+.v4-hero__body {
+    flex: 1;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 0 64px;
+    gap: 48px;
+}
+.v4-hero__headline {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    color: var(--color-white);
+    margin: 0;
+    font-size: clamp(72px, 9.2vw, 148px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    max-width: 1240px;
+    display: grid;
+    row-gap: 6px;
+}
+.v4-hero__line { display: block; }
+.v4-hero__line--accent { color: var(--color-red); }
+
+.v4-hero__ctas { display: flex; align-items: center; gap: 28px; }
+.v4-hero__cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    color: var(--color-white);
+    background: transparent;
+    border: none;
+    padding: 14px 0;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-bottom: 2px solid var(--color-red);
+    transition: gap var(--transition-fast);
+}
+.v4-hero__cta:hover { gap: 22px; }
+.v4-hero__cta-arrow { color: var(--color-red); font-size: 18px; }
+
+/* Pillar matrix at hero base */
+.v4-hero__matrix {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.12);
+    border-top: 1px solid rgba(255,255,255,0.18);
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+@media (max-width: 767px) {
+    .v4-hero__matrix { grid-template-columns: repeat(2, 1fr); }
+}
+.v4-hero__matrix-cell {
+    display: flex; align-items: center; gap: 12px;
+    padding: 22px 24px;
+    background: rgba(0,0,0,0.45);
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    transition: background var(--transition-fast);
+}
+.v4-hero__matrix-cell:hover { background: rgba(0,0,0,0.65); }
+.v4-hero__matrix-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--pillar, var(--color-red));
+    flex-shrink: 0;
+}
+.v4-hero__matrix-cell[data-pillar="nationals"] .v4-hero__matrix-dot { background: var(--color-gold); }
+.v4-hero__matrix-num { color: rgba(255,255,255,0.45); margin-right: 4px; }
+
+/* ============================================================
+   NEXT UP TICKER — navy strip, 4 numbered editorial cards
+   ============================================================ */
+.next-up {
+    background: var(--color-navy);
+    color: var(--color-white);
+    position: relative;
+}
+.next-up::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--color-red);
+}
+.next-up__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 36px var(--margin);
+    display: grid;
+    grid-template-columns: 152px 1fr;
+    gap: 32px;
+    align-items: stretch;
+}
+@media (max-width: 767px) {
+    .next-up__inner { grid-template-columns: 1fr; gap: 16px; }
+}
+.next-up__label {
+    display: flex; flex-direction: column;
+    gap: 4px;
+    color: var(--color-red);
+    border-right: 1px solid rgba(255,255,255,0.15);
+    padding-right: 24px;
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+}
+@media (max-width: 767px) {
+    .next-up__label { border-right: none; padding-right: 0; }
+}
+.next-up__label:hover { gap: 8px; }
+.next-up__label-line {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+}
+.next-up__arrow {
+    color: var(--color-red);
+    font-size: 30px;
+    line-height: 1;
+    margin-top: 8px;
+}
+.next-up__grid {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+@media (max-width: 767px) {
+    .next-up__grid { grid-template-columns: 1fr; gap: 16px; }
+}
+.next-up__item {
+    padding: 0 24px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    position: relative;
+}
+.next-up__item:first-child { padding-left: 0; }
+.next-up__item:last-child  { padding-right: 0; border-right: none; }
+@media (max-width: 767px) {
+    .next-up__item { padding: 16px 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .next-up__item:last-child { border-bottom: none; }
+}
+.next-up__num {
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.18em;
+}
+.next-up__tag {
+    position: absolute;
+    top: 4px; right: 24px;
+    display: inline-flex;
+}
+.next-up__item:last-child .next-up__tag { right: 0; }
+/* On navy bg, recolor pillar dots so navy isn't invisible */
+.next-up__item[data-pillar="destinations"] .pillar-dot { background: var(--color-gold); }
+.next-up__item[data-pillar="nationals"] .pillar-dot    { background: var(--color-gold); }
+.next-up__item[data-pillar="training"] .pillar-dot     { background: var(--color-blue); }
+.next-up__item[data-pillar="local"] .pillar-dot        { background: var(--color-red); }
+.next-up__title {
+    color: var(--color-white);
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1.08;
+    margin: 0;
+}
+.next-up__meta { color: rgba(255,255,255,0.60); margin: 0; }
+
+/* ============================================================
+   FOUR WAYS TO PLAY — gray-50 surface, pillar cards with photo top
+   ============================================================ */
+body.v4 .portfolio { background: var(--gray-50); }
+body.v4 .portfolio__inner {
+    max-width: var(--content-max-width); margin: 0 auto;
+    padding: 100px var(--margin);
+    display: flex; flex-direction: column; gap: 20px;
+}
+body.v4 .portfolio__eyebrow { color: var(--gray-500); }
+body.v4 .portfolio__headline {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 0.95;
+    color: var(--color-black);
+    max-width: 900px;
+    margin: 0;
+}
+body.v4 .v4__pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+@media (max-width: 1023px) {
+    body.v4 .v4__pillar-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 639px) {
+    body.v4 .v4__pillar-grid { grid-template-columns: 1fr; }
+}
+
+.pcv4 {
+    display: flex; flex-direction: column;
+    text-decoration: none; color: var(--color-white);
+    background: var(--pillar, var(--color-red));
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    transition: transform var(--transition-fast);
+    position: relative;
+    border-radius: var(--radius-card);
+}
+.pcv4[data-pillar="nationals"] { color: var(--color-black); background: var(--color-gold); }
+.pcv4:hover { transform: translateY(-4px); }
+.pcv4__photo {
+    flex: 0 0 55%;
+    background-color: var(--gray-300);
+    background-size: cover; background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+.pcv4__photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%);
+    pointer-events: none;
+}
+.pcv4[data-pillar="local"]        .pcv4__photo { background-image: url('/images/v4/photo-flags.png'); background-position: 50% 60%; }
+.pcv4[data-pillar="destinations"] .pcv4__photo { background-image: url('/images/v4/photo-dugout.png'); }
+.pcv4[data-pillar="nationals"]    .pcv4__photo { background-image: url('/images/v4/photo-celebrate.png'); }
+.pcv4[data-pillar="training"]     .pcv4__photo { background-image: url('/images/v4/photo-pitcher.png'); }
+.pcv4__body {
+    flex: 1;
+    padding: 22px 22px 24px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+    color: inherit;
+    position: relative;
+}
+.pcv4__num {
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.18em;
+    font-size: 11px;
+}
+.pcv4[data-pillar="nationals"] .pcv4__num { color: rgba(0,0,0,0.55); }
+.pcv4__name {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 26px; line-height: 1;
+    margin: 0;
+    color: inherit;
+}
+.pcv4__desc {
+    color: inherit;
+    opacity: 0.85;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+}
+.pcv4__arrow {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 22px;
+    color: inherit;
+    transition: transform var(--transition-fast);
+}
+.pcv4:hover .pcv4__arrow { transform: translateX(4px); }
+
+/* ============================================================
+   PINNACLE MANIFESTO — combined editorial moment on navy.
+   Eyebrow → headline → body → horizontal carousel.
+   ============================================================ */
+.pm { background: var(--color-navy); color: var(--color-white); padding: 100px 0 80px; }
+.pm__inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--margin);
+}
+.pm__head {
+    max-width: 920px;
+    display: flex; flex-direction: column; gap: 20px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 56px;
+}
+.pm__eyebrow { color: var(--color-gold); letter-spacing: 0.18em; }
+.pm__headline {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    color: var(--color-white);
+    margin: 0;
+    max-width: 1000px;
+    letter-spacing: -0.015em;
+    font-size: clamp(48px, 6vw, 92px);
+    line-height: 0.95;
+}
+.pm__body {
+    color: rgba(255,255,255,0.82);
+    max-width: 680px;
+    font-style: italic;
+    margin: 0;
+}
+
+.pm__carousel { position: relative; overflow: hidden; }
+.pm__track {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--margin);
+    padding: 4px 0 24px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.18) transparent;
+}
+.pm__track::-webkit-scrollbar { height: 6px; }
+.pm__track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 3px; }
+.pm__track::-webkit-scrollbar-track { background: transparent; }
+.pm__track-leadin,
+.pm__track-tailout { flex: 0 0 auto; align-self: stretch; }
+.pm__track-leadin {
+    width: calc((100% - var(--content-max-width)) / 2 + var(--margin));
+    min-width: var(--margin);
+}
+.pm__track-tailout { width: 80px; }
+.pm__fade {
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    width: 120px;
+    background: linear-gradient(90deg, rgba(29,36,104,0) 0%, var(--color-navy) 100%);
+    pointer-events: none;
+}
+
+.pm-card {
+    flex: 0 0 380px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    background: #0f1547;
+    color: var(--color-white);
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform var(--transition-fast);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-card);
+}
+.pm-card:hover { transform: translateY(-4px); }
+.pm-card__photo {
+    flex: 0 0 auto;
+    aspect-ratio: 4 / 5;
+    background-color: #0a0e30;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+.pm-card__photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+}
+.pm-card__photo-caption {
+    position: absolute;
+    top: 14px; left: 14px;
+    z-index: 1;
+    color: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.45);
+    padding: 4px 8px;
+    max-width: calc(100% - 28px);
+    font-size: 10px;
+}
+.pm-card__body {
+    padding: 24px 26px 26px;
+    display: flex; flex-direction: column; gap: 10px;
+    flex: 1;
+}
+.pm-card .pillar-tag { color: rgba(255,255,255,0.75); }
+.pm-card .pillar-tag[data-pillar="destinations"] .pillar-dot { background: var(--color-gold); }
+.pm-card .pillar-tag[data-pillar="nationals"]    .pillar-dot { background: var(--color-gold); }
+.pm-card .pillar-tag[data-pillar="training"]     .pillar-dot { background: var(--color-blue); }
+.pm-card .pillar-tag[data-pillar="local"]        .pillar-dot { background: var(--color-red); }
+.pm-card__name {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 1.04;
+    color: inherit;
+    margin: 0;
+    letter-spacing: -0.005em;
+}
+.pm-card__meta { color: var(--color-gold); margin: 0; letter-spacing: 0.04em; }
+.pm-card__blurb { color: rgba(255,255,255,0.78); margin: 0; }
+.pm-card__cta {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    color: var(--color-red);
+    align-self: stretch;
+    transition: color var(--transition-fast);
+}
+.pm-card:hover .pm-card__cta { color: var(--color-white); }
+
+/* ============================================================
+   FOUNDING WRAP — light, framed by the navy sections above/below
+   ============================================================ */
+body.v4 .founding-wrap { background: var(--color-white); }
+body.v4 .founding-wrap__inner {
+    max-width: var(--content-max-width); margin: 0 auto;
+    padding: 100px var(--margin);
+    display: flex; flex-direction: column; gap: 24px;
+}
+body.v4 .founding-wrap__eyebrow { color: var(--color-gold); letter-spacing: 0.15em; }
+body.v4 .founding-wrap__headline { color: var(--color-black); max-width: 900px; margin: 0; }
+
+/* ============================================================
+   VENUE WALL — 8-property grid on gray-50
+   ============================================================ */
+body.v4 .venue-wall { background: var(--gray-50); }
+body.v4 .venue-wall__inner {
+    max-width: var(--content-max-width); margin: 0 auto;
+    padding: 100px var(--margin);
+    display: flex; flex-direction: column; gap: 32px;
+}
+body.v4 .venue-wall__head { display: flex; flex-direction: column; gap: 12px; }
+body.v4 .venue-wall__eyebrow { color: var(--gray-500); margin: 0; }
+body.v4 .venue-wall__headline { color: var(--color-black); max-width: 800px; margin: 0; }
+body.v4 .venue-wall__grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+@media (max-width: 1023px) {
+    body.v4 .venue-wall__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 639px) {
+    body.v4 .venue-wall__grid { grid-template-columns: 1fr; }
+}
+/* Paint photos onto venue cards (8 venues in order) */
+body.v4 .venue-wall .venue-card:nth-child(1) .venue-card__img { background-image: url('/images/v4/photo-flags.png'); }
+body.v4 .venue-wall .venue-card:nth-child(2) .venue-card__img { background-image: url('/images/v4/photo-celebrate.png'); }
+body.v4 .venue-wall .venue-card:nth-child(3) .venue-card__img { background-image: url('/images/v4/photo-batter.png'); }
+body.v4 .venue-wall .venue-card:nth-child(4) .venue-card__img { background-image: url('/images/v4/photo-running.png'); }
+body.v4 .venue-wall .venue-card:nth-child(5) .venue-card__img { background-image: url('/images/v4/photo-pitcher.png'); }
+body.v4 .venue-wall .venue-card:nth-child(6) .venue-card__img { background-image: url('/images/v4/photo-dugout.png'); }
+body.v4 .venue-wall .venue-card:nth-child(7) .venue-card__img { background-image: url('/images/v4/hero.png'); }
+body.v4 .venue-wall .venue-card:nth-child(8) .venue-card__img { background-image: url('/images/v4/photo-running.png'); }
+body.v4 .venue-wall .venue-card__img {
+    background-size: cover; background-position: center;
+    background-color: var(--gray-300);
+}
+
+/* ============================================================
+   TESTIMONIALS — navy, video voice cards
+   ============================================================ */
+body.v4 .testimonials { background: var(--color-navy); color: var(--color-white); }
+body.v4 .testimonials__inner {
+    max-width: var(--content-max-width); margin: 0 auto;
+    padding: 100px var(--margin);
+    display: flex; flex-direction: column; gap: 32px;
+}
+body.v4 .testimonials__head {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 32px; align-items: end;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+@media (max-width: 767px) {
+    body.v4 .testimonials__head { grid-template-columns: 1fr; }
+}
+body.v4 .testimonials__eyebrow { color: var(--color-gold); align-self: end; margin: 0; }
+body.v4 .testimonials__headline { color: var(--color-white); margin: 0; align-self: end; }
+body.v4 .testimonials__view {
+    color: var(--color-red);
+    align-self: end;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+body.v4 .vv-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 1023px) {
+    body.v4 .vv-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 639px) {
+    body.v4 .vv-grid { grid-template-columns: 1fr; }
+}
+
+.vvc {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-white);
+    display: block;
+    transition: transform var(--transition-fast);
+    border-radius: var(--radius-card);
+}
+.vvc:hover { transform: translateY(-3px); }
+.vvc__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.vvc__shade {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.75) 100%);
+    pointer-events: none;
+}
+.vvc__play {
+    position: absolute;
+    top: 16px; right: 16px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.55);
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.25);
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+.vvc__play-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px;
+    background: var(--color-red);
+    color: var(--color-white);
+    border-radius: 50%;
+}
+.vvc__caption {
+    position: absolute;
+    left: 22px; right: 22px; bottom: 22px;
+    display: flex; flex-direction: column; gap: 4px;
+}
+.vvc__name {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 22px;
+    line-height: 1.05;
+    color: var(--color-white);
+    margin: 0;
+}
+.vvc__role {
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* ============================================================
+   PARTNERS strip
+   ============================================================ */
+body.v4 .partners-strip { background: var(--color-white); border-top: 1px solid var(--gray-200); }
+body.v4 .partners-strip__inner {
+    max-width: var(--content-max-width); margin: 0 auto;
+    padding: 56px var(--margin);
+    display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 767px) {
+    body.v4 .partners-strip__inner { grid-template-columns: 1fr; gap: 24px; }
+}
+body.v4 .partners-strip__label { color: var(--gray-500); margin: 0; }
+body.v4 .partners-strip__row {
+    display: flex; flex-wrap: wrap; gap: 40px 56px;
+    align-items: center;
+}
+body.v4 .partners-strip__name {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    text-transform: uppercase;
+    font-size: 22px;
+    color: var(--gray-400);
+    letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   CARD RADIUS — uniform 8px across the v4 homepage
+   Excludes section backgrounds, buttons, and the NEXT UP ticker
+   ============================================================ */
+body.v4 .pillar-card,
+body.v4 .founding-card,
+body.v4 .venue-card,
+body.v4 .vvc,
+body.v4 .pcv4,
+body.v4 .pm-card {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+}

@@ -10,12 +10,18 @@ interface Props {
   title: string;
   description?: string;
   activeNav?: 'home' | 'ways-to-play' | 'venues' | 'events' | 'stories' | 'about';
+  /** Extra CSS class(es) on <body> — used by variant pages to scope styles. */
+  bodyClass?: string;
+  /** When true, SiteHeader floats over the hero photo (homepage v4). */
+  transparentNav?: boolean;
 }
 
 const {
   title,
   description = 'Your youth baseball journey lives here.',
   activeNav,
+  bodyClass,
+  transparentNav = false,
 } = Astro.props;
 ---
 
@@ -28,7 +34,7 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
+  <body class={bodyClass} data-transparent-nav={transparentNav ? 'true' : undefined}>
     <SiteHeader activeNav={activeNav} />
     <main>
       <slot />
