@@ -111,8 +111,8 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
     flex: 1;
     display: flex; flex-direction: column;
     justify-content: flex-end;
-    padding: 80px 0 64px;
-    gap: 48px;
+    padding: 60px 0 48px;
+    gap: 28px;
 }
 .v4-hero__headline {
     font-family: var(--font-display-poster);
@@ -171,10 +171,14 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
 .v4-hero__matrix-cell:hover { background: rgba(0,0,0,0.65); }
 .v4-hero__matrix-dot {
     width: 10px; height: 10px; border-radius: 50%;
-    background: var(--pillar, var(--color-red));
     flex-shrink: 0;
 }
-.v4-hero__matrix-cell[data-pillar="nationals"] .v4-hero__matrix-dot { background: var(--color-gold); }
+/* Recolor every pillar dot so each is visible on the near-black matrix cell bg.
+   Navy (destinations) on dark = invisible, so destinations + nationals both use gold. */
+.v4-hero__matrix-cell[data-pillar="local"]        .v4-hero__matrix-dot { background: var(--color-red); }
+.v4-hero__matrix-cell[data-pillar="destinations"] .v4-hero__matrix-dot { background: var(--color-gold); }
+.v4-hero__matrix-cell[data-pillar="nationals"]    .v4-hero__matrix-dot { background: var(--color-gold); }
+.v4-hero__matrix-cell[data-pillar="training"]     .v4-hero__matrix-dot { background: var(--color-blue); }
 .v4-hero__matrix-num { color: rgba(255,255,255,0.45); margin-right: 4px; }
 
 /* ============================================================
@@ -242,10 +246,13 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
 }
 .next-up__item {
     padding: 0 24px;
-    display: flex; flex-direction: column;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 8px;
+    row-gap: 8px;
+    align-content: start;
     border-right: 1px solid rgba(255,255,255,0.12);
-    position: relative;
 }
 .next-up__item:first-child { padding-left: 0; }
 .next-up__item:last-child  { padding-right: 0; border-right: none; }
@@ -256,13 +263,23 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
 .next-up__num {
     color: rgba(255,255,255,0.45);
     letter-spacing: 0.18em;
+    grid-column: 1; grid-row: 1;
+    align-self: center;
+    margin: 0;
 }
 .next-up__tag {
-    position: absolute;
-    top: 4px; right: 24px;
+    grid-column: 2; grid-row: 1;
+    align-self: center;
     display: inline-flex;
 }
-.next-up__item:last-child .next-up__tag { right: 0; }
+.next-up__title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+.next-up__meta {
+    grid-column: 1 / -1;
+    grid-row: 3;
+}
 /* On navy bg, recolor pillar dots so navy isn't invisible */
 .next-up__item[data-pillar="destinations"] .pillar-dot { background: var(--color-gold); }
 .next-up__item[data-pillar="nationals"] .pillar-dot    { background: var(--color-gold); }
@@ -285,7 +302,7 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
 body.v4 .portfolio { background: var(--gray-50); }
 body.v4 .portfolio__inner {
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 100px var(--margin);
+    padding: 80px var(--margin);
     display: flex; flex-direction: column; gap: 20px;
 }
 body.v4 .portfolio__eyebrow { color: var(--gray-500); }
@@ -383,7 +400,7 @@ body.v4 .v4__pillar-grid {
    PINNACLE MANIFESTO — combined editorial moment on navy.
    Eyebrow → headline → body → horizontal carousel.
    ============================================================ */
-.pm { background: var(--color-navy); color: var(--color-white); padding: 100px 0 80px; }
+.pm { background: var(--color-navy); color: var(--color-white); padding: 80px 0 60px; }
 .pm__inner {
     max-width: var(--content-max-width);
     margin: 0 auto;
@@ -391,10 +408,10 @@ body.v4 .v4__pillar-grid {
 }
 .pm__head {
     max-width: 920px;
-    display: flex; flex-direction: column; gap: 20px;
-    padding-bottom: 48px;
+    display: flex; flex-direction: column; gap: 16px;
+    padding-bottom: 28px;
     border-bottom: 1px solid rgba(255,255,255,0.12);
-    margin-bottom: 56px;
+    margin-bottom: 32px;
 }
 .pm__eyebrow { color: var(--color-gold); letter-spacing: 0.18em; }
 .pm__headline {
@@ -521,7 +538,7 @@ body.v4 .v4__pillar-grid {
 body.v4 .founding-wrap { background: var(--color-white); }
 body.v4 .founding-wrap__inner {
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 100px var(--margin);
+    padding: 80px var(--margin);
     display: flex; flex-direction: column; gap: 24px;
 }
 body.v4 .founding-wrap__eyebrow { color: var(--color-gold); letter-spacing: 0.15em; }
@@ -533,7 +550,7 @@ body.v4 .founding-wrap__headline { color: var(--color-black); max-width: 900px; 
 body.v4 .venue-wall { background: var(--gray-50); }
 body.v4 .venue-wall__inner {
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 100px var(--margin);
+    padding: 80px var(--margin);
     display: flex; flex-direction: column; gap: 32px;
 }
 body.v4 .venue-wall__head { display: flex; flex-direction: column; gap: 12px; }
@@ -568,7 +585,7 @@ body.v4 .venue-wall .venue-card__img {
 body.v4 .testimonials { background: var(--color-navy); color: var(--color-white); }
 body.v4 .testimonials__inner {
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 100px var(--margin);
+    padding: 80px var(--margin);
     display: flex; flex-direction: column; gap: 32px;
 }
 body.v4 .testimonials__head {
