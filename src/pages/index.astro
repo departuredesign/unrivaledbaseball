@@ -1,172 +1,236 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/heroes/Hero.astro';
-import Ticker from '../components/sections/Ticker.astro';
-import PillarCard from '../components/cards/PillarCard.astro';
-import Manifesto from '../components/sections/Manifesto.astro';
-import FeaturedRail from '../components/sections/FeaturedRail.astro';
-import FindYourPath from '../components/sections/FindYourPath.astro';
-import VoicesModule from '../components/sections/VoicesModule.astro';
+import FoundingCard from '../components/cards/FoundingCard.astro';
+import VenueCard from '../components/cards/VenueCard.astro';
+import PillarCardV4 from '../components/cards/PillarCardV4.astro';
+import PinnacleCard from '../components/cards/PinnacleCard.astro';
+import VoiceCard from '../components/cards/VoiceCard.astro';
+import PillarDot from '../components/atoms/PillarDot.astro';
+import '../styles/v4.css';
 
-const pillars = [
-  { pillar: 'local' as const,        num: '01', name: 'Local Tournaments',       desc: 'UBN · USSSA-Sanctioned Play',              href: '/local/' },
-  { pillar: 'destinations' as const, num: '02', name: 'Destinations',            desc: 'Weeklong at our properties',                href: '/destinations/' },
-  { pillar: 'nationals' as const,    num: '03', name: 'Nationals',               desc: '16-team championship · Cooperstown',        href: '/nationals/' },
-  { pillar: 'training' as const,     num: '04', name: 'Training',                desc: 'Baseball Factory · Prospect Select',        href: '/training/' },
+const PILLARS = [
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong at our properties',          href: '/destinations/' },
+  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16-team Championship · Aberdeen',     href: '/nationals/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
 ];
 
-const tickerItems = [
-  { text: 'Ripken National Championships — Aberdeen, MD — Jul 12' },
-  { text: 'Prospect Select Showcase — Las Vegas — Jul 18' },
-  { text: 'Cooperstown Week 7 Tournament — Aug 3' },
-  { text: 'Baseball Factory Eval — Manteca, CA — Aug 9' },
+const NEXT_UP = [
+  { pillar: 'local'        as const, title: 'UBN Mid-Atlantic Spring Classic', loc: 'Aberdeen, MD',    date: 'May 17' },
+  { pillar: 'destinations' as const, title: 'Cooperstown Week 7',              loc: 'Cooperstown, NY', date: 'Aug 3–9' },
+  { pillar: 'nationals'    as const, title: 'Ripken National Championships',   loc: 'Aberdeen, MD',    date: 'Jul 12–19' },
+  { pillar: 'training'     as const, title: 'Prospect Select Las Vegas',       loc: 'Las Vegas, NV',   date: 'Jul 18' },
 ];
 
-const featured = [
-  { pillar: 'destinations' as const, parentTag: 'DESTINATION EXPERIENCES', title: 'Ripken National Championships', meta: 'Jul 12-19 · Aberdeen, MD', href: '/nationals/' },
-  { pillar: 'training' as const,     parentTag: 'TRAINING & DEVELOPMENT',  title: 'Prospect Select Las Vegas',     meta: 'Jul 18 · 14U-16U',         href: '/prospect-select/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATION EXPERIENCES', title: 'Cooperstown Week 7',            meta: 'Aug 3-9 · 11U-12U',        href: '/cooperstown/' },
+const PINNACLE_PROGRAMS = [
+  {
+    pillar: 'nationals' as const,
+    tag: 'NATIONALS · CHAMPIONSHIP',
+    name: 'Ripken Nationals',
+    meta: 'Aberdeen, MD · Jun 30 – Jul 5 · 12U',
+    photoBrief: '[ Ripken Nationals image · trophy round under the lights ]',
+    photo: '/images/v4/photo-celebrate.png',
+    blurb: "The 16-team 12U bracket at the Ripken Experience Aberdeen. Cal and Bill's hometown. The national championship round of the youth baseball year.",
+    href: '/nationals/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Rocker B Ranch',
+    meta: 'Graford, TX · Summer Invitational · 12U–16U',
+    photoBrief: '[ Rocker B Ranch image · Byrd Family Field at golden hour ]',
+    photo: '/images/v4/photo-flags.png',
+    blurb: 'The 325-acre Texas ranch where weekend tournaments meet resort lodging. Pool. Pond. Music venue. The Byrd Family Field at the center of all of it.',
+    href: '/rocker-b/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Cooperstown All Star Village',
+    meta: 'Oneonta, NY · 12 Summer Weeks · 11U–12U',
+    photoBrief: '[ Cooperstown All Star Village image · opening pin trade ]',
+    photo: '/images/v4/photo-dugout.png',
+    blurb: 'The 12U pilgrimage. Twelve weeks every summer, hundreds of teams, the Hall of Fame minutes away. The week families plan around for years.',
+    href: '/cooperstown/',
+  },
+  {
+    pillar: 'destinations' as const,
+    tag: 'DESTINATION EXPERIENCE',
+    name: 'Myrtle Beach Madness at Ripken',
+    meta: 'Myrtle Beach, SC · Summer Week · 10U–12U',
+    photoBrief: '[ Myrtle Beach Madness image · the nine-field complex from above ]',
+    photo: '/images/v4/photo-running.png',
+    blurb: 'The Big League Experience a few stoplights from the beach. Nine replica MLB fields. A coastal vacation week the family plans around.',
+    href: '/ripken-myrtle-beach/',
+  },
 ];
 
-const testimonials = [
-  { quote: 'This is the first place where my son felt like he was part of something bigger.', attribution: 'Parent · Massachusetts' },
-  { quote: "You see the kids walk in on day one, and you see them walk out on day seven. They're different.", attribution: 'Coach · Texas' },
-  { quote: 'I played here in 2019. Came back five years later as staff. The place stays with you.', attribution: 'Alum · 2019' },
+const VOICES = [
+  { name: 'The Marchetti Family', role: 'PARENTS · WESTBOROUGH, MA', photo: '/images/v4/photo-dugout.png',    pillar: 'destinations' as const },
+  { name: 'Coach Davis',          role: 'HEAD COACH · PLANO, TX',    photo: '/images/v4/photo-celebrate.png', pillar: 'local'        as const },
+  { name: 'Jordan Reyes',         role: 'ALUM · 2019 · PHOENIX, AZ', photo: '/images/v4/photo-pitcher.png',   pillar: 'training'     as const },
 ];
+
+const VENUES = [
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: '/cooperstown/' },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: '/ripken-aberdeen/' },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: '/ripken-myrtle-beach/' },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: '/ripken-pigeon-forge/' },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: '/sports-force-parks-cedar-point/' },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: '/sports-force-parks-manteca/' },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: '/rocker-b/' },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: '/baseball-factory/' },
+];
+
+const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', 'Marucci'];
 ---
 
-<BaseLayout title="Home" activeNav="home">
-  <Hero
-    headline="Your youth baseball journey lives here."
-    sub="Pinnacle moments across the journey, all under one banner."
-  />
+<BaseLayout title="Home" activeNav="home" bodyClass="v4" transparentNav={true}>
 
-  <Ticker items={tickerItems} />
+  {/* ===== HERO B — photographic + 2-line poster headline ===== */}
+  <section class="v4-hero v4-hero-b">
+    <div class="v4-hero__bg" aria-hidden="true"></div>
+    <div class="v4-hero__overlay" aria-hidden="true"></div>
+    <div class="v4-hero__inner">
+      <div class="v4-hero__top">
+        <p class="v4-hero__eyebrow text-eyebrow">
+          <span>UNRIVALED BASEBALL</span>
+          <span class="v4-hero__rule" aria-hidden="true"></span>
+          <span>SEASON 2026</span>
+        </p>
+        <p class="v4-hero__caption text-eyebrow">EST. 2024 · A SUB-PROPERTY OF UNRIVALED SPORTS</p>
+      </div>
 
-  <section class="portfolio">
-    <div class="portfolio__inner">
-      <p class="portfolio__eyebrow text-eyebrow">WAYS TO PLAY</p>
-      <h2 class="portfolio__headline text-h1">One brand across the entire arc of the journey.</h2>
-      <div class="portfolio__grid">
-        {pillars.map(p => <PillarCard {...p} />)}
+      <div class="v4-hero__body">
+        <h1 class="v4-hero__headline">
+          <span class="v4-hero__line">Your youth baseball</span>
+          <span class="v4-hero__line v4-hero__line--accent">journey lives here.</span>
+        </h1>
+
+        <div class="v4-hero__ctas">
+          <a class="v4-hero__cta" href="#manifesto">
+            <span>Read the manifesto</span>
+            <span class="v4-hero__cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="v4-hero__matrix">
+        {PILLARS.map(p => (
+          <a class="v4-hero__matrix-cell" data-pillar={p.pillar} href={p.href}>
+            <span class="v4-hero__matrix-dot" aria-hidden="true"></span>
+            <span class="text-eyebrow">
+              <span class="v4-hero__matrix-num">{p.num} /</span> {p.name}
+            </span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <Manifesto
-    headline="Pinnacle moments across the journey."
-    body="From a first weekend tournament to a 12U championship at Cooperstown — the journey lives here."
-  />
+  {/* ===== NEXT UP ticker ===== */}
+  <section class="next-up" aria-label="Next up">
+    <div class="next-up__inner">
+      <a class="next-up__label" href="/events/" aria-label="See all events">
+        <span class="next-up__label-line">NEXT</span>
+        <span class="next-up__label-line">UP</span>
+        <span class="next-up__arrow" aria-hidden="true">→</span>
+      </a>
+      <ul class="next-up__grid">
+        {NEXT_UP.map((e, i) => (
+          <li class="next-up__item" data-pillar={e.pillar}>
+            <p class="next-up__num text-eyebrow">{String(i + 1).padStart(2, '0')}</p>
+            <span class="next-up__tag"><PillarDot pillar={e.pillar} /></span>
+            <p class="next-up__title">{e.title}</p>
+            <p class="next-up__meta text-meta">{e.loc} · {e.date}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-  <FeaturedRail items={featured} />
+  {/* ===== FOUR WAYS TO PLAY — pillar cards with photo top half ===== */}
+  <section class="portfolio">
+    <div class="portfolio__inner">
+      <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
+      <h2 class="portfolio__headline">One brand across the entire arc of the journey.</h2>
+      <div class="v4__pillar-grid">
+        {PILLARS.map(p => <PillarCardV4 {...p} />)}
+      </div>
+    </div>
+  </section>
 
-  <FindYourPath />
+  {/* ===== PINNACLE MANIFESTO — combined editorial moment on navy ===== */}
+  <section class="pm" id="manifesto">
+    <div class="pm__inner">
+      <div class="pm__head">
+        <p class="pm__eyebrow text-eyebrow">WHY WE BUILT THIS</p>
+        <h2 class="pm__headline">Pinnacle moments across the journey.</h2>
+        <p class="pm__body text-body">
+          [ Manifesto paragraph placeholder — one short paragraph (40–60 words). Every event we run is built around a single moment a family will remember years later. The bracket, the bus trip, the trophy round, the week at the village. The brand exists to put those moments within reach of more families, more often — under one banner, on one schedule, run to one standard. ]
+        </p>
+      </div>
+    </div>
+    <div class="pm__carousel" role="region" aria-label="Featured programs">
+      <div class="pm__track">
+        <span class="pm__track-leadin" aria-hidden="true"></span>
+        {PINNACLE_PROGRAMS.map(c => <PinnacleCard {...c} />)}
+        <span class="pm__track-tailout" aria-hidden="true"></span>
+      </div>
+      <div class="pm__fade" aria-hidden="true"></div>
+    </div>
+  </section>
 
+  {/* ===== FOUNDING ===== */}
+  <section class="founding-wrap">
+    <div class="founding-wrap__inner">
+      <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
+      <h2 class="founding-wrap__headline text-h1">A world-class tournament at the birthplace of baseball.</h2>
+      <FoundingCard
+        name="Cooperstown All Star Village"
+        meta="Cooperstown, NY · Founded 2001"
+        line="The bar that founded the brand. Every property, every event, every season."
+        cta="Plan Cooperstown"
+        href="/cooperstown/"
+      />
+    </div>
+  </section>
+
+  {/* ===== VENUE WALL ===== */}
+  <section class="venue-wall">
+    <div class="venue-wall__inner">
+      <div class="venue-wall__head">
+        <p class="venue-wall__eyebrow text-eyebrow">OUR VENUES</p>
+        <h2 class="venue-wall__headline text-h1">Eight properties. One standard.</h2>
+      </div>
+      <div class="venue-wall__grid">
+        {VENUES.map(v => <VenueCard {...v} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ===== TESTIMONIALS — video voice cards ===== */}
   <section class="testimonials">
     <div class="testimonials__inner">
-      <p class="testimonials__eyebrow text-eyebrow">TESTIMONIALS</p>
-      <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
-      <VoicesModule voices={testimonials} eyebrow="" headline="" />
+      <div class="testimonials__head">
+        <p class="testimonials__eyebrow text-eyebrow">VOICES FROM THE STANDS</p>
+        <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
+        <a class="testimonials__view" href="/stories/">SEE ALL STORIES →</a>
+      </div>
+      <div class="vv-grid">
+        {VOICES.map(v => <VoiceCard {...v} />)}
+      </div>
     </div>
   </section>
 
-  <section class="partners">
-    <p class="partners__label text-eyebrow">Our Partners</p>
-    <div class="partners__row">
-      {Array.from({ length: 6 }, () => <div class="partners__cell" aria-hidden="true"></div>)}
+  {/* ===== PARTNERS ===== */}
+  <section class="partners-strip">
+    <div class="partners-strip__inner">
+      <p class="partners-strip__label text-eyebrow">PARTNERS</p>
+      <div class="partners-strip__row">
+        {PARTNERS.map(p => <span class="partners-strip__name">{p}</span>)}
+      </div>
     </div>
   </section>
+
 </BaseLayout>
-
-<style>
-  .portfolio {
-    background: var(--color-white);
-  }
-  .portfolio__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  @media (min-width: 1024px) {
-    .portfolio__inner { padding: 100px var(--margin-desktop); }
-  }
-  .portfolio__eyebrow { color: var(--gray-500); }
-  .portfolio__headline { color: var(--color-black); max-width: 800px; }
-  .portfolio__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 24px;
-  }
-  @media (min-width: 640px) {
-    .portfolio__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .portfolio__grid { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .testimonials {
-    background: var(--color-navy);
-    color: var(--color-white);
-  }
-  .testimonials__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  @media (min-width: 1024px) {
-    .testimonials__inner { padding: 100px var(--margin-desktop); }
-  }
-  .testimonials__eyebrow { color: var(--color-gold); }
-  .testimonials__headline { color: var(--color-white); }
-  .testimonials :global(.voices-module) {
-    background: transparent;
-  }
-  .testimonials :global(.voices-module__inner) {
-    padding: 0;
-  }
-  .testimonials :global(.voice-card) {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--color-white);
-  }
-  .testimonials :global(.voice-card__quote) {
-    color: var(--color-white);
-  }
-  .testimonials :global(.voice-card__attr) {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .partners {
-    background: var(--color-white);
-    padding: 60px var(--margin-mobile);
-    text-align: center;
-  }
-  @media (min-width: 1024px) {
-    .partners { padding: 80px var(--margin-desktop); }
-  }
-  .partners__label {
-    color: var(--gray-500);
-    margin-bottom: 24px;
-  }
-  .partners__row {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  @media (min-width: 768px) {
-    .partners__row { grid-template-columns: repeat(6, 1fr); }
-  }
-  .partners__cell {
-    aspect-ratio: 5 / 2;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-  }
-</style>

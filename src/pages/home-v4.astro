@@ -2,7 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FoundingCard from '../components/cards/FoundingCard.astro';
 import VenueCard from '../components/cards/VenueCard.astro';
-import PillarTag from '../components/atoms/PillarTag.astro';
+import PillarCardV4 from '../components/cards/PillarCardV4.astro';
+import PinnacleCard from '../components/cards/PinnacleCard.astro';
+import VoiceCard from '../components/cards/VoiceCard.astro';
 import PillarDot from '../components/atoms/PillarDot.astro';
 import '../styles/v4.css';
 
@@ -153,17 +155,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
       <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
       <h2 class="portfolio__headline">One brand across the entire arc of the journey.</h2>
       <div class="v4__pillar-grid">
-        {PILLARS.map(p => (
-          <a class="pcv4" data-pillar={p.pillar} href={p.href}>
-            <div class="pcv4__photo" aria-hidden="true"></div>
-            <div class="pcv4__body">
-              <span class="pcv4__num text-eyebrow">{p.num}</span>
-              <h3 class="pcv4__name">{p.name}</h3>
-              <p class="pcv4__desc">{p.desc}</p>
-              <span class="pcv4__arrow" aria-hidden="true">→</span>
-            </div>
-          </a>
-        ))}
+        {PILLARS.map(p => <PillarCardV4 {...p} />)}
       </div>
     </div>
   </section>
@@ -182,20 +174,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
     <div class="pm__carousel" role="region" aria-label="Featured programs">
       <div class="pm__track">
         <span class="pm__track-leadin" aria-hidden="true"></span>
-        {PINNACLE_PROGRAMS.map(c => (
-          <a class="pm-card" data-pillar={c.pillar} href={c.href}>
-            <div class="pm-card__photo" aria-hidden="true" style={`background-image: url(${c.photo});`}>
-              <span class="pm-card__photo-caption text-meta">{c.photoBrief}</span>
-            </div>
-            <div class="pm-card__body">
-              <PillarTag pillar={c.pillar} label={c.tag} color="white" />
-              <h3 class="pm-card__name">{c.name}</h3>
-              <p class="pm-card__meta text-meta">{c.meta}</p>
-              <p class="pm-card__blurb text-body-sm">{c.blurb}</p>
-              <span class="pm-card__cta text-eyebrow">EXPLORE →</span>
-            </div>
-          </a>
-        ))}
+        {PINNACLE_PROGRAMS.map(c => <PinnacleCard {...c} />)}
         <span class="pm__track-tailout" aria-hidden="true"></span>
       </div>
       <div class="pm__fade" aria-hidden="true"></div>
@@ -239,22 +218,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
         <a class="testimonials__view" href="/stories/">SEE ALL STORIES →</a>
       </div>
       <div class="vv-grid">
-        {VOICES.map(v => (
-          <a class="vvc" data-pillar={v.pillar} href="/stories/">
-            <img class="vvc__img" src={v.photo} alt="" loading="lazy" />
-            <div class="vvc__shade" aria-hidden="true"></div>
-            <span class="vvc__play">
-              <span>PLAY</span>
-              <span class="vvc__play-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="10" height="10"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
-              </span>
-            </span>
-            <div class="vvc__caption">
-              <p class="vvc__name">{v.name}</p>
-              <p class="vvc__role">{v.role}</p>
-            </div>
-          </a>
-        ))}
+        {VOICES.map(v => <VoiceCard {...v} />)}
       </div>
     </div>
   </section>

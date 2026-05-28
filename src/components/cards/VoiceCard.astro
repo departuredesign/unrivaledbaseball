@@ -1,0 +1,30 @@
+---
+/**
+ * VoiceCard — video-voice testimonial card with a full-bleed photo,
+ * play affordance, and name/role caption on a dark gradient shade.
+ * Used on the v4 homepage "Voices from the stands" grid.
+ */
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'nationals' | 'ripken';
+  name: string;
+  role: string;
+  photo: string;
+  href?: string;
+}
+const { pillar, name, role, photo, href = '/stories/' } = Astro.props;
+---
+
+<a class="vvc" data-pillar={pillar} href={href}>
+  <img class="vvc__img" src={photo} alt="" loading="lazy" />
+  <div class="vvc__shade" aria-hidden="true"></div>
+  <span class="vvc__play">
+    <span>PLAY</span>
+    <span class="vvc__play-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="10" height="10"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+    </span>
+  </span>
+  <div class="vvc__caption">
+    <p class="vvc__name">{name}</p>
+    <p class="vvc__role">{role}</p>
+  </div>
+</a>

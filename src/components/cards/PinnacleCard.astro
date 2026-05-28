@@ -1,0 +1,37 @@
+---
+import PillarTag from '../atoms/PillarTag.astro';
+
+/**
+ * PinnacleCard — the dark-navy editorial card used in the
+ * "Pinnacle Moments Across the Journey" carousel on the v4 homepage.
+ * 4:5 photo on top, pillar-tagged copy block below.
+ */
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'nationals' | 'ripken';
+  tag: string;
+  name: string;
+  meta: string;
+  photo: string;
+  photoBrief?: string;
+  blurb: string;
+  href: string;
+  cta?: string;
+}
+const {
+  pillar, tag, name, meta, photo, photoBrief,
+  blurb, href, cta = 'EXPLORE →',
+} = Astro.props;
+---
+
+<a class="pm-card" data-pillar={pillar} href={href}>
+  <div class="pm-card__photo" aria-hidden="true" style={`background-image: url(${photo});`}>
+    {photoBrief && <span class="pm-card__photo-caption text-meta">{photoBrief}</span>}
+  </div>
+  <div class="pm-card__body">
+    <PillarTag pillar={pillar} label={tag} color="white" />
+    <h3 class="pm-card__name">{name}</h3>
+    <p class="pm-card__meta text-meta">{meta}</p>
+    <p class="pm-card__blurb text-body-sm">{blurb}</p>
+    <span class="pm-card__cta text-eyebrow">{cta}</span>
+  </div>
+</a>

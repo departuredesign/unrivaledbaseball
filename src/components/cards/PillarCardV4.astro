@@ -1,0 +1,26 @@
+---
+/**
+ * PillarCardV4 — photo-top + colored-body pillar card.
+ * Used on the v4 homepage "Four Ways to Play" grid.
+ * Photo is set in v4.css via data-pillar selector so each pillar
+ * stays themed even when the card is reused elsewhere.
+ */
+interface Props {
+  pillar: 'local' | 'destinations' | 'training' | 'nationals' | 'ripken';
+  num: string;
+  name: string;
+  desc: string;
+  href: string;
+}
+const { pillar, num, name, desc, href } = Astro.props;
+---
+
+<a class="pcv4" data-pillar={pillar} href={href}>
+  <div class="pcv4__photo" aria-hidden="true"></div>
+  <div class="pcv4__body">
+    <span class="pcv4__num text-eyebrow">{num}</span>
+    <h3 class="pcv4__name">{name}</h3>
+    <p class="pcv4__desc">{desc}</p>
+    <span class="pcv4__arrow" aria-hidden="true">→</span>
+  </div>
+</a>
