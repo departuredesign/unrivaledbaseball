@@ -57,6 +57,14 @@ body.v4[data-transparent-nav] .site-header .nav-cta:hover {
     background: var(--color-red);
     border-color: var(--color-red);
 }
+/* White hamburger lines over the dark hero */
+body.v4[data-transparent-nav] .site-header__burger span {
+    background: var(--color-white);
+}
+/* The mobile drawer is solid white even on the transparent-nav homepage */
+body.v4[data-transparent-nav] .site-header.is-open {
+    background: var(--color-white);
+}
 
 /* ============================================================
    HERO V4-B — photographic backdrop + 2-line poster typography

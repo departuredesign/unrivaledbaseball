@@ -43,8 +43,40 @@ const pillars = [
     </nav>
 
     <a class="nav-cta" href="/events/">Start Planning</a>
+
+    <button class="site-header__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="site-header__mobile" id="mobile-nav" hidden>
+    <a class="mnav__link" href="/local/">Local Tournaments</a>
+    <a class="mnav__link" href="/destinations/">Destinations</a>
+    <a class="mnav__link" href="/nationals/">Ripken Nationals</a>
+    <a class="mnav__link" href="/training/">Training</a>
+    <span class="mnav__divider" aria-hidden="true"></span>
+    <a class="mnav__link" href="/venues/">Our Venues</a>
+    <a class="mnav__link" href="/events/">Events</a>
+    <a class="mnav__link" href="/stories/">Stories</a>
+    <a class="mnav__link" href="/about/">About</a>
   </div>
 </header>
+
+<script>
+  (function () {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var burger = header.querySelector('.site-header__burger');
+    var panel = header.querySelector('.site-header__mobile');
+    if (!burger || !panel) return;
+    burger.addEventListener('click', function () {
+      var open = header.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.hidden = !open;
+    });
+  })();
+</script>
 
 <style>
   .site-header {
@@ -183,4 +215,52 @@ const pillars = [
     flex-shrink: 0;
     background: var(--pillar, var(--gray-400));
   }
+
+  /* ===== Mobile hamburger + drawer (<1024px) ===== */
+  .site-header__burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 9px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .site-header__burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--color-navy);
+  }
+  @media (min-width: 1024px) {
+    .site-header__burger { display: none; }
+  }
+
+  .site-header__mobile {
+    display: none;
+    flex-direction: column;
+    padding: 4px var(--margin-mobile) 20px;
+    background: var(--color-white);
+    border-top: 1px solid var(--gray-200);
+  }
+  .site-header.is-open .site-header__mobile { display: flex; }
+  @media (min-width: 1024px) {
+    .site-header__mobile { display: none !important; }
+  }
+  .mnav__link {
+    padding: 13px 2px;
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .mnav__link:hover { color: var(--color-red); }
+  .mnav__divider { height: 10px; }
 </style>

@@ -1,12 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import SubPageHero from '../components/heroes/SubPageHero.astro';
-import AtAGlance from '../components/sections/AtAGlance.astro';
-import StoryBlock from '../components/sections/StoryBlock.astro';
-import ListRow from '../components/sections/ListRow.astro';
-import WhatToExpect from '../components/sections/WhatToExpect.astro';
-import Gallery from '../components/sections/Gallery.astro';
-import ContinueExploring from '../components/sections/ContinueExploring.astro';
+import '../styles/v4-pillar.css';
+import '../styles/v4-subproperty.css';
 
 interface CsCardData {
   pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
@@ -26,9 +21,11 @@ interface Props {
   parentPillar: 'destinations' | 'training';
   pageTitle: string;
   heroSub: string;
+  heroPhoto?: string;
   stats: Stat[];
   storyHeadline: string;
   storyBody: string;
+  storyPhoto?: string;
   upcomingEyebrow: string;
   upcomingHeadline: string;
   upcomingEvents: Event[];
@@ -40,71 +37,109 @@ interface Props {
 }
 
 const {
-  title,
-  parentLabel,
-  parentHref,
-  parentPillar,
-  pageTitle,
-  heroSub,
-  stats,
-  storyHeadline,
-  storyBody,
-  upcomingEyebrow,
-  upcomingHeadline,
-  upcomingEvents,
-  wtePillar,
-  wteHeadline,
-  wteItems,
-  galleryHeadline,
-  continueCards,
+  title, parentLabel, parentHref, parentPillar, pageTitle, heroSub,
+  heroPhoto = '/images/v4/photo-dugout.png',
+  stats, storyHeadline, storyBody,
+  storyPhoto = '/images/v4/photo-running.png',
+  upcomingEyebrow, upcomingHeadline, upcomingEvents,
+  wteHeadline, wteItems, galleryHeadline, continueCards,
 } = Astro.props;
+
+const GALLERY = ['/images/v4/photo-flags.png', '/images/v4/photo-batter.png', '/images/v4/photo-pitcher.png', '/images/v4/photo-celebrate.png'];
 ---
 
-<BaseLayout title={title} activeNav="ways-to-play">
-  <SubPageHero
-    parentLabel={parentLabel}
-    parentHref={parentHref}
-    parentPillar={parentPillar}
-    headline={pageTitle}
-    sub={heroSub}
-  />
-  <AtAGlance items={stats} />
-  <StoryBlock headline={storyHeadline} body={storyBody} />
+<BaseLayout title={title} activeNav="ways-to-play" bodyClass="v4">
+  <div class="pillar-page" data-pillar={parentPillar}>
 
-  <section class="upcoming">
-    <div class="upcoming__inner">
-      <p class="upcoming__eyebrow text-eyebrow">{upcomingEyebrow}</p>
-      <h2 class="upcoming__headline text-h2">{upcomingHeadline}</h2>
-      <div class="upcoming__list">
-        {upcomingEvents.map(e => <ListRow {...e} href="/events/" />)}
+    <section class="phv4">
+      <div class="phv4__bg" style={`background-image:url('${heroPhoto}')`} aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / <a class="phv4__crumb" href={parentHref}>{parentLabel}</a></p>
+        <span class="phv4__chip">{parentLabel}</span>
+        <h1 class="phv4__headline">{pageTitle}</h1>
+        <p class="phv4__sub">{heroSub}</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <WhatToExpect pillar={wtePillar} headline={wteHeadline} items={wteItems} />
-  <Gallery headline={galleryHeadline} />
-  <ContinueExploring title={`More from ${parentLabel}.`} cards={continueCards} />
+    <section class="aag">
+      <div class="aag__inner">
+        {stats.map(s => (
+          <div class="aag__item"><span class="aag__label">{s.label}</span><span class="aag__value">{s.value}</span></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="story__inner">
+        <div>
+          <p class="story__eyebrow text-eyebrow">THE STORY</p>
+          <h2 class="story__headline">{storyHeadline}</h2>
+          <p class="story__body text-body">{storyBody}</p>
+        </div>
+        <div class="story__photo" style={`background-image:url('${storyPhoto}')`} aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="pevents" style="background:var(--gray-50)">
+      <div class="sec__inner">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">{upcomingEyebrow}</p>
+        <h2 class="sec__headline">{upcomingHeadline}</h2>
+        {upcomingEvents.map(e => (
+          <div class="evrow">
+            <span class="evrow__date"><span class="evrow__mon">{e.month}</span><span class="evrow__day">{e.day}</span></span>
+            <span class="evrow__main"><h3 class="evrow__title">{e.title}</h3><span class="evrow__cat">{e.pillarLabel} · {e.age}</span></span>
+            <span class="evrow__loc">{e.loc} · {e.dates}</span>
+            <a class="evrow__reg" href="/events/">Register →</a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="wte sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">WHAT TO EXPECT</p>
+        <h2 class="sec__headline">{wteHeadline}</h2>
+        <div class="wte__grid">
+          {wteItems.map(i => (
+            <div class="wte-card"><h3 class="wte-card__title">{i.title}</h3><p class="wte-card__desc">{i.desc}</p></div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pgallery sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <h2 class="sec__headline">{galleryHeadline}</h2>
+        <div class="pgallery__grid">
+          {GALLERY.map(src => <span class="pgallery__tile" style={`background-image:url('${src}')`} aria-hidden="true"></span>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="xsell">
+      <div class="xsell__inner">
+        <p class="xsell__eyebrow text-eyebrow">CONTINUE EXPLORING</p>
+        <h2 class="xsell__headline">More from {parentLabel}.</h2>
+        <div class="xsell__grid">
+          {continueCards.map(c => (
+            <a class="xcard" href={c.href}>
+              <span class="xcard__tag">{c.parentTag}</span>
+              <h3 class="xcard__name">{c.name}</h3>
+              <p class="xcard__meta">{c.meta}</p>
+              <span class="xcard__arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Plan your trip to {title}.</h2>
+        <a class="ctaband__btn" href="/events/">See the schedule →</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
-
-<style>
-  .upcoming {
-    background: var(--gray-50);
-  }
-  .upcoming__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 60px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  @media (min-width: 1024px) {
-    .upcoming__inner { padding: 80px var(--margin-desktop); }
-  }
-  .upcoming__eyebrow { color: var(--gray-500); }
-  .upcoming__headline { color: var(--color-black); margin-bottom: 16px; }
-  .upcoming__list {
-    display: flex;
-    flex-direction: column;
-  }
-</style>

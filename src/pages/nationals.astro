@@ -1,176 +1,91 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PillarHero from '../components/heroes/PillarHero.astro';
-import PillarExplainer from '../components/sections/PillarExplainer.astro';
-import CrossSell from '../components/sections/CrossSell.astro';
-import CtaBand from '../components/sections/CtaBand.astro';
+import '../styles/v4-pillar.css';
 
-const crossSell = [
-  { pillar: 'local' as const,        parentTag: 'LOCAL TOURNAMENTS', name: 'UBN Qualifying Network', meta: 'Earn your way through regional play', href: '/local/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS',      name: 'Cooperstown',            meta: 'The championship setting',           href: '/cooperstown/' },
-  { pillar: 'training' as const,     parentTag: 'TRAINING',          name: 'All-Ripken Games',       meta: 'Top players by class',                href: '/all-ripken/' },
+const QUALIFIERS = [
+  { mon: 'MAY', day: '17', title: 'UBN Mid-Atlantic Qualifier', cat: 'Qualifying Ladder · 12U', loc: 'Aberdeen, MD',  age: '12U' },
+  { mon: 'JUN', day: '14', title: 'UBN Southeast Championship',  cat: 'Qualifying Ladder · 12U', loc: 'Atlanta, GA',   age: '12U' },
+  { mon: 'JUN', day: '30', title: 'Ripken National Championships', cat: 'Championship Round · Cooperstown', loc: 'Cooperstown, NY', age: '12U' },
+];
+
+const CROSS_SELL = [
+  { tag: 'LOCAL TOURNAMENTS', name: 'UBN Qualifying Network', meta: 'Earn your way through regional play', href: '/local/' },
+  { tag: 'DESTINATIONS',      name: 'Cooperstown',            meta: 'The championship setting',           href: '/cooperstown/' },
+  { tag: 'TRAINING',          name: 'All-Ripken Games',       meta: 'Top players by class',               href: '/all-ripken/' },
 ];
 ---
 
-<BaseLayout title="Ripken Nationals" activeNav="ways-to-play">
-  <PillarHero
-    pillar="nationals"
-    tag="RIPKEN NATIONALS"
-    headline="A pinnacle moment."
-    sub="After 20+ years of unforgettable tournaments, we're making history. Sixteen of the best teams in each class meet at Cooperstown for the championship round."
-  />
+<BaseLayout title="Ripken Nationals" activeNav="ways-to-play" bodyClass="v4">
+  <div class="pillar-page" data-pillar="nationals">
 
-  <PillarExplainer
-    pillar="nationals"
-    eyebrow="THE CHAMPIONSHIP"
-    headline="Sixteen teams. One title."
-    body="The Ripken Nationals is the championship round of the Unrivaled portfolio — a 16-team invitational held at Cooperstown All Star Village. Teams qualify through the UBN ladder or by direct invitation."
-    bullets={[
-      '16-team bracket, single-class.',
-      'Hosted at Cooperstown All Star Village.',
-      'Two pathways to qualify.',
-    ]}
-  />
-
-  <section class="pinnacle">
-    <div class="pinnacle__inner">
-      <p class="pinnacle__eyebrow text-eyebrow">A PINNACLE MOMENT</p>
-      <h2 class="pinnacle__headline text-h1">What makes the Nationals.</h2>
-      <p class="pinnacle__body text-body">After 20+ years of unforgettable tournaments at Cooperstown, we are making history. The Nationals brings the top 16 teams in each class to one stage — the championship round of Unrivaled Baseball.</p>
-    </div>
-  </section>
-
-  <section class="champ">
-    <div class="champ__inner">
-      <p class="champ__eyebrow text-eyebrow">CHAMPIONSHIP HIGHLIGHTS</p>
-      <h2 class="champ__headline text-h1">Two pathways to the championship round.</h2>
-      <div class="champ__grid">
-        <article class="champ-card">
-          <p class="champ-card__num text-h1">01</p>
-          <h3 class="champ-card__title text-h3">UBN Qualifying Ladder</h3>
-          <p class="champ-card__desc text-body">Win your way in through the regional weekend tournament network.</p>
-        </article>
-        <article class="champ-card">
-          <p class="champ-card__num text-h1">02</p>
-          <h3 class="champ-card__title text-h3">Direct Invitation</h3>
-          <p class="champ-card__desc text-body">Earn an invite through select competitive performance during the season.</p>
-        </article>
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/photo-celebrate.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / RIPKEN NATIONALS</p>
+        <span class="phv4__chip">NATIONALS · CHAMPIONSHIP</span>
+        <h1 class="phv4__headline">A pinnacle moment.</h1>
+        <p class="phv4__sub">Sixteen of the best teams in each class meet at Cooperstown for the championship round of the youth baseball year.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="qualify">
-    <div class="qualify__inner">
-      <p class="qualify__eyebrow text-eyebrow">HOW TO QUALIFY</p>
-      <h2 class="qualify__headline text-h1">Earn your way to Cooperstown.</h2>
-      <div class="qualify__steps">
-        <article class="qualify-step">
-          <p class="qualify-step__num text-h1">01</p>
-          <h3 class="qualify-step__title text-h3">Play UBN events</h3>
-          <p class="qualify-step__desc text-body-sm">Enter regional weekend tournaments throughout the season.</p>
-        </article>
-        <article class="qualify-step">
-          <p class="qualify-step__num text-h1">02</p>
-          <h3 class="qualify-step__title text-h3">Climb the ladder</h3>
-          <p class="qualify-step__desc text-body-sm">Accumulate qualifying points and finish strong in regional championships.</p>
-        </article>
-        <article class="qualify-step">
-          <p class="qualify-step__num text-h1">03</p>
-          <h3 class="qualify-step__title text-h3">Earn your bid</h3>
-          <p class="qualify-step__desc text-body-sm">Top finishers receive an invitation to compete at the Nationals.</p>
-        </article>
+    <section class="ubn-x">
+      <div class="ubn-x__inner">
+        <div>
+          <p class="ubn-x__eyebrow text-eyebrow">THE CHAMPIONSHIP</p>
+          <h2 class="ubn-x__headline">Sixteen teams. One title.</h2>
+          <p class="ubn-x__body text-body">The Ripken Nationals is the championship round of the Unrivaled portfolio — a 16-team invitational at Cooperstown All Star Village. Teams qualify through the UBN ladder or by direct invitation.</p>
+          <ul class="ubn-x__bullets">
+            <li class="text-body-sm">16-team bracket, single class.</li>
+            <li class="text-body-sm">Hosted at Cooperstown All Star Village.</li>
+            <li class="text-body-sm">Two pathways to qualify — the ladder or a direct bid.</li>
+          </ul>
+        </div>
+        <div class="ubn-x__aside">
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">Teams per class</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">1</span><span class="ubn-x__stat-label">National title</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">20+</span><span class="ubn-x__stat-label">Years in the making</span></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <CrossSell title="Other ways your kid can play in the Unrivaled portfolio:" cards={crossSell} />
-  <CtaBand headline="Find a qualifier." sub="Browse the calendar of UBN qualifying events." ctaLabel="FIND A QUALIFIER →" />
+    <section class="pevents">
+      <div class="sec__inner">
+        <h2 class="sec__headline">The road to Cooperstown.</h2>
+        {QUALIFIERS.map(e => (
+          <div class="evrow">
+            <span class="evrow__date"><span class="evrow__mon">{e.mon}</span><span class="evrow__day">{e.day}</span></span>
+            <span class="evrow__main"><h3 class="evrow__title">{e.title}</h3><span class="evrow__cat">{e.cat} · {e.age}</span></span>
+            <span class="evrow__loc">{e.loc}</span>
+            <a class="evrow__reg" href="/events/">Register →</a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="xsell">
+      <div class="xsell__inner">
+        <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
+        <h2 class="xsell__headline">More ways to play.</h2>
+        <div class="xsell__grid">
+          {CROSS_SELL.map(c => (
+            <a class="xcard" href={c.href}>
+              <span class="xcard__tag">{c.tag}</span>
+              <h3 class="xcard__name">{c.name}</h3>
+              <p class="xcard__meta">{c.meta}</p>
+              <span class="xcard__arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Find a qualifier.</h2>
+        <a class="ctaband__btn" href="/events/">Find a qualifier →</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
-
-<style>
-  .pinnacle { background: var(--color-white); }
-  .pinnacle__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  @media (min-width: 1024px) {
-    .pinnacle__inner { padding: 100px var(--margin-desktop); }
-  }
-  .pinnacle__eyebrow { color: var(--color-gold); }
-  .pinnacle__headline { color: var(--color-black); max-width: 800px; }
-  .pinnacle__body { color: var(--gray-600); max-width: 720px; }
-
-  .champ {
-    background: var(--color-navy);
-    color: var(--color-white);
-  }
-  .champ__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  @media (min-width: 1024px) {
-    .champ__inner { padding: 100px var(--margin-desktop); }
-  }
-  .champ__eyebrow { color: var(--color-gold); }
-  .champ__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  @media (min-width: 768px) {
-    .champ__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  .champ-card {
-    background: rgba(0,0,0,0.4);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .champ-card__num { color: var(--color-gold); }
-  .champ-card__title { color: var(--color-white); }
-  .champ-card__desc { opacity: 0.85; }
-
-  .qualify { background: var(--gray-50); }
-  .qualify__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  @media (min-width: 1024px) {
-    .qualify__inner { padding: 100px var(--margin-desktop); }
-  }
-  .qualify__eyebrow { color: var(--gray-500); }
-  .qualify__headline { color: var(--color-black); }
-  .qualify__steps {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  @media (min-width: 768px) {
-    .qualify__steps { grid-template-columns: repeat(3, 1fr); }
-  }
-  .qualify-step {
-    background: var(--color-white);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .qualify-step__num { color: var(--color-gold); }
-  .qualify-step__title { color: var(--color-navy); }
-  .qualify-step__desc { color: var(--gray-600); }
-</style>

@@ -1,93 +1,122 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PillarHero from '../components/heroes/PillarHero.astro';
-import PillarExplainer from '../components/sections/PillarExplainer.astro';
-import LocationCard from '../components/cards/LocationCard.astro';
-import CrossSell from '../components/sections/CrossSell.astro';
-import CtaBand from '../components/sections/CtaBand.astro';
+import '../styles/v4-pillar.css';
 
-const regions = [
-  { pillar: 'local' as const, parentTag: 'NORTHEAST',     name: 'Northeast Region',     meta: 'MA · CT · NY · NJ · PA',     line: 'Sanctioned weekend play across the Northeast.', href: '#' },
-  { pillar: 'local' as const, parentTag: 'MID-ATLANTIC',  name: 'Mid-Atlantic',         meta: 'MD · DE · DC · VA',          line: 'The hometown circuit through the Mid-Atlantic.', href: '#' },
-  { pillar: 'local' as const, parentTag: 'SOUTHEAST',     name: 'Southeast',            meta: 'GA · NC · SC · FL · TN',     line: 'Weekend tournament play across the Southeast.',  href: '#' },
-  { pillar: 'local' as const, parentTag: 'MIDWEST',       name: 'Midwest',              meta: 'OH · MI · IN · IL · WI',     line: 'Heartland baseball weekend after weekend.',      href: '#' },
-  { pillar: 'local' as const, parentTag: 'MOUNTAIN WEST', name: 'Mountain West',        meta: 'CO · UT · NM · AZ',          line: 'Mountain-state tournament play.',                href: '#' },
-  { pillar: 'local' as const, parentTag: 'WEST COAST',    name: 'West Coast',           meta: 'CA · OR · WA · NV',          line: 'West Coast weekends, year-round.',               href: '#' },
+const REGIONS = [
+  { name: 'Northeast',     count: '5 STATES', states: 'Massachusetts · Connecticut · New York · New Jersey · Pennsylvania', photo: '/images/v4/photo-flags.png' },
+  { name: 'Mid-Atlantic',  count: '4 STATES', states: 'Maryland · Delaware · Washington DC · Virginia',                    photo: '/images/v4/photo-dugout.png' },
+  { name: 'Southeast',     count: '5 STATES', states: 'Georgia · North Carolina · South Carolina · Florida · Tennessee',   photo: '/images/v4/photo-running.png' },
+  { name: 'Midwest',       count: '4 STATES', states: 'Ohio · Michigan · Indiana · Illinois',                              photo: '/images/v4/photo-batter.png' },
+  { name: 'Mountain West', count: '4 STATES', states: 'Colorado · Utah · New Mexico · Arizona',                            photo: '/images/v4/photo-pitcher.png' },
+  { name: 'West Coast',    count: '4 STATES', states: 'California · Oregon · Washington · Nevada',                         photo: '/images/v4/photo-field.png' },
 ];
 
-const crossSell = [
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS',        name: 'Cooperstown All Star Village', meta: 'A weeklong rite of passage', href: '/cooperstown/' },
-  { pillar: 'nationals' as const,    parentTag: 'NATIONALS',           name: 'Ripken Nationals',             meta: 'The championship round',     href: '/nationals/' },
-  { pillar: 'training' as const,     parentTag: 'TRAINING',            name: 'Prospect Select Showcases',    meta: 'Where 14U-16U gets seen',   href: '/prospect-select/' },
+const EVENTS = [
+  { mon: 'JUN', day: '07', title: 'UBN Mid-Atlantic Spring Classic', cat: 'Local & Regional · UBN Network', loc: 'Baltimore, MD',  age: '10U–14U' },
+  { mon: 'JUN', day: '23', title: 'UBN Northeast Summer Qualifier',  cat: 'Local & Regional · UBN Network', loc: 'Flemington, NJ', age: '10U–14U' },
+  { mon: 'JUL', day: '12', title: 'UBN Southeast Championship',      cat: 'Local & Regional · UBN Network', loc: 'Atlanta, GA',    age: '12U' },
+  { mon: 'JUL', day: '26', title: 'UBN Midwest Open',                cat: 'Local & Regional · UBN Network', loc: 'Columbus, OH',   age: '10U–16U' },
+];
+
+const CROSS_SELL = [
+  { tag: 'DESTINATIONS', name: 'Cooperstown All Star Village', meta: 'A weeklong rite of passage', href: '/cooperstown/' },
+  { tag: 'NATIONALS',    name: 'Ripken Nationals',            meta: 'The championship round',     href: '/nationals/' },
+  { tag: 'TRAINING',     name: 'Prospect Select',             meta: 'Where 14U–16U gets seen',    href: '/prospect-select/' },
 ];
 ---
 
-<BaseLayout title="Local Tournaments" activeNav="ways-to-play">
-  <PillarHero
-    pillar="local"
-    tag="LOCAL AND REGIONAL WEEKEND TOURNAMENTS"
-    headline="Local play. Regional reach. Year round."
-    sub="The Unrivaled Baseball Network — USSSA-sanctioned weekend tournament play, region by region."
-  />
+<BaseLayout title="Local Tournaments" activeNav="ways-to-play" bodyClass="v4">
+  <div class="pillar-page" data-pillar="local">
 
-  <PillarExplainer
-    pillar="local"
-    eyebrow="WHAT IS UBN"
-    headline="Sanctioned weekend play, region by region."
-    body="UBN is the regional weekend tournament network inside Unrivaled. Every event runs under USSSA rules, with the qualifying ladder leading toward Ripken Nationals."
-    bullets={[
-      'Built on the UBN qualifying ladder.',
-      'Year-round play across every region.',
-      'The pathway into Ripken Nationals.',
-    ]}
-  />
-
-  <section class="regions">
-    <div class="regions__inner">
-      <p class="regions__eyebrow text-eyebrow">OUR REGIONS</p>
-      <h2 class="regions__headline text-h1">Local play. Regional reach.</h2>
-      <div class="regions__grid">
-        {regions.map(r => <LocationCard {...r} />)}
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/photo-flags.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / LOCAL AND REGIONAL WEEKEND TOURNAMENTS</p>
+        <span class="phv4__chip">LOCAL &amp; REGIONAL</span>
+        <h1 class="phv4__headline">National footprint. Local roots.</h1>
+        <p class="phv4__sub">Competitive youth baseball tournaments, elite high-school events, and player-development weekends. In 16 states and growing.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <CrossSell
-    title="Other ways your kid can play in the Unrivaled portfolio:"
-    cards={crossSell}
-  />
+    <section class="ubn-x">
+      <div class="ubn-x__inner">
+        <div>
+          <p class="ubn-x__eyebrow text-eyebrow">WHAT IS UBN</p>
+          <h2 class="ubn-x__headline">Sanctioned weekend play, region by region.</h2>
+          <p class="ubn-x__body text-body">The Unrivaled Baseball Network is the regional weekend tournament circuit inside Unrivaled. Every event runs under USSSA rules, with a qualifying ladder that leads toward Ripken Nationals.</p>
+          <ul class="ubn-x__bullets">
+            <li class="text-body-sm">Built on the UBN qualifying ladder.</li>
+            <li class="text-body-sm">Year-round play across every region.</li>
+            <li class="text-body-sm">One standard, one schedule, one brand.</li>
+          </ul>
+        </div>
+        <div class="ubn-x__aside">
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">States active nationwide</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">200+</span><span class="ubn-x__stat-label">Sanctioned weekend events</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">10U–16U</span><span class="ubn-x__stat-label">Age divisions</span></div>
+        </div>
+      </div>
+    </section>
 
-  <CtaBand
-    headline="Ready to find what fits?"
-    sub="Browse the full calendar or start planning the season."
-  />
+    <section class="regions sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">OUR REGIONS</p>
+        <h2 class="sec__headline">Local play. Regional reach.</h2>
+        <div class="regions__grid">
+          {REGIONS.map(r => (
+            <a class="region-card" href="/events/">
+              <span class="region-card__bar" aria-hidden="true"></span>
+              <span class="region-card__photo" style={`background-image:url('${r.photo}')`} aria-hidden="true"></span>
+              <span class="region-card__body">
+                <span class="region-card__tag">UBN NETWORK</span>
+                <h3 class="region-card__name">{r.name}</h3>
+                <span class="region-card__count">{r.count}</span>
+                <p class="region-card__states">{r.states}</p>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pevents">
+      <div class="sec__inner">
+        <h2 class="sec__headline">Upcoming local events.</h2>
+        {EVENTS.map(e => (
+          <div class="evrow">
+            <span class="evrow__date"><span class="evrow__mon">{e.mon}</span><span class="evrow__day">{e.day}</span></span>
+            <span class="evrow__main"><h3 class="evrow__title">{e.title}</h3><span class="evrow__cat">{e.cat} · {e.age}</span></span>
+            <span class="evrow__loc">{e.loc}</span>
+            <a class="evrow__reg" href="/events/">Register →</a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="xsell">
+      <div class="xsell__inner">
+        <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
+        <h2 class="xsell__headline">More ways to play.</h2>
+        <div class="xsell__grid">
+          {CROSS_SELL.map(c => (
+            <a class="xcard" href={c.href}>
+              <span class="xcard__tag">{c.tag}</span>
+              <h3 class="xcard__name">{c.name}</h3>
+              <p class="xcard__meta">{c.meta}</p>
+              <span class="xcard__arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Find a weekend near you.</h2>
+        <a class="ctaband__btn" href="/events/">See all events →</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
-
-<style>
-  .regions { background: var(--gray-50); }
-  .regions__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  @media (min-width: 1024px) {
-    .regions__inner { padding: 100px var(--margin-desktop); }
-  }
-  .regions__eyebrow { color: var(--gray-500); }
-  .regions__headline { color: var(--color-black); }
-  .regions__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  @media (min-width: 768px) {
-    .regions__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .regions__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-</style>

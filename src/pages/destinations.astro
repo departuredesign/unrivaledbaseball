@@ -1,87 +1,101 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PillarHero from '../components/heroes/PillarHero.astro';
-import PillarExplainer from '../components/sections/PillarExplainer.astro';
-import LocationCard from '../components/cards/LocationCard.astro';
-import CrossSell from '../components/sections/CrossSell.astro';
-import CtaBand from '../components/sections/CtaBand.astro';
+import '../styles/v4-pillar.css';
 
-const properties = [
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Cooperstown All Star Village',   meta: 'Oneonta, NY · 12U weeklong',      line: 'A pilgrimage at the birthplace of baseball.', href: '/cooperstown/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Rocker B Ranch',                 meta: 'Graford, TX · weeklong',          line: 'The Texas ranch built for baseball memories.', href: '/rocker-b/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Cedar Point', meta: 'Sandusky, OH · weekend + week', line: 'Where baseball week meets Cedar Point week.', href: '/sports-force-parks-cedar-point/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Sports Force Parks · Manteca',   meta: 'Manteca, CA · weekend + week',   line: 'A West Coast home for weeklong tournament baseball.', href: '/sports-force-parks-manteca/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Aberdeen',   meta: 'Aberdeen, MD · weeklong',         line: 'Where the Ripken family started.', href: '/ripken-aberdeen/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Myrtle Beach', meta: 'Myrtle Beach, SC · weeklong',   line: 'The baseball vacation built into the season.', href: '/ripken-myrtle-beach/' },
-  { pillar: 'destinations' as const, parentTag: 'DESTINATIONS', name: 'Ripken Experience · Pigeon Forge', meta: 'Pigeon Forge, TN · weeklong',    line: 'Big League baseball in the foothills.', href: '/ripken-pigeon-forge/' },
+const PROPERTIES = [
+  { name: 'Cooperstown All Star Village',     count: 'ONEONTA, NY',     line: 'A pilgrimage at the birthplace of baseball. 12 summer weeks.', href: '/cooperstown/',                    photo: '/images/v4/photo-dugout.png' },
+  { name: 'Rocker B Ranch',                   count: 'GRAFORD, TX',     line: 'The 325-acre Texas ranch built for baseball memories.',       href: '/rocker-b/',                       photo: '/images/v4/photo-flags.png' },
+  { name: 'Ripken Experience · Aberdeen',     count: 'ABERDEEN, MD',    line: 'Where the Ripken family started. Replica big-league fields.', href: '/ripken-aberdeen/',                photo: '/images/v4/photo-celebrate.png' },
+  { name: 'Ripken Experience · Myrtle Beach', count: 'MYRTLE BEACH, SC', line: 'The baseball vacation built into the season.',               href: '/ripken-myrtle-beach/',            photo: '/images/v4/photo-running.png' },
+  { name: 'Ripken Experience · Pigeon Forge', count: 'PIGEON FORGE, TN', line: 'Big-league baseball in the foothills of the Smokies.',       href: '/ripken-pigeon-forge/',            photo: '/images/v4/photo-batter.png' },
+  { name: 'Sports Force Parks · Cedar Point', count: 'SANDUSKY, OH',    line: 'Where baseball week meets Cedar Point week.',                 href: '/sports-force-parks-cedar-point/', photo: '/images/v4/photo-field.png' },
 ];
 
-const crossSell = [
-  { pillar: 'local' as const,     parentTag: 'LOCAL TOURNAMENTS', name: 'UBN Network',                meta: 'USSSA-sanctioned weekends', href: '/local/' },
-  { pillar: 'nationals' as const, parentTag: 'NATIONALS',         name: 'Ripken Nationals',           meta: 'The championship round',    href: '/nationals/' },
-  { pillar: 'training' as const,  parentTag: 'TRAINING',          name: 'Prospect Select Showcases',  meta: 'Where players become prospects', href: '/prospect-select/' },
+const CROSS_SELL = [
+  { tag: 'LOCAL TOURNAMENTS', name: 'UBN Network',     meta: 'USSSA-sanctioned weekends',      href: '/local/' },
+  { tag: 'NATIONALS',         name: 'Ripken Nationals', meta: 'The championship round',         href: '/nationals/' },
+  { tag: 'TRAINING',          name: 'Prospect Select',  meta: 'Where players become prospects', href: '/prospect-select/' },
 ];
 ---
 
-<BaseLayout title="Destination Experiences" activeNav="ways-to-play">
-  <PillarHero
-    pillar="destinations"
-    tag="DESTINATION EXPERIENCES"
-    headline="Where families travel to play."
-    sub="Weeklong tournaments at six premier properties — Cooperstown, the Ripken Experience, Rocker B Ranch, and Sports Force Parks."
-  />
+<BaseLayout title="Destination Experiences" activeNav="ways-to-play" bodyClass="v4">
+  <div class="pillar-page" data-pillar="destinations">
 
-  <PillarExplainer
-    pillar="destinations"
-    eyebrow="OUR WEEKLONG MODEL"
-    headline="Trip + tournament, all in one place."
-    body="Destination Experiences are weeklong baseball tournaments at our owned properties. Lodging, tournaments, opening and closing ceremonies — all coordinated as a single experience for families."
-    bullets={[
-      'Stay on-site at most properties.',
-      'Replica big-league treatment for every team.',
-      'Memories that families plan a year around.',
-    ]}
-  />
-
-  <section class="properties">
-    <div class="properties__inner">
-      <p class="properties__eyebrow text-eyebrow">OUR PROPERTIES</p>
-      <h2 class="properties__headline text-h1">Where families travel to play.</h2>
-      <div class="properties__grid">
-        {properties.map(p => <LocationCard {...p} />)}
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/photo-dugout.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / DESTINATION EXPERIENCES</p>
+        <span class="phv4__chip">DESTINATIONS</span>
+        <h1 class="phv4__headline">Where families travel to play.</h1>
+        <p class="phv4__sub">Weeklong tournaments at premier properties — Cooperstown, the Ripken Experience, Rocker B Ranch, and Sports Force Parks.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <CrossSell title="Other ways your kid can play in the Unrivaled portfolio:" cards={crossSell} />
-  <CtaBand headline="Ready to find your week?" sub="Browse the full calendar of destination tournaments." />
+    <section class="ubn-x">
+      <div class="ubn-x__inner">
+        <div>
+          <p class="ubn-x__eyebrow text-eyebrow">OUR WEEKLONG MODEL</p>
+          <h2 class="ubn-x__headline">Trip + tournament, all in one place.</h2>
+          <p class="ubn-x__body text-body">Destination Experiences are weeklong baseball tournaments at our owned properties. Lodging, games, opening and closing ceremonies — coordinated as a single experience families plan a year around.</p>
+          <ul class="ubn-x__bullets">
+            <li class="text-body-sm">Stay on-site at most properties.</li>
+            <li class="text-body-sm">Replica big-league treatment for every team.</li>
+            <li class="text-body-sm">Memories that last a lifetime.</li>
+          </ul>
+        </div>
+        <div class="ubn-x__aside">
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">6</span><span class="ubn-x__stat-label">Premier properties</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">12</span><span class="ubn-x__stat-label">Summer weeks at the Village</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">11U–16U</span><span class="ubn-x__stat-label">Age divisions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="regions sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">OUR PROPERTIES</p>
+        <h2 class="sec__headline">Where the season becomes a trip.</h2>
+        <div class="regions__grid">
+          {PROPERTIES.map(p => (
+            <a class="region-card" href={p.href}>
+              <span class="region-card__bar" aria-hidden="true"></span>
+              <span class="region-card__photo" style={`background-image:url('${p.photo}')`} aria-hidden="true"></span>
+              <span class="region-card__body">
+                <span class="region-card__tag">DESTINATION</span>
+                <h3 class="region-card__name">{p.name}</h3>
+                <span class="region-card__count">{p.count}</span>
+                <p class="region-card__states">{p.line}</p>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="xsell">
+      <div class="xsell__inner">
+        <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
+        <h2 class="xsell__headline">More ways to play.</h2>
+        <div class="xsell__grid">
+          {CROSS_SELL.map(c => (
+            <a class="xcard" href={c.href}>
+              <span class="xcard__tag">{c.tag}</span>
+              <h3 class="xcard__name">{c.name}</h3>
+              <p class="xcard__meta">{c.meta}</p>
+              <span class="xcard__arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Ready to find your week?</h2>
+        <a class="ctaband__btn" href="/events/">Browse destinations →</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
-
-<style>
-  .properties { background: var(--gray-50); }
-  .properties__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  @media (min-width: 1024px) {
-    .properties__inner { padding: 100px var(--margin-desktop); }
-  }
-  .properties__eyebrow { color: var(--gray-500); }
-  .properties__headline { color: var(--color-black); }
-  .properties__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  @media (min-width: 768px) {
-    .properties__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .properties__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-</style>

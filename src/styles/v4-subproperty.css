@@ -1,0 +1,49 @@
+/* =============================================================
+   SUB-PROPERTY PAGES V4  (Cooperstown, Ripken, Rocker B, etc.)
+   Reuses v4-pillar.css for the hero (.phv4), events (.evrow),
+   cross-sell (.xsell) and CTA. Adds: at-a-glance, the-story,
+   what-to-expect, gallery. Accent from [data-pillar].
+   ============================================================= */
+
+/* Hero breadcrumb (above the eyebrow) */
+.phv4__crumb { color: rgba(255,255,255,0.7); text-decoration: none; }
+.phv4__crumb:hover { color: var(--color-white); }
+
+/* ===== AT A GLANCE — stat strip ===== */
+.aag { background: var(--color-white); border-bottom: 1px solid var(--gray-200); }
+.aag__inner {
+    max-width: var(--content-max-width); margin: 0 auto; padding: 32px var(--margin);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+@media (max-width: 767px) { .aag__inner { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 24px var(--margin); } }
+.aag__item { display: flex; flex-direction: column; gap: 4px; }
+.aag__label { color: var(--gray-500); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+.aag__value { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: clamp(18px, 2vw, 24px); line-height: 1.05; color: var(--color-navy); }
+
+/* ===== THE STORY — 2-col editorial ===== */
+.story { background: var(--color-white); }
+.story__inner {
+    max-width: var(--content-max-width); margin: 0 auto; padding: 80px var(--margin);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 899px) { .story__inner { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 767px) { .story__inner { padding: 56px var(--margin); } }
+.story__eyebrow { color: var(--accent); margin: 0 0 12px; }
+.story__headline { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: clamp(28px, 3.6vw, 48px); line-height: 1; color: var(--color-black); margin: 0 0 16px; }
+.story__body { color: var(--gray-600); margin: 0; max-width: 50ch; }
+.story__photo { aspect-ratio: 4 / 3; border-radius: var(--radius-card); background: var(--gray-300) center / cover; }
+
+/* ===== WHAT TO EXPECT — card grid ===== */
+.wte { background: var(--gray-50); }
+.wte__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1023px) { .wte__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 599px)  { .wte__grid { grid-template-columns: 1fr; } }
+.wte-card { background: var(--color-white); border-radius: var(--radius-card); padding: 24px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--accent); }
+.wte-card__title { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: 18px; line-height: 1.05; color: var(--color-navy); margin: 0; }
+.wte-card__desc { color: var(--gray-600); font-size: 13px; line-height: 1.5; margin: 0; }
+
+/* ===== GALLERY strip ===== */
+.pgallery { background: var(--color-white); }
+.pgallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 767px) { .pgallery__grid { grid-template-columns: repeat(2, 1fr); } }
+.pgallery__tile { aspect-ratio: 4 / 3; border-radius: var(--radius-card); background: var(--gray-300) center / cover; }

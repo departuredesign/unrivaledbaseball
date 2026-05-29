@@ -1,143 +1,73 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/heroes/Hero.astro';
-import StoryBlock from '../components/sections/StoryBlock.astro';
-import ByTheNumbers from '../components/sections/ByTheNumbers.astro';
-import DynamicTimeline from '../components/sections/DynamicTimeline.astro';
-import Leadership from '../components/sections/Leadership.astro';
+import '../styles/v4-pillar.css';
+import '../styles/v4-subproperty.css';
 
-const stats = [
-  { number: '20+',     label: 'Years of unforgettable tournaments' },
-  { number: '7',       label: 'Destination properties' },
-  { number: '12K+',    label: 'Teams every summer' },
-  { number: '1',       label: 'Standard, end to end' },
+const STATS = [
+  { label: 'EXPERIENCE', value: '20+ Years' },
+  { label: 'PROPERTIES', value: '7 Destinations' },
+  { label: 'TEAMS',      value: '12K+ / Summer' },
+  { label: 'STANDARD',   value: 'One, End to End' },
 ];
 
-const timeline = [
-  { year: '1985', label: 'Cooperstown All Star Village', detail: 'The original pilgrimage' },
-  { year: '1996', label: 'Ripken Experience Aberdeen',   detail: 'The first Big League Experience' },
-  { year: '2003', label: 'Ripken Myrtle Beach',          detail: 'Coastal weeklong play' },
-  { year: '2011', label: 'Ripken Pigeon Forge',          detail: 'Smoky Mountain baseball' },
-  { year: '2022', label: 'Sports Force Parks · Cedar Point', detail: 'Theme-park weekend' },
-  { year: '2024', label: 'Unrivaled portfolio',           detail: 'One name, end to end' },
-];
-
-const leadership = [
-  { name: '[ Name ]', role: 'CEO' },
-  { name: '[ Name ]', role: 'President' },
-  { name: '[ Name ]', role: 'COO' },
-  { name: '[ Name ]', role: 'CMO' },
-];
-
-const promise = [
-  { title: 'Communication',        desc: 'Clear, timely, accurate. You always know what is happening with your week.' },
-  { title: 'Customer Service',     desc: 'A real person, on the ground, every day. The standard families have come to expect.' },
+const PROMISE = [
+  { title: 'Communication',          desc: 'Clear, timely, accurate. You always know what is happening with your week.' },
+  { title: 'Customer Service',       desc: 'A real person, on the ground, every day — the standard families expect.' },
   { title: 'Standard of Excellence', desc: 'The bar that founded the brand. Every property, every event, every season.' },
 ];
 ---
 
-<BaseLayout title="About" activeNav="about">
-  <Hero
-    eyebrow="ABOUT UNRIVALED"
-    headline="One name across the entire arc of the youth baseball journey."
-    sub="The most trusted names in youth baseball, together under one banner."
-  />
+<BaseLayout title="About" activeNav="about" bodyClass="v4">
+  <div class="pillar-page" data-pillar="local">
 
-  <StoryBlock
-    eyebrow="OUR STORY"
-    headline="Built over decades. Brought together for the next generation."
-    body="Unrivaled Baseball brings the most trusted names in youth baseball — Cooperstown All Star Village, the Ripken Experience, Baseball Factory — together under one banner. One standard. One journey."
-  />
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/hero.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / ABOUT</p>
+        <span class="phv4__chip">ABOUT UNRIVALED</span>
+        <h1 class="phv4__headline">One name across the journey.</h1>
+        <p class="phv4__sub">The most trusted names in youth baseball, together under one banner — one standard, one journey.</p>
+      </div>
+    </section>
 
-  <ByTheNumbers stats={stats} />
+    <section class="story">
+      <div class="story__inner">
+        <div>
+          <p class="story__eyebrow text-eyebrow">OUR STORY</p>
+          <h2 class="story__headline">Built over decades. Brought together for the next generation.</h2>
+          <p class="story__body text-body">Unrivaled Baseball brings the most trusted names in youth baseball — Cooperstown All Star Village, the Ripken Experience, Baseball Factory — together under one banner. One standard. One journey from a kid's first weekend tournament to the national championship round.</p>
+        </div>
+        <div class="story__photo" style="background-image:url('/images/v4/photo-dugout.png')" aria-hidden="true"></div>
+      </div>
+    </section>
 
-  <section class="promise">
-    <div class="promise__inner">
-      <p class="promise__eyebrow text-eyebrow">OUR PROMISE</p>
-      <h2 class="promise__headline text-h1">The standard parents and coaches can count on.</h2>
-      <div class="promise__grid">
-        {promise.map(p => (
-          <article class="promise-card">
-            <h3 class="promise-card__title text-h3">{p.title}</h3>
-            <p class="promise-card__desc text-body-sm">{p.desc}</p>
-          </article>
+    <section class="aag">
+      <div class="aag__inner">
+        {STATS.map(s => (
+          <div class="aag__item"><span class="aag__label">{s.label}</span><span class="aag__value">{s.value}</span></div>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
 
-  <DynamicTimeline steps={timeline} />
+    <section class="wte sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">OUR PROMISE</p>
+        <h2 class="sec__headline">The standard parents and coaches count on.</h2>
+        <div class="wte__grid" style="grid-template-columns:repeat(3,1fr)">
+          {PROMISE.map(p => (
+            <div class="wte-card"><h3 class="wte-card__title">{p.title}</h3><p class="wte-card__desc">{p.desc}</p></div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-  <Leadership people={leadership} />
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Start your family's journey.</h2>
+        <a class="ctaband__btn" href="/events/">Explore events →</a>
+      </div>
+    </section>
 
-  <section class="partners">
-    <p class="partners__label text-eyebrow">Our Partners</p>
-    <div class="partners__row">
-      {Array.from({ length: 6 }, () => <div class="partners__cell" aria-hidden="true"></div>)}
-    </div>
-  </section>
+  </div>
 </BaseLayout>
-
-<style>
-  .promise { background: var(--gray-50); }
-  .promise__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  @media (min-width: 1024px) {
-    .promise__inner { padding: 100px var(--margin-desktop); }
-  }
-  .promise__eyebrow { color: var(--gray-500); }
-  .promise__headline { color: var(--color-black); }
-  .promise__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 24px;
-  }
-  @media (min-width: 768px) {
-    .promise__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .promise-card {
-    background: var(--color-white);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    border: 1px solid var(--gray-200);
-  }
-  .promise-card__title { color: var(--color-navy); }
-  .promise-card__desc { color: var(--gray-600); }
-
-  .partners {
-    background: var(--color-white);
-    padding: 60px var(--margin-mobile);
-    text-align: center;
-  }
-  @media (min-width: 1024px) {
-    .partners { padding: 80px var(--margin-desktop); }
-  }
-  .partners__label {
-    color: var(--gray-500);
-    margin-bottom: 24px;
-  }
-  .partners__row {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  @media (min-width: 768px) {
-    .partners__row { grid-template-columns: repeat(6, 1fr); }
-  }
-  .partners__cell {
-    aspect-ratio: 5 / 2;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-  }
-</style>

@@ -1,148 +1,59 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/heroes/Hero.astro';
-import FoundingCard from '../components/cards/FoundingCard.astro';
-import VenueCard from '../components/cards/VenueCard.astro';
-import PillarDot from '../components/atoms/PillarDot.astro';
+import '../styles/v4-pillar.css';
 
-const venues = [
-  { name: 'Cooperstown All Star Village', loc: 'Oneonta, NY',         href: '/cooperstown/',                  founding: true },
-  { name: 'Ripken Experience · Aberdeen',  loc: 'Aberdeen, MD',        href: '/ripken-aberdeen/',              founding: true },
-  { name: 'Ripken Experience · Myrtle Beach', loc: 'Myrtle Beach, SC', href: '/ripken-myrtle-beach/' },
-  { name: 'Ripken Experience · Pigeon Forge', loc: 'Pigeon Forge, TN', href: '/ripken-pigeon-forge/' },
-  { name: 'Rocker B Ranch',                loc: 'Graford, TX',         href: '/rocker-b/' },
-  { name: 'Sports Force Parks · Cedar Point', loc: 'Sandusky, OH',     href: '/sports-force-parks-cedar-point/' },
-  { name: 'Sports Force Parks · Manteca',  loc: 'Manteca, CA',         href: '/sports-force-parks-manteca/' },
+const VENUES = [
+  { name: 'Cooperstown All Star Village',     loc: 'Oneonta, NY',      founding: true,  line: 'The original pilgrimage at the birthplace of baseball.', href: '/cooperstown/',                    photo: '/images/v4/photo-dugout.png' },
+  { name: 'Ripken Experience · Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  line: "The first Big League Experience — Cal and Bill's hometown.", href: '/ripken-aberdeen/',             photo: '/images/v4/photo-celebrate.png' },
+  { name: 'Ripken Experience · Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, line: 'A baseball vacation a few stoplights from the beach.',  href: '/ripken-myrtle-beach/',            photo: '/images/v4/photo-running.png' },
+  { name: 'Ripken Experience · Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, line: 'Big-league baseball in the foothills of the Smokies.',  href: '/ripken-pigeon-forge/',            photo: '/images/v4/photo-batter.png' },
+  { name: 'Rocker B Ranch',                   loc: 'Graford, TX',      founding: false, line: 'A 325-acre Texas ranch built for baseball memories.',   href: '/rocker-b/',                       photo: '/images/v4/photo-flags.png' },
+  { name: 'Sports Force Parks · Cedar Point', loc: 'Sandusky, OH',     founding: false, line: 'Where baseball week meets Cedar Point week.',          href: '/sports-force-parks-cedar-point/', photo: '/images/v4/photo-field.png' },
+  { name: 'Sports Force Parks · Manteca',     loc: 'Manteca, CA',      founding: false, line: 'A West Coast home for weeklong tournament baseball.',   href: '/sports-force-parks-manteca/',     photo: '/images/v4/photo-pitcher.png' },
 ];
 ---
 
-<BaseLayout title="Our Venues" activeNav="venues">
-  <Hero
-    eyebrow="OUR VENUES"
-    headline="The places where the journey lives."
-    sub="Every venue in the Unrivaled Baseball portfolio runs to the same standard. Some carry the weight of where it all started."
-  />
+<BaseLayout title="Our Venues" activeNav="venues" bodyClass="v4">
+  <div class="pillar-page" data-pillar="destinations">
 
-  <section class="founding">
-    <div class="founding__inner">
-      <div class="founding__header">
-        <span class="founding__star">★</span>
-        <p class="founding__eyebrow text-eyebrow">FOUNDING VENUES</p>
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/photo-dugout.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / OUR VENUES</p>
+        <span class="phv4__chip">OUR VENUES</span>
+        <h1 class="phv4__headline">The places where the journey lives.</h1>
+        <p class="phv4__sub">Every venue in the portfolio runs to the same standard. Some carry the weight of where it all started.</p>
       </div>
-      <h2 class="founding__headline text-h1">Where the standard was set.</h2>
-      <p class="founding__body text-body">Two venues anchor the Unrivaled Baseball story. The original pilgrimage. The original Big League Experience. Every property that joined since runs to what these two established.</p>
-      <div class="founding__grid">
-        <FoundingCard
-          name="Cooperstown All Star Village"
-          meta="Oneonta, NY · 12U weeklong · 12 summer weeks"
-          line="The original pilgrimage. A baseball tournament and family resort at the birthplace of baseball, where hundreds of teams gather every summer."
-          cta="EXPLORE COOPERSTOWN"
-          href="/cooperstown/"
-        />
-        <FoundingCard
-          name="Ripken Experience · Aberdeen"
-          meta="Aberdeen, MD · Weeklong + tournaments · Cal and Bill's hometown"
-          line="The first Big League Experience. Built on the ground where Cal and Bill Ripken grew up, with replica MLB ballparks, walk-up music, and the major-league treatment."
-          cta="EXPLORE ABERDEEN"
-          href="/ripken-aberdeen/"
-        />
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="all-venues">
-    <div class="all-venues__inner">
-      <p class="all-venues__eyebrow text-eyebrow">EVERY VENUE</p>
-      <h2 class="all-venues__headline text-h1">Across the portfolio.</h2>
-
-      <div class="venue-group">
-        <div class="venue-group__head">
-          <PillarDot pillar="destinations" />
-          <p class="text-eyebrow" style="color: var(--color-navy);">DESTINATION EXPERIENCES</p>
-        </div>
-        <p class="venue-group__meta text-body-sm">Where families travel to play.</p>
-        <div class="venue-group__grid">
-          {venues.map(v => <VenueCard {...v} />)}
+    <section class="regions sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">EVERY VENUE</p>
+        <h2 class="sec__headline">Eight properties. One standard.</h2>
+        <div class="regions__grid">
+          {VENUES.map(v => (
+            <a class="region-card" href={v.href}>
+              <span class="region-card__bar" aria-hidden="true"></span>
+              <span class="region-card__photo" style={`background-image:url('${v.photo}')`} aria-hidden="true"></span>
+              <span class="region-card__body">
+                <span class="region-card__tag">{v.founding ? '★ FOUNDING VENUE' : 'DESTINATION'}</span>
+                <h3 class="region-card__name">{v.name}</h3>
+                <span class="region-card__count">{v.loc}</span>
+                <p class="region-card__states">{v.line}</p>
+              </span>
+            </a>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Find a tournament at any property.</h2>
+        <a class="ctaband__btn" href="/events/">See all events →</a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
-
-<style>
-  .founding { background: var(--color-white); }
-  .founding__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  @media (min-width: 1024px) {
-    .founding__inner { padding: 100px var(--margin-desktop); }
-  }
-  .founding__header {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .founding__star {
-    color: var(--color-gold);
-    font-size: 18px;
-  }
-  .founding__eyebrow { color: var(--color-gold); }
-  .founding__headline { color: var(--color-black); }
-  .founding__body { color: var(--gray-600); max-width: 760px; }
-  .founding__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 24px;
-  }
-  @media (min-width: 1024px) {
-    .founding__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .all-venues { background: var(--gray-50); }
-  .all-venues__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    padding: 80px var(--margin-mobile);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  @media (min-width: 1024px) {
-    .all-venues__inner { padding: 100px var(--margin-desktop); }
-  }
-  .all-venues__eyebrow { color: var(--gray-500); }
-  .all-venues__headline { color: var(--color-black); }
-
-  .venue-group {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .venue-group__head {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .venue-group__meta {
-    color: var(--gray-500);
-    margin-bottom: 16px;
-  }
-  .venue-group__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  @media (min-width: 640px) {
-    .venue-group__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .venue-group__grid { grid-template-columns: repeat(4, 1fr); }
-  }
-</style>

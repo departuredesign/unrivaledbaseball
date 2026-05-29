@@ -1,0 +1,19 @@
+/* =============================================================
+   LISTING PAGES V4  (Venues / Events / Stories / About)
+   Reuses v4-pillar.css + v4-subproperty.css. Adds filter chips.
+   ============================================================= */
+
+.fbar { background: var(--color-white); border-bottom: 1px solid var(--gray-200); }
+.fbar__inner {
+    max-width: var(--content-max-width); margin: 0 auto; padding: 18px var(--margin);
+    display: flex; gap: 10px; flex-wrap: wrap;
+}
+.fchip {
+    padding: 8px 16px; border-radius: 999px; border: 1px solid var(--gray-300);
+    background: var(--color-white); color: var(--color-navy);
+    font-family: var(--font-body); font-weight: var(--weight-bold);
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+}
+.fchip:hover { border-color: var(--color-navy); }
+.fchip.is-active { background: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
