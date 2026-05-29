@@ -37,7 +37,6 @@ body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-whi
 
 /* ===== PILLAR HERO V4 — photographic, scaled-back ===== */
 .phv4 { position: relative; overflow: hidden; background: var(--color-navy); color: var(--color-white); }
-@media (min-width: 768px) { .phv4 { min-height: 660px; } }
 .phv4__bg {
     position: absolute; inset: 0;
     background-size: cover; background-position: 50% 40%;
@@ -52,9 +51,15 @@ body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-whi
 .phv4__inner {
     position: relative; z-index: 1;
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 120px var(--margin) 56px;
+    width: 100%;
+    padding: 56px var(--margin);
     display: flex; flex-direction: column; gap: 18px;
 }
+/* Desktop: full-height hero, content vertically centered below the floating nav (matches Figma) */
+@media (min-width: 768px) {
+    .phv4__inner { min-height: 660px; justify-content: center; padding-top: 140px; padding-bottom: 88px; }
+}
+/* Mobile: shorter hero, content anchored below the floating nav */
 @media (max-width: 767px) { .phv4__inner { padding: 112px var(--margin) 48px; } }
 .phv4__eyebrow { color: rgba(255,255,255,0.7); margin: 0; }
 .phv4__chip {
