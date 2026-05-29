@@ -12,7 +12,7 @@ body.v4 { --margin: var(--margin-desktop); background: var(--color-white); }
 /* ===== TRANSPARENT NAV — header floats over the hero (matches homepage) ===== */
 body.v4[data-transparent-nav] .site-header {
     position: absolute; top: 0; left: 0; right: 0; z-index: 10;
-    background: transparent; border-bottom: 1px solid rgba(255,255,255,0.18);
+    background: transparent; border-bottom: none;
 }
 body.v4[data-transparent-nav] .site-header__inner { padding-top: 22px; padding-bottom: 22px; }
 body.v4[data-transparent-nav] .site-header__logo,
@@ -37,6 +37,7 @@ body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-whi
 
 /* ===== PILLAR HERO V4 — photographic, scaled-back ===== */
 .phv4 { position: relative; overflow: hidden; background: var(--color-navy); color: var(--color-white); }
+@media (min-width: 768px) { .phv4 { min-height: 660px; } }
 .phv4__bg {
     position: absolute; inset: 0;
     background-size: cover; background-position: 50% 40%;

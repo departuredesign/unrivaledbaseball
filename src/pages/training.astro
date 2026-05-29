@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
+import '../styles/v4-extra.css';
 
 const PROGRAMS = [
   { name: 'Baseball Factory', count: 'EVALUATIONS · CAMPS', line: 'Where players unlock their full potential.',     href: '/baseball-factory/', photo: '/images/v4/photo-batter.png' },
@@ -27,6 +28,11 @@ const CROSS_SELL = [
         <span class="phv4__chip">TRAINING</span>
         <h1 class="phv4__headline">Where players become prospects.</h1>
         <p class="phv4__sub">Evaluation, instruction, showcase, exposure — the development side of the Unrivaled portfolio.</p>
+        <div class="phv4__stats">
+          <div><span class="phv4__stat-label">PROGRAMS</span><span class="phv4__stat-val">4 development tracks</span></div>
+          <div><span class="phv4__stat-label">FORMAT</span><span class="phv4__stat-val">Camps · Showcases · Games</span></div>
+          <div><span class="phv4__stat-label">AUDIENCE</span><span class="phv4__stat-val">Youth → College</span></div>
+        </div>
       </div>
     </section>
 
