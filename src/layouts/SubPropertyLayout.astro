@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import '../styles/v4-pillar.css';
 import '../styles/v4-subproperty.css';
+import '../styles/v4-extra.css';
 
 interface CsCardData {
   pillar: 'local' | 'destinations' | 'training' | 'ripken' | 'nationals';
@@ -108,16 +109,17 @@ const GALLERY = ['/images/v4/photo-flags.png', '/images/v4/photo-batter.png', '/
       </div>
     </section>
 
-    <section class="pgallery sec">
-      <div class="sec__inner" style="display:flex;flex-direction:column;">
-        <h2 class="sec__headline">{galleryHeadline}</h2>
-        <div class="pgallery__grid">
-          {GALLERY.map(src => <span class="pgallery__tile" style={`background-image:url('${src}')`} aria-hidden="true"></span>)}
+    <section class="ngallery">
+      <div class="ngallery__inner">
+        <p class="ngallery__eyebrow text-eyebrow">GALLERY</p>
+        <h2 class="ngallery__headline">{galleryHeadline}</h2>
+        <div class="ngallery__grid">
+          {GALLERY.map((src, i) => <span class="ngallery__tile" style={`background-image:url('${src}')`}><span class="ngallery__cap">[ on-site at {title} ]</span></span>)}
         </div>
       </div>
     </section>
 
-    <section class="xsell">
+    <section class="xsell xsell--gray">
       <div class="xsell__inner">
         <p class="xsell__eyebrow text-eyebrow">CONTINUE EXPLORING</p>
         <h2 class="xsell__headline">More from {parentLabel}.</h2>
@@ -131,13 +133,6 @@ const GALLERY = ['/images/v4/photo-flags.png', '/images/v4/photo-batter.png', '/
             </a>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section class="ctaband">
-      <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Plan your trip to {title}.</h2>
-        <a class="ctaband__btn" href="/events/">See the schedule →</a>
       </div>
     </section>
 

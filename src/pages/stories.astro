@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
 import '../styles/v4-listing.css';
+import '../styles/v4-extra.css';
 
 const CHIPS = ['All Stories', 'Athletes', 'Development', 'Nationals', 'Press'];
 
@@ -29,7 +30,18 @@ const STORIES = [
       </div>
     </section>
 
-    <section class="fbar">
+    <section class="elead">
+      <div class="elead__inner">
+        <div>
+          <p class="elead__cat text-eyebrow">FEATURED · ATHLETE</p>
+          <h2 class="elead__title">A long road from a Northeast UBN field to Cooperstown's center diamond.</h2>
+          <p class="elead__byline">By the editorial team · 5 min read</p>
+        </div>
+        <a class="elead__photo" href="/stories/long-road/" style="background-image:url('/images/v4/photo-running.png')" aria-label="Read the feature"></a>
+      </div>
+    </section>
+
+    <section class="fbar" style="background:var(--gray-50)">
       <div class="fbar__inner">
         {CHIPS.map((c, i) => <a class="fchip" class:list={[{ 'is-active': i === 0 }]} href="#">{c}</a>)}
       </div>
@@ -55,10 +67,11 @@ const STORIES = [
       </div>
     </section>
 
-    <section class="ctaband">
-      <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Be part of the next story.</h2>
-        <a class="ctaband__btn" href="/events/">Find your event →</a>
+    <section class="aspot">
+      <div class="aspot__inner">
+        <p class="aspot__eyebrow text-eyebrow">ATHLETE SPOTLIGHT</p>
+        <h2 class="aspot__headline">Behind the scenes at Ripken Aberdeen during Nationals week.</h2>
+        <p class="aspot__byline">Editorial · 4 min read</p>
       </div>
     </section>
 

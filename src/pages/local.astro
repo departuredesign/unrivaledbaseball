@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
+import '../styles/v4-extra.css';
 
 const REGIONS = [
   { name: 'Northeast',     count: '5 STATES', states: 'Massachusetts · Connecticut · New York · New Jersey · Pennsylvania', photo: '/images/v4/photo-flags.png' },
@@ -55,6 +56,18 @@ const CROSS_SELL = [
           <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">States active nationwide</span></div>
           <div class="ubn-x__stat"><span class="ubn-x__stat-num">200+</span><span class="ubn-x__stat-label">Sanctioned weekend events</span></div>
           <div class="ubn-x__stat"><span class="ubn-x__stat-num">10U–16U</span><span class="ubn-x__stat-label">Age divisions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ngallery">
+      <div class="ngallery__inner">
+        <p class="ngallery__eyebrow text-eyebrow">THE UBN NETWORK</p>
+        <h2 class="ngallery__headline">Weekend baseball, coast to coast.</h2>
+        <div class="ngallery__grid">
+          {['dust and dugouts', 'a walk-off win', 'opening Saturday', 'the bracket board', 'trophy presentation'].map((cap, i) => (
+            <span class="ngallery__tile" style={`background-image:url('${['/images/v4/photo-flags.png','/images/v4/photo-running.png','/images/v4/photo-batter.png','/images/v4/photo-pitcher.png','/images/v4/photo-celebrate.png'][i]}')`}><span class="ngallery__cap">[ {cap} ]</span></span>
+          ))}
         </div>
       </div>
     </section>

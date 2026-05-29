@@ -121,35 +121,34 @@ body.v4 { --margin: var(--margin-desktop); background: var(--color-white); }
 .evrow__loc { color: var(--gray-600); font-size: 13px; white-space: nowrap; }
 .evrow__reg { color: var(--accent); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: var(--weight-bold); text-decoration: none; white-space: nowrap; }
 
-/* ===== CROSS-SELL — navy, 3 cards ===== */
-.xsell { background: var(--color-navy); color: var(--color-white); }
+/* ===== CROSS-SELL — white, 3 cards (Figma: white bg) ===== */
+.xsell { background: var(--color-white); color: var(--color-black); }
+.xsell--gray { background: var(--gray-50); }
 .xsell__inner { max-width: var(--content-max-width); margin: 0 auto; padding: 80px var(--margin); display: flex; flex-direction: column; gap: 24px; }
 @media (max-width: 767px) { .xsell__inner { padding: 56px var(--margin); } }
-.xsell__eyebrow { color: var(--color-gold); margin: 0; }
-.xsell__headline { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: clamp(28px, 3.4vw, 44px); line-height: 1; margin: 0; color: var(--color-white); }
+.xsell__eyebrow { color: var(--gray-500); margin: 0; }
+.xsell__headline { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: clamp(28px, 3.4vw, 44px); line-height: 1; margin: 0; color: var(--color-black); }
 .xsell__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 767px) { .xsell__grid { grid-template-columns: 1fr; } }
-.xcard { display: flex; flex-direction: column; gap: 8px; padding: 24px; background: #0f1547; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-card); text-decoration: none; color: var(--color-white); transition: transform var(--transition-fast); }
+.xcard { display: flex; flex-direction: column; gap: 8px; padding: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-card); text-decoration: none; color: var(--color-navy); transition: transform var(--transition-fast); }
+.xsell--gray .xcard { background: var(--color-white); }
 .xcard:hover { transform: translateY(-4px); }
-.xcard__tag { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-.xcard__name { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: 22px; line-height: 1.04; margin: 0; }
-.xcard__meta { color: var(--color-gold); font-size: 12px; margin: 0; }
+.xcard__tag { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-500); }
+.xcard__name { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: 22px; line-height: 1.04; margin: 0; color: var(--color-navy); }
+.xcard__meta { color: var(--gray-600); font-size: 12px; margin: 0; }
 .xcard__arrow { margin-top: auto; color: var(--color-red); align-self: flex-end; font-size: 20px; line-height: 1; }
 
-/* ===== CTA BAND ===== */
-.ctaband { background: var(--color-navy); color: var(--color-white); text-align: center; }
+/* ===== CTA BAND — red (Figma) ===== */
+.ctaband { background: var(--color-red); color: var(--color-white); text-align: center; }
 .ctaband__inner { max-width: var(--content-max-width); margin: 0 auto; padding: 80px var(--margin); display: flex; flex-direction: column; align-items: center; gap: 20px; }
 @media (max-width: 767px) { .ctaband__inner { padding: 56px var(--margin); } }
 .ctaband__headline { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: clamp(32px, 4.5vw, 56px); line-height: 0.95; margin: 0; max-width: 18ch; }
 .ctaband__btn {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: var(--color-white);
+    background: var(--color-white); color: var(--color-navy);
     padding: 15px 30px; border-radius: 999px; text-decoration: none;
     font-family: var(--font-body); font-weight: var(--weight-bold); font-size: 13px;
     letter-spacing: 0.14em; text-transform: uppercase;
     transition: transform var(--transition-fast);
 }
 .ctaband__btn:hover { transform: translateY(-2px); }
-/* Gold accent needs dark button text for contrast */
-.pillar-page[data-pillar="nationals"] .ctaband__btn,
-.pillar-page[data-pillar="destinations"] .ctaband__btn { color: var(--color-black); }

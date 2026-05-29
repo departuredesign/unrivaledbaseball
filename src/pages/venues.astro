@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
+import '../styles/v4-extra.css';
 
 const VENUES = [
   { name: 'Cooperstown All Star Village',     loc: 'Oneonta, NY',      founding: true,  line: 'The original pilgrimage at the birthplace of baseball.', href: '/cooperstown/',                    photo: '/images/v4/photo-dugout.png' },
@@ -11,6 +12,8 @@ const VENUES = [
   { name: 'Sports Force Parks · Cedar Point', loc: 'Sandusky, OH',     founding: false, line: 'Where baseball week meets Cedar Point week.',          href: '/sports-force-parks-cedar-point/', photo: '/images/v4/photo-field.png' },
   { name: 'Sports Force Parks · Manteca',     loc: 'Manteca, CA',      founding: false, line: 'A West Coast home for weeklong tournament baseball.',   href: '/sports-force-parks-manteca/',     photo: '/images/v4/photo-pitcher.png' },
 ];
+const founding = VENUES.filter(v => v.founding);
+const rest = VENUES.filter(v => !v.founding);
 ---
 
 <BaseLayout title="Our Venues" activeNav="venues" bodyClass="v4">
@@ -27,17 +30,17 @@ const VENUES = [
       </div>
     </section>
 
-    <section class="regions sec">
+    <section class="founding sec">
       <div class="sec__inner" style="display:flex;flex-direction:column;">
-        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">EVERY VENUE</p>
-        <h2 class="sec__headline">Eight properties. One standard.</h2>
-        <div class="regions__grid">
-          {VENUES.map(v => (
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">★ FOUNDING VENUES</p>
+        <h2 class="sec__headline">Where the standard was set.</h2>
+        <div class="founding__grid">
+          {founding.map(v => (
             <a class="region-card" href={v.href}>
               <span class="region-card__bar" aria-hidden="true"></span>
               <span class="region-card__photo" style={`background-image:url('${v.photo}')`} aria-hidden="true"></span>
               <span class="region-card__body">
-                <span class="region-card__tag">{v.founding ? '★ FOUNDING VENUE' : 'DESTINATION'}</span>
+                <span class="region-card__tag">★ FOUNDING VENUE</span>
                 <h3 class="region-card__name">{v.name}</h3>
                 <span class="region-card__count">{v.loc}</span>
                 <p class="region-card__states">{v.line}</p>
@@ -48,10 +51,24 @@ const VENUES = [
       </div>
     </section>
 
-    <section class="ctaband">
-      <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Find a tournament at any property.</h2>
-        <a class="ctaband__btn" href="/events/">See all events →</a>
+    <section class="regions sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">EVERY VENUE</p>
+        <h2 class="sec__headline">Across the portfolio.</h2>
+        <div class="regions__grid">
+          {rest.map(v => (
+            <a class="region-card" href={v.href}>
+              <span class="region-card__bar" aria-hidden="true"></span>
+              <span class="region-card__photo" style={`background-image:url('${v.photo}')`} aria-hidden="true"></span>
+              <span class="region-card__body">
+                <span class="region-card__tag">DESTINATION</span>
+                <h3 class="region-card__name">{v.name}</h3>
+                <span class="region-card__count">{v.loc}</span>
+                <p class="region-card__states">{v.line}</p>
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 

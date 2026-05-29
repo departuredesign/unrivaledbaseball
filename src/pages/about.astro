@@ -2,18 +2,35 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
 import '../styles/v4-subproperty.css';
+import '../styles/v4-extra.css';
 
 const STATS = [
-  { label: 'EXPERIENCE', value: '20+ Years' },
-  { label: 'PROPERTIES', value: '7 Destinations' },
-  { label: 'TEAMS',      value: '12K+ / Summer' },
-  { label: 'STANDARD',   value: 'One, End to End' },
+  { num: '20+',  label: 'Years of unforgettable tournaments' },
+  { num: '7',    label: 'Destination properties' },
+  { num: '12K+', label: 'Teams every summer' },
+  { num: '1',    label: 'Standard, end to end' },
 ];
 
 const PROMISE = [
   { title: 'Communication',          desc: 'Clear, timely, accurate. You always know what is happening with your week.' },
   { title: 'Customer Service',       desc: 'A real person, on the ground, every day — the standard families expect.' },
   { title: 'Standard of Excellence', desc: 'The bar that founded the brand. Every property, every event, every season.' },
+];
+
+const TIMELINE = [
+  { year: '1985', label: 'Cooperstown All Star Village', detail: 'The original pilgrimage' },
+  { year: '1996', label: 'Ripken Experience Aberdeen',   detail: 'The first Big League Experience' },
+  { year: '2003', label: 'Ripken Myrtle Beach',          detail: 'Coastal weeklong play' },
+  { year: '2011', label: 'Ripken Pigeon Forge',          detail: 'Smoky Mountain baseball' },
+  { year: '2022', label: 'Sports Force Parks · Cedar Point', detail: 'Theme-park weekend' },
+  { year: '2024', label: 'The Unrivaled portfolio',      detail: 'One name, end to end' },
+];
+
+const LEADERSHIP = [
+  { name: '[ Name ]', role: 'CEO' },
+  { name: '[ Name ]', role: 'President' },
+  { name: '[ Name ]', role: 'COO' },
+  { name: '[ Name ]', role: 'CMO' },
 ];
 ---
 
@@ -42,11 +59,15 @@ const PROMISE = [
       </div>
     </section>
 
-    <section class="aag">
-      <div class="aag__inner">
-        {STATS.map(s => (
-          <div class="aag__item"><span class="aag__label">{s.label}</span><span class="aag__value">{s.value}</span></div>
-        ))}
+    <section class="btns">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">BY THE NUMBERS</p>
+        <h2 class="sec__headline" style="color:var(--color-white)">Two decades, one standard.</h2>
+        <div class="btns__grid">
+          {STATS.map(s => (
+            <div><div class="btns__num">{s.num}</div><div class="btns__label">{s.label}</div></div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -62,10 +83,28 @@ const PROMISE = [
       </div>
     </section>
 
-    <section class="ctaband">
-      <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Start your family's journey.</h2>
-        <a class="ctaband__btn" href="/events/">Explore events →</a>
+    <section class="tline">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">THE TIMELINE</p>
+        <h2 class="sec__headline" style="color:var(--color-white)">Brought together over forty years.</h2>
+        {TIMELINE.map(t => (
+          <div class="tline__row">
+            <span class="tline__year">{t.year}</span>
+            <div><h3 class="tline__label">{t.label}</h3><span class="tline__detail">{t.detail}</span></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="lead-sec sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">LEADERSHIP</p>
+        <h2 class="sec__headline">The team behind the standard.</h2>
+        <div class="lead__grid">
+          {LEADERSHIP.map(p => (
+            <div><div class="lead-card__photo" aria-hidden="true"></div><div class="lead-card__name">{p.name}</div><div class="lead-card__role">{p.role}</div></div>
+          ))}
+        </div>
       </div>
     </section>
 

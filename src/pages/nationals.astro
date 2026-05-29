@@ -1,11 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
+import '../styles/v4-extra.css';
+
+const HERO_STATS = [
+  { label: 'QUALIFIER SITES',   val: '12 across the country' },
+  { label: 'CHAMPIONSHIP BIDS', val: '16 teams earn their way in' },
+  { label: 'CHAMPIONSHIP ROUND', val: 'Jun 29 – Jul 5 · Cooperstown' },
+];
+
+const GALLERY = [
+  'championship round under the lights',
+  'team carrying the trophy',
+  'national broadcast at home plate',
+  'walk-up at-bat at Cooperstown',
+  'trophy presentation',
+];
+const GALLERY_PHOTOS = ['/images/v4/photo-celebrate.png', '/images/v4/photo-flags.png', '/images/v4/photo-dugout.png', '/images/v4/photo-batter.png', '/images/v4/photo-running.png'];
+
+const HIGHLIGHTS = [
+  { num: '01', title: 'A National Footprint',  desc: 'Twelve qualifier sites span the country, from Manteca to Aberdeen to Pigeon Forge. Wherever a team plays its season, the path to Cooperstown runs through a venue close enough to drive.', photo: '/images/v4/photo-field.png' },
+  { num: '02', title: 'Every Bid Earned',      desc: 'Sixteen teams, sixteen bids earned through competition — twelve from winning a spring qualifier outright, four from finishing top-four in pool play. Nothing is invited.', photo: '/images/v4/photo-running.png' },
+  { num: '03', title: 'Under Armour Uniforms', desc: 'Every championship team is outfitted in official Gameday uniforms from Under Armour. All 16 teams walk into Cooperstown wearing the same standard.', photo: '/images/v4/photo-batter.png' },
+  { num: '04', title: 'Nationally Broadcast',  desc: 'Round of 16 through the championship game broadcast on CBS Sports Network and GameChanger across the final two days. National stage, national stakes.', photo: '/images/v4/photo-celebrate.png' },
+  { num: '05', title: 'Stats That Count',      desc: 'Real-time stats throughout every qualifier and the championship round via GameChanger. All-Tournament honors and MVP are decided on the field.', photo: '/images/v4/photo-pitcher.png' },
+  { num: '06', title: 'The Trophy',            desc: 'Champions raise the one-of-a-kind, fully custom Ripken National Championships trophy — built for the first team to lift it. Every winner after follows that lineage.', photo: '/images/v4/photo-dugout.png' },
+];
+
+const PATHWAYS = [
+  { bids: '12 BIDS', title: 'Spring Qualifiers',     desc: 'Twelve teams qualify by winning a Ripken Nationals Qualifier during the spring. Qualifiers run at Ripken sites, Sports Force Parks, Rocker B Ranch, Diamond Nation, and partner venues from California to Florida to Iowa.' },
+  { bids: '4 BIDS',  title: 'Cooperstown Qualifier', desc: 'Four teams qualify as a top-four seed after pool play at the Ripken Nationals Qualifier at Cooperstown All Star Village — entering the championships directly into bracket play.' },
+];
 
 const QUALIFIERS = [
-  { mon: 'MAY', day: '17', title: 'UBN Mid-Atlantic Qualifier', cat: 'Qualifying Ladder · 12U', loc: 'Aberdeen, MD',  age: '12U' },
-  { mon: 'JUN', day: '14', title: 'UBN Southeast Championship',  cat: 'Qualifying Ladder · 12U', loc: 'Atlanta, GA',   age: '12U' },
-  { mon: 'JUN', day: '30', title: 'Ripken National Championships', cat: 'Championship Round · Cooperstown', loc: 'Cooperstown, NY', age: '12U' },
+  { date: 'FEB 14–16, 2026', name: 'Big League Dreams Manteca',     loc: 'Manteca, CA' },
+  { date: 'FEB 20–21, 2026', name: 'Great Park',                    loc: 'Irvine, CA' },
+  { date: 'MAR 7–8, 2026',   name: 'Boombah Sports Complex',        loc: 'Sanford, FL' },
+  { date: 'MAR 20–22, 2026', name: 'Rocker B Ranch',                loc: 'Graford, TX' },
+  { date: 'APR 10–12, 2026', name: 'The Ripken Experience Aberdeen', loc: 'Aberdeen, MD' },
+  { date: 'APR 24–26, 2026', name: 'Diamond Nation',                loc: 'Flemington, NJ' },
 ];
 
 const CROSS_SELL = [
@@ -24,40 +57,84 @@ const CROSS_SELL = [
       <div class="phv4__inner">
         <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / RIPKEN NATIONALS</p>
         <span class="phv4__chip">NATIONALS · CHAMPIONSHIP</span>
-        <h1 class="phv4__headline">A pinnacle moment.</h1>
-        <p class="phv4__sub">Sixteen of the best teams in each class meet at Cooperstown for the championship round of the youth baseball year.</p>
-      </div>
-    </section>
-
-    <section class="ubn-x">
-      <div class="ubn-x__inner">
-        <div>
-          <p class="ubn-x__eyebrow text-eyebrow">THE CHAMPIONSHIP</p>
-          <h2 class="ubn-x__headline">Sixteen teams. One title.</h2>
-          <p class="ubn-x__body text-body">The Ripken Nationals is the championship round of the Unrivaled portfolio — a 16-team invitational at Cooperstown All Star Village. Teams qualify through the UBN ladder or by direct invitation.</p>
-          <ul class="ubn-x__bullets">
-            <li class="text-body-sm">16-team bracket, single class.</li>
-            <li class="text-body-sm">Hosted at Cooperstown All Star Village.</li>
-            <li class="text-body-sm">Two pathways to qualify — the ladder or a direct bid.</li>
-          </ul>
-        </div>
-        <div class="ubn-x__aside">
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">Teams per class</span></div>
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">1</span><span class="ubn-x__stat-label">National title</span></div>
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">20+</span><span class="ubn-x__stat-label">Years in the making</span></div>
+        <h1 class="phv4__headline">Ripken Nationals</h1>
+        <p class="phv4__sub"><strong>After 20+ years of unforgettable tournaments, we're making history.</strong> On a mission to find the best 12U team in the country. 16 of the nation's top teams gather at the iconic Cooperstown All Star Village to compete for the right to be called Ripken National Champions.</p>
+        <div class="phv4__stats">
+          {HERO_STATS.map(s => (
+            <div><span class="phv4__stat-label">{s.label}</span><span class="phv4__stat-val">{s.val}</span></div>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="pevents">
-      <div class="sec__inner">
+    <section class="pinnacle">
+      <div class="pinnacle__inner">
+        <p class="pinnacle__eyebrow text-eyebrow">RIPKEN NATIONAL CHAMPIONSHIPS</p>
+        <h2 class="pinnacle__headline">A pinnacle moment.</h2>
+        <p class="pinnacle__body text-body">This is more than a tournament. It's a moment in youth baseball history — in front of a national broadcast crowd, the chance to etch your team's name into the home of baseball history: Cooperstown, New York.</p>
+      </div>
+    </section>
+
+    <section class="ngallery">
+      <div class="ngallery__inner">
+        <p class="ngallery__eyebrow text-eyebrow">RIPKEN NATIONALS 2026</p>
+        <h2 class="ngallery__headline">Inside the championship week.</h2>
+        <div class="ngallery__grid">
+          {GALLERY.map((cap, i) => (
+            <span class="ngallery__tile" style={`background-image:url('${GALLERY_PHOTOS[i]}')`}><span class="ngallery__cap">[ {cap} ]</span></span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="chl sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">TOURNAMENT HIGHLIGHTS</p>
+        <h2 class="sec__headline">What makes the Nationals.</h2>
+        <div class="chl__grid">
+          {HIGHLIGHTS.map(h => (
+            <article class="chl-card">
+              <span class="chl-card__photo" style={`background-image:url('${h.photo}')`} aria-hidden="true"></span>
+              <div class="chl-card__body">
+                <span class="chl-card__num">{h.num}</span>
+                <h3 class="chl-card__title">{h.title}</h3>
+                <p class="chl-card__desc">{h.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="htq">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">HOW DO YOU QUALIFY?</p>
+        <h2 class="sec__headline" style="color:var(--color-white)">Two pathways to the championship round.</h2>
+        <p class="htq__intro text-body">Teams earn a free bid to the Ripken National Championships at Cooperstown All Star Village by making their way through a Ripken Nationals Qualifier. The 16-team field is built through two pathways:</p>
+        <div class="htq__grid">
+          {PATHWAYS.map(p => (
+            <div class="htq-card">
+              <span class="htq-card__bids">{p.bids}</span>
+              <h3 class="htq-card__title">{p.title}</h3>
+              <p class="htq-card__desc">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="qcal sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">2026 QUALIFIER EVENTS</p>
         <h2 class="sec__headline">The road to Cooperstown.</h2>
-        {QUALIFIERS.map(e => (
-          <div class="evrow">
-            <span class="evrow__date"><span class="evrow__mon">{e.mon}</span><span class="evrow__day">{e.day}</span></span>
-            <span class="evrow__main"><h3 class="evrow__title">{e.title}</h3><span class="evrow__cat">{e.cat} · {e.age}</span></span>
-            <span class="evrow__loc">{e.loc}</span>
-            <a class="evrow__reg" href="/events/">Register →</a>
+        <p class="text-body" style="color:var(--gray-600);max-width:60ch;margin:0">Twelve spring qualifier sites earn 12 of the 16 championship bids. The final four come from pool play at the Cooperstown qualifier.</p>
+        <p class="qcal__sub">SPRING QUALIFIERS · 12 SITES · WINNERS EARN A FREE BID</p>
+        {QUALIFIERS.map(q => (
+          <div class="qrow">
+            <span class="qrow__date">{q.date}</span>
+            <h3 class="qrow__name">{q.name}</h3>
+            <span class="qrow__loc">{q.loc}</span>
+            <a class="qrow__link" href="/events/">View live scores →</a>
           </div>
         ))}
       </div>
@@ -82,8 +159,8 @@ const CROSS_SELL = [
 
     <section class="ctaband">
       <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Find a qualifier.</h2>
-        <a class="ctaband__btn" href="/events/">Find a qualifier →</a>
+        <h2 class="ctaband__headline">Find a qualifier near you.</h2>
+        <a class="ctaband__btn" href="/events/">Start planning →</a>
       </div>
     </section>
 
