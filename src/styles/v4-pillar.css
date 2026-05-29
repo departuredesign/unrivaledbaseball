@@ -9,6 +9,26 @@
 body.v4 { --margin: var(--margin-desktop); background: var(--color-white); }
 @media (max-width: 767px) { body.v4 { --margin: var(--margin-mobile); } }
 
+/* ===== TRANSPARENT NAV — header floats over the hero (matches homepage) ===== */
+body.v4[data-transparent-nav] .site-header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    background: transparent; border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+body.v4[data-transparent-nav] .site-header__inner { padding-top: 22px; padding-bottom: 22px; }
+body.v4[data-transparent-nav] .site-header__logo,
+body.v4[data-transparent-nav] .site-header__logo-img { height: 64px; }
+body.v4[data-transparent-nav] .site-header__logo-img { filter: brightness(0) invert(1); }
+body.v4[data-transparent-nav] .site-header .nav-link,
+body.v4[data-transparent-nav] .site-header .nav-dropdown__trigger { color: rgba(255,255,255,0.92); }
+body.v4[data-transparent-nav] .site-header .nav-link:hover,
+body.v4[data-transparent-nav] .site-header .nav-link.is-active { color: var(--color-red); }
+body.v4[data-transparent-nav] .site-header .nav-cta {
+    background: transparent; color: var(--color-white); border: 1px solid rgba(255,255,255,0.5);
+}
+body.v4[data-transparent-nav] .site-header .nav-cta:hover { background: var(--color-red); border-color: var(--color-red); }
+body.v4[data-transparent-nav] .site-header__burger span { background: var(--color-white); }
+body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-white); }
+
 /* Pillar accent colour (used for chips, bars, links, CTA) */
 .pillar-page[data-pillar="local"]        { --accent: var(--color-red); }
 .pillar-page[data-pillar="destinations"] { --accent: var(--color-gold); }
@@ -34,7 +54,7 @@ body.v4 { --margin: var(--margin-desktop); background: var(--color-white); }
     padding: 120px var(--margin) 56px;
     display: flex; flex-direction: column; gap: 18px;
 }
-@media (max-width: 767px) { .phv4__inner { padding: 72px var(--margin) 48px; } }
+@media (max-width: 767px) { .phv4__inner { padding: 112px var(--margin) 48px; } }
 .phv4__eyebrow { color: rgba(255,255,255,0.7); margin: 0; }
 .phv4__chip {
     display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
