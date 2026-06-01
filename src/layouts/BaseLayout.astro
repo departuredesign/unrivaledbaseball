@@ -5,6 +5,7 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import SiteHeader from '../components/chrome/SiteHeader.astro';
 import SiteFooter from '../components/chrome/SiteFooter.astro';
+import { isPageHidden } from '../lib/phase';
 
 interface Props {
   title: string;
@@ -23,6 +24,9 @@ const {
   bodyClass,
   transparentNav = false,
 } = Astro.props;
+
+// Phase 2 pages reachable by URL but invisible to search engines during Phase 1.
+const hideFromSearch = isPageHidden(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -32,6 +36,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} | Unrivaled Baseball</title>
     <meta name="description" content={description} />
+    {hideFromSearch && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class={bodyClass} data-transparent-nav={transparentNav ? 'true' : undefined}>

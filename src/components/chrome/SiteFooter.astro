@@ -1,42 +1,16 @@
 ---
-const columns = [
-  {
-    heading: 'WAYS TO PLAY',
-    links: [
-      { label: 'Local Tournaments', href: '/local/' },
-      { label: 'Destinations',      href: '/destinations/' },
-      { label: 'Nationals',         href: '/nationals/' },
-      { label: 'Training',          href: '/training/' },
-    ],
-  },
-  {
-    heading: 'PROPERTIES',
-    links: [
-      { label: 'Cooperstown',          href: '/cooperstown/' },
-      { label: 'Rocker B Ranch',       href: '/rocker-b/' },
-      { label: 'Sports Force Parks',   href: '/sports-force-parks-cedar-point/' },
-      { label: 'Ripken Experience',    href: '/ripken-aberdeen/' },
-      { label: 'Baseball Factory',     href: '/baseball-factory/' },
-    ],
-  },
-  {
-    heading: 'FOR YOU',
-    links: [
-      { label: 'Players',  href: '#' },
-      { label: 'Parents',  href: '#' },
-      { label: 'Coaches',  href: '#' },
-    ],
-  },
-  {
-    heading: 'COMPANY',
-    links: [
-      { label: 'About',    href: '/about/' },
-      { label: 'Careers',  href: 'https://unrivaledsports.com/careers/' },
-      { label: 'Press',    href: 'https://unrivaledsports.com/press/' },
-      { label: 'Contact',  href: 'https://unrivaledsports.com/contact/' },
-    ],
-  },
+import { FOOTER, liveOnly } from '../../lib/phase';
+
+const rawColumns = [
+  { heading: 'WAYS TO PLAY', links: FOOTER.waysToPlay },
+  { heading: 'PROPERTIES',   links: FOOTER.properties },
+  { heading: 'FOR YOU',      links: FOOTER.forYou },
+  { heading: 'COMPANY',      links: FOOTER.company },
 ];
+// Filter each column to currently-live links, and drop columns that empty out.
+const columns = rawColumns
+  .map(c => ({ heading: c.heading, links: liveOnly(c.links) }))
+  .filter(c => c.links.length > 0);
 ---
 
 <footer class="site-footer">

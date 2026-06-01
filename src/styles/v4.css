@@ -191,6 +191,7 @@ body.v4[data-transparent-nav] .site-header.is-open {
    Navy (destinations) on dark = invisible, so destinations + nationals both use gold. */
 .v4-hero__matrix-cell[data-pillar="local"]        .v4-hero__matrix-dot { background: var(--color-red); }
 .v4-hero__matrix-cell[data-pillar="destinations"] .v4-hero__matrix-dot { background: var(--color-gold); }
+.v4-hero__matrix-cell[data-pillar="ripken"]       .v4-hero__matrix-dot { background: var(--color-gold); }
 .v4-hero__matrix-cell[data-pillar="nationals"]    .v4-hero__matrix-dot { background: var(--color-gold); }
 .v4-hero__matrix-cell[data-pillar="training"]     .v4-hero__matrix-dot { background: var(--color-blue); }
 .v4-hero__matrix-num { color: rgba(255,255,255,0.45); margin-right: 4px; }
@@ -296,6 +297,7 @@ body.v4[data-transparent-nav] .site-header.is-open {
 }
 /* On navy bg, recolor pillar dots so navy isn't invisible */
 .next-up__item[data-pillar="destinations"] .pillar-dot { background: var(--color-gold); }
+.next-up__item[data-pillar="ripken"] .pillar-dot       { background: var(--color-gold); }
 .next-up__item[data-pillar="nationals"] .pillar-dot    { background: var(--color-gold); }
 .next-up__item[data-pillar="training"] .pillar-dot     { background: var(--color-blue); }
 .next-up__item[data-pillar="local"] .pillar-dot        { background: var(--color-red); }
@@ -354,6 +356,7 @@ body.v4 .v4__pillar-grid {
     border-radius: var(--radius-card);
 }
 .pcv4[data-pillar="nationals"] { color: var(--color-black); background: var(--color-gold); }
+.pcv4[data-pillar="ripken"]    { color: var(--color-black); background: var(--color-gold); }
 .pcv4:hover { transform: translateY(-4px); }
 .pcv4__photo {
     flex: 0 0 55%;
@@ -370,6 +373,7 @@ body.v4 .v4__pillar-grid {
 }
 .pcv4[data-pillar="local"]        .pcv4__photo { background-image: url('/images/v4/photo-flags.png'); background-position: 50% 60%; }
 .pcv4[data-pillar="destinations"] .pcv4__photo { background-image: url('/images/v4/photo-dugout.png'); }
+.pcv4[data-pillar="ripken"]       .pcv4__photo { background-image: url('/images/v4/photo-celebrate.png'); }
 .pcv4[data-pillar="nationals"]    .pcv4__photo { background-image: url('/images/v4/photo-celebrate.png'); }
 .pcv4[data-pillar="training"]     .pcv4__photo { background-image: url('/images/v4/photo-pitcher.png'); }
 .pcv4__body {
@@ -386,6 +390,7 @@ body.v4 .v4__pillar-grid {
     font-size: 11px;
 }
 .pcv4[data-pillar="nationals"] .pcv4__num { color: rgba(0,0,0,0.55); }
+.pcv4[data-pillar="ripken"]    .pcv4__num { color: rgba(0,0,0,0.55); }
 .pcv4__name {
     font-family: var(--font-display-poster);
     font-weight: var(--weight-poster-heavy);
@@ -522,6 +527,7 @@ body.v4 .v4__pillar-grid {
 .pm-card .pillar-tag { color: rgba(255,255,255,0.75); }
 .pm-card .pillar-tag[data-pillar="destinations"] .pillar-dot { background: var(--color-gold); }
 .pm-card .pillar-tag[data-pillar="nationals"]    .pillar-dot { background: var(--color-gold); }
+.pm-card .pillar-tag[data-pillar="ripken"]       .pillar-dot { background: var(--color-gold); }
 .pm-card .pillar-tag[data-pillar="training"]     .pillar-dot { background: var(--color-blue); }
 .pm-card .pillar-tag[data-pillar="local"]        .pillar-dot { background: var(--color-red); }
 .pm-card__name {

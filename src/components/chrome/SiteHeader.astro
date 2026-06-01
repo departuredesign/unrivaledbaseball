@@ -1,15 +1,13 @@
 ---
+import { liveOnly, WAYS_TO_PLAY, TOP_NAV } from '../../lib/phase';
+
 interface Props {
   activeNav?: 'home' | 'ways-to-play' | 'venues' | 'events' | 'stories' | 'about';
 }
 const { activeNav } = Astro.props;
 
-const pillars = [
-  { slug: 'local',        name: 'Local Tournaments',       meta: 'UBN · USSSA-Sanctioned Play',              pillar: 'local' },
-  { slug: 'destinations', name: 'Destination Experiences', meta: 'Cooperstown · Ripken · Rocker B · Parks',  pillar: 'destinations' },
-  { slug: 'nationals',    name: 'Ripken Nationals',        meta: '16-team Championship · Cooperstown',       pillar: 'nationals' },
-  { slug: 'training',     name: 'Training & Development',  meta: 'Baseball Factory · Prospect Select',       pillar: 'training' },
-];
+const pillars = liveOnly(WAYS_TO_PLAY);
+const topNav = liveOnly(TOP_NAV);
 ---
 
 <header class="site-header">
@@ -36,10 +34,9 @@ const pillars = [
           ))}
         </div>
       </div>
-      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'venues' }]} href="/venues/">Our Venues</a>
-      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'events' }]} href="/events/">Events</a>
-      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'stories' }]} href="/stories/">Stories</a>
-      <a class="nav-link" class:list={[{ 'is-active': activeNav === 'about' }]} href="/about/">About</a>
+      {topNav.map(l => (
+        <a class="nav-link" class:list={[{ 'is-active': activeNav === l.key }]} href={l.href}>{l.label}</a>
+      ))}
     </nav>
 
     <a class="nav-cta" href="/events/">Start Planning</a>
@@ -50,15 +47,9 @@ const pillars = [
   </div>
 
   <div class="site-header__mobile" id="mobile-nav" hidden>
-    <a class="mnav__link" href="/local/">Local Tournaments</a>
-    <a class="mnav__link" href="/destinations/">Destinations</a>
-    <a class="mnav__link" href="/nationals/">Ripken Nationals</a>
-    <a class="mnav__link" href="/training/">Training</a>
+    {pillars.map(p => <a class="mnav__link" href={p.href}>{p.name}</a>)}
     <span class="mnav__divider" aria-hidden="true"></span>
-    <a class="mnav__link" href="/venues/">Our Venues</a>
-    <a class="mnav__link" href="/events/">Events</a>
-    <a class="mnav__link" href="/stories/">Stories</a>
-    <a class="mnav__link" href="/about/">About</a>
+    {topNav.map(l => <a class="mnav__link" href={l.href}>{l.label}</a>)}
   </div>
 </header>
 

@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CURRENT_PHASE } from '../lib/phase';
+import '../styles/v4-pillar.css';
+import '../styles/v4-subproperty.css';
+import '../styles/v4-extra.css';
+
+// Ripken Experiences — inline profile cards. In Phase 1 each card is
+// self-contained (no link). In Phase 2 (when sub-pages light up), each
+// gets a "Learn more →" link to its deep page.
+const EXPERIENCES = [
+  {
+    name: 'The Ripken Experience · Aberdeen',
+    count: 'ABERDEEN, MD',
+    line: "Where the Ripken family started. Replica big-league fields, walk-up music, and the major-league treatment at Cal and Bill's hometown park.",
+    href: '/ripken-aberdeen/',
+    photo: '/images/v4/photo-celebrate.png',
+  },
+  {
+    name: 'The Ripken Experience · Myrtle Beach',
+    count: 'MYRTLE BEACH, SC',
+    line: 'Nine replica MLB fields a few stoplights from the ocean. The baseball vacation built into the season.',
+    href: '/ripken-myrtle-beach/',
+    photo: '/images/v4/photo-running.png',
+  },
+  {
+    name: 'The Ripken Experience · Pigeon Forge',
+    count: 'PIGEON FORGE, TN',
+    line: 'Big-league baseball in the foothills of the Smokies — fields built for the family weekend.',
+    href: '/ripken-pigeon-forge/',
+    photo: '/images/v4/photo-batter.png',
+  },
+];
+
+// Nationals championship — featured highlights
+const NATIONALS_STATS = [
+  { label: 'TEAMS',    val: '16 teams per class' },
+  { label: 'FIELD',    val: 'Cooperstown All Star Village' },
+  { label: 'ROUND',    val: 'Jun 29 – Jul 5' },
+];
+
+const CROSS_SELL = [
+  { tag: 'LOCAL TOURNAMENTS', name: 'UBN Network',     meta: 'USSSA-sanctioned weekends',          href: '/local/' },
+  { tag: 'DESTINATIONS',      name: 'Destinations',     meta: 'Weeklong tournaments at our properties', href: '/destinations/' },
+  { tag: 'TRAINING',          name: 'Training & Development', meta: 'Camps · Showcases · Games',     href: '/training/' },
+];
+---
+
+<BaseLayout title="Ripken" activeNav="ways-to-play" bodyClass="v4" transparentNav={true}>
+  <div class="pillar-page" data-pillar="ripken">
+
+    {/* HERO */}
+    <section class="phv4">
+      <div class="phv4__bg" style="background-image:url('/images/v4/photo-celebrate.png')" aria-hidden="true"></div>
+      <div class="phv4__overlay" aria-hidden="true"></div>
+      <div class="phv4__inner">
+        <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / RIPKEN</p>
+        <span class="phv4__chip">RIPKEN</span>
+        <h1 class="phv4__headline">The Ripken way to play.</h1>
+        <p class="phv4__sub">The Ripken Experience properties, the Ripken National Championships, and the All-Ripken Games — the names that set the standard, under one banner.</p>
+        <div class="phv4__stats">
+          <div><span class="phv4__stat-label">EXPERIENCES</span><span class="phv4__stat-val">Aberdeen · Myrtle Beach · Pigeon Forge</span></div>
+          <div><span class="phv4__stat-label">CHAMPIONSHIP</span><span class="phv4__stat-val">Ripken Nationals at Cooperstown</span></div>
+          <div><span class="phv4__stat-label">SHOWCASE</span><span class="phv4__stat-val">All-Ripken Games</span></div>
+        </div>
+      </div>
+    </section>
+
+    {/* EXPLAINER — the Ripken portfolio */}
+    <section class="ubn-x">
+      <div class="ubn-x__inner">
+        <div>
+          <p class="ubn-x__eyebrow text-eyebrow">THE RIPKEN PORTFOLIO</p>
+          <h2 class="ubn-x__headline">Built on the Big League Experience.</h2>
+          <p class="ubn-x__body text-body">Cal and Bill Ripken set the bar in Aberdeen — replica big-league fields, walk-up music, and the major-league treatment for every team. That bar built the brand. Today the Ripken portfolio spans three Experience properties, a 16-team national championship, and an invitation-only showcase that brings the top players in the country together by class.</p>
+          <ul class="ubn-x__bullets">
+            <li class="text-body-sm">Three Big League Experience properties.</li>
+            <li class="text-body-sm">One 16-team national championship.</li>
+            <li class="text-body-sm">One All-Ripken Games showcase.</li>
+          </ul>
+        </div>
+        <div class="ubn-x__aside">
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">3</span><span class="ubn-x__stat-label">Ripken Experience properties</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">Teams in the national bracket</span></div>
+          <div class="ubn-x__stat"><span class="ubn-x__stat-num">1985</span><span class="ubn-x__stat-label">The bar that founded the brand</span></div>
+        </div>
+      </div>
+    </section>
+
+    {/* THE RIPKEN EXPERIENCE — 3 property cards */}
+    <section class="regions sec">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">THE RIPKEN EXPERIENCE</p>
+        <h2 class="sec__headline">Three Big League Experience properties.</h2>
+        <div class="regions__grid">
+          {EXPERIENCES.map(e => (
+            <div class="region-card" style={CURRENT_PHASE < 2 ? 'transform:none;cursor:default' : undefined}>
+              <span class="region-card__bar" aria-hidden="true"></span>
+              <span class="region-card__photo" style={`background-image:url('${e.photo}')`} aria-hidden="true"></span>
+              <span class="region-card__body">
+                <span class="region-card__tag">RIPKEN EXPERIENCE</span>
+                <h3 class="region-card__name">{e.name}</h3>
+                <span class="region-card__count">{e.count}</span>
+                <p class="region-card__states">{e.line}</p>
+                {CURRENT_PHASE >= 2 && (
+                  <a class="region-card__cta" href={e.href}>Learn more →</a>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* RIPKEN NATIONALS — championship feature */}
+    <section class="pinnacle">
+      <div class="pinnacle__inner">
+        <p class="pinnacle__eyebrow text-eyebrow">RIPKEN NATIONAL CHAMPIONSHIPS</p>
+        <h2 class="pinnacle__headline">A pinnacle moment.</h2>
+        <p class="pinnacle__body text-body">Sixteen of the nation's top teams in each class meet at Cooperstown All Star Village to compete for the title of Ripken National Champions. Two pathways earn you in — twelve free bids from spring qualifier sites, four from pool play at the Cooperstown qualifier.</p>
+      </div>
+    </section>
+
+    <section class="htq">
+      <div class="sec__inner" style="display:flex;flex-direction:column;">
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">THE CHAMPIONSHIP, BY THE NUMBERS</p>
+        <h2 class="sec__headline" style="color:var(--color-white)">Sixteen teams. One title.</h2>
+        <div class="htq__grid" style="grid-template-columns:repeat(3,1fr)">
+          {NATIONALS_STATS.map(s => (
+            <div class="htq-card">
+              <span class="htq-card__bids">{s.label}</span>
+              <p class="htq-card__desc" style="color:var(--color-white)">{s.val}</p>
+            </div>
+          ))}
+        </div>
+        {CURRENT_PHASE >= 2 && (
+          <p style="margin-top:24px"><a class="qrow__link" href="/nationals/" style="color:var(--color-gold)">Explore Ripken Nationals →</a></p>
+        )}
+      </div>
+    </section>
+
+    {/* ALL-RIPKEN GAMES */}
+    <section class="story">
+      <div class="story__inner">
+        <div>
+          <p class="story__eyebrow text-eyebrow">ALL-RIPKEN GAMES</p>
+          <h2 class="story__headline">The best players in each class, in one game.</h2>
+          <p class="story__body text-body">An invitation-only showcase that gathers the top players from across the country by age class. Played at Ripken properties on the heels of the championship round — the All-Ripken Games are where the next pinnacle moment begins.</p>
+          {CURRENT_PHASE >= 2 && (
+            <p style="margin-top:16px"><a class="qrow__link" href="/all-ripken/" style="color:var(--accent)">Learn more about All-Ripken →</a></p>
+          )}
+        </div>
+        <div class="story__photo" style="background-image:url('/images/v4/photo-batter.png')" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    {/* CROSS-SELL — Phase 1 destinations only */}
+    <section class="xsell">
+      <div class="xsell__inner">
+        <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
+        <h2 class="xsell__headline">More ways to play.</h2>
+        <div class="xsell__grid">
+          {CROSS_SELL.map(c => (
+            <a class="xcard" href={c.href}>
+              <span class="xcard__tag">{c.tag}</span>
+              <h3 class="xcard__name">{c.name}</h3>
+              <p class="xcard__meta">{c.meta}</p>
+              <span class="xcard__arrow" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CTA BAND */}
+    <section class="ctaband">
+      <div class="ctaband__inner">
+        <h2 class="ctaband__headline">Plan your Ripken summer.</h2>
+        <a class="ctaband__btn" href="/about/">Start planning →</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

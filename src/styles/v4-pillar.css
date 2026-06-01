@@ -32,6 +32,7 @@ body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-whi
 /* Pillar accent colour (used for chips, bars, links, CTA) */
 .pillar-page[data-pillar="local"]        { --accent: var(--color-red); }
 .pillar-page[data-pillar="destinations"] { --accent: var(--color-gold); }
+.pillar-page[data-pillar="ripken"]       { --accent: var(--color-gold); }
 .pillar-page[data-pillar="nationals"]    { --accent: var(--color-gold); }
 .pillar-page[data-pillar="training"]     { --accent: var(--color-blue); }
 
@@ -129,6 +130,7 @@ body.v4[data-transparent-nav] .site-header.is-open { background: var(--color-whi
 .region-card__name { font-family: var(--font-display-poster); font-weight: var(--weight-poster-heavy); text-transform: uppercase; font-size: 22px; line-height: 1; margin: 0; }
 .region-card__count { color: var(--accent); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: var(--weight-bold); }
 .region-card__states { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.5; margin: 0; }
+.region-card__cta { color: var(--accent); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: var(--weight-bold); text-decoration: none; margin-top: 12px; }
 
 /* ===== EVENTS — compact upcoming list ===== */
 .pevents { background: var(--color-white); }

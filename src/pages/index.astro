@@ -6,32 +6,34 @@ import PillarCardV4 from '../components/cards/PillarCardV4.astro';
 import PinnacleCard from '../components/cards/PinnacleCard.astro';
 import VoiceCard from '../components/cards/VoiceCard.astro';
 import PillarDot from '../components/atoms/PillarDot.astro';
+import { phaseLink } from '../lib/phase';
 import '../styles/v4.css';
 
 const PILLARS = [
-  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
-  { pillar: 'destinations' as const, num: '02', name: 'Destinations',      desc: 'Weeklong at our properties',          href: '/destinations/' },
-  { pillar: 'nationals'    as const, num: '03', name: 'Nationals',         desc: '16-team Championship · Aberdeen',     href: '/nationals/' },
-  { pillar: 'training'     as const, num: '04', name: 'Training',          desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
+  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments',       desc: 'UBN · USSSA-Sanctioned Play',           href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',            desc: 'Weeklong at our properties',            href: '/destinations/' },
+  { pillar: 'ripken'       as const, num: '03', name: 'Ripken',                  desc: 'Experiences · Nationals · All-Ripken',  href: '/ripken/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training & Development',  desc: 'Baseball Factory · Prospect Select',    href: '/training/' },
 ];
 
 const NEXT_UP = [
   { pillar: 'local'        as const, title: 'UBN Mid-Atlantic Spring Classic', loc: 'Aberdeen, MD',    date: 'May 17' },
   { pillar: 'destinations' as const, title: 'Cooperstown Week 7',              loc: 'Cooperstown, NY', date: 'Aug 3–9' },
-  { pillar: 'nationals'    as const, title: 'Ripken National Championships',   loc: 'Aberdeen, MD',    date: 'Jul 12–19' },
+  { pillar: 'ripken'       as const, title: 'Ripken National Championships',   loc: 'Cooperstown, NY', date: 'Jun 29 – Jul 5' },
   { pillar: 'training'     as const, title: 'Prospect Select Las Vegas',       loc: 'Las Vegas, NV',   date: 'Jul 18' },
 ];
 
+// Pinnacle carousel — hrefs route to pillar pages until Phase 2 lights up the deep pages.
 const PINNACLE_PROGRAMS = [
   {
-    pillar: 'nationals' as const,
-    tag: 'NATIONALS · CHAMPIONSHIP',
+    pillar: 'ripken' as const,
+    tag: 'RIPKEN · CHAMPIONSHIP',
     name: 'Ripken Nationals',
-    meta: 'Aberdeen, MD · Jun 30 – Jul 5 · 12U',
+    meta: 'Cooperstown, NY · Jun 29 – Jul 5 · 12U',
     photoBrief: '[ Ripken Nationals image · trophy round under the lights ]',
     photo: '/images/v4/photo-celebrate.png',
-    blurb: "The 16-team 12U bracket at the Ripken Experience Aberdeen. Cal and Bill's hometown. The national championship round of the youth baseball year.",
-    href: '/nationals/',
+    blurb: "The 16-team 12U bracket at Cooperstown All Star Village. The national championship round of the youth baseball year.",
+    href: phaseLink('/nationals/', '/ripken/'),
   },
   {
     pillar: 'destinations' as const,
@@ -41,7 +43,7 @@ const PINNACLE_PROGRAMS = [
     photoBrief: '[ Rocker B Ranch image · Byrd Family Field at golden hour ]',
     photo: '/images/v4/photo-flags.png',
     blurb: 'The 325-acre Texas ranch where weekend tournaments meet resort lodging. Pool. Pond. Music venue. The Byrd Family Field at the center of all of it.',
-    href: '/rocker-b/',
+    href: phaseLink('/rocker-b/', '/destinations/'),
   },
   {
     pillar: 'destinations' as const,
@@ -51,17 +53,17 @@ const PINNACLE_PROGRAMS = [
     photoBrief: '[ Cooperstown All Star Village image · opening pin trade ]',
     photo: '/images/v4/photo-dugout.png',
     blurb: 'The 12U pilgrimage. Twelve weeks every summer, hundreds of teams, the Hall of Fame minutes away. The week families plan around for years.',
-    href: '/cooperstown/',
+    href: phaseLink('/cooperstown/', '/destinations/'),
   },
   {
-    pillar: 'destinations' as const,
-    tag: 'DESTINATION EXPERIENCE',
+    pillar: 'ripken' as const,
+    tag: 'RIPKEN EXPERIENCE',
     name: 'Myrtle Beach Madness at Ripken',
     meta: 'Myrtle Beach, SC · Summer Week · 10U–12U',
     photoBrief: '[ Myrtle Beach Madness image · the nine-field complex from above ]',
     photo: '/images/v4/photo-running.png',
     blurb: 'The Big League Experience a few stoplights from the beach. Nine replica MLB fields. A coastal vacation week the family plans around.',
-    href: '/ripken-myrtle-beach/',
+    href: phaseLink('/ripken-myrtle-beach/', '/ripken/'),
   },
 ];
 
@@ -71,15 +73,16 @@ const VOICES = [
   { name: 'Jordan Reyes',         role: 'ALUM · 2019 · PHOENIX, AZ', photo: '/images/v4/photo-pitcher.png',   pillar: 'training'     as const },
 ];
 
+// Venue wall — links resolve to pillar pages in Phase 1, deep pages in Phase 2.
 const VENUES = [
-  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: '/cooperstown/' },
-  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: '/ripken-aberdeen/' },
-  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: '/ripken-myrtle-beach/' },
-  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: '/ripken-pigeon-forge/' },
-  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: '/sports-force-parks-cedar-point/' },
-  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: '/sports-force-parks-manteca/' },
-  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: '/rocker-b/' },
-  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: '/baseball-factory/' },
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: phaseLink('/cooperstown/',                    '/destinations/') },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: phaseLink('/ripken-aberdeen/',                '/ripken/') },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: phaseLink('/ripken-myrtle-beach/',            '/ripken/') },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: phaseLink('/ripken-pigeon-forge/',            '/ripken/') },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: phaseLink('/sports-force-parks-cedar-point/', '/destinations/') },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: phaseLink('/sports-force-parks-manteca/',     '/destinations/') },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: phaseLink('/rocker-b/',                       '/destinations/') },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: phaseLink('/baseball-factory/',               '/training/') },
 ];
 
 const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', 'Marucci'];
@@ -193,7 +196,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
         meta="Cooperstown, NY · Founded 2001"
         line="The bar that founded the brand. Every property, every event, every season."
         cta="Plan Cooperstown"
-        href="/cooperstown/"
+        href={phaseLink('/cooperstown/', '/destinations/')}
       />
     </div>
   </section>
