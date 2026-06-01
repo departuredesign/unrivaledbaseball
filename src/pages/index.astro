@@ -165,6 +165,25 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
     </div>
   </section>
 
+  {/* ===== ABOUT TEASER — Who we are, with video background ===== */}
+  {/* When a background video is ready, drop it under .about-teaser__bg as
+       <video autoplay muted loop playsinline poster="…">
+         <source src="/videos/about-bg.mp4" type="video/mp4" />
+       </video>
+       The .about-teaser__bg currently shows a poster image — same slot. */}
+  <section class="about-teaser">
+    <div class="about-teaser__bg" aria-hidden="true"></div>
+    <div class="about-teaser__overlay" aria-hidden="true"></div>
+    <div class="about-teaser__inner">
+      <p class="about-teaser__eyebrow text-eyebrow">WHO WE ARE</p>
+      <h2 class="about-teaser__headline">The most trusted names in youth baseball, together under one banner.</h2>
+      <a class="about-teaser__cta" href="/about/">
+        <span>About Unrivaled Baseball</span>
+        <span class="about-teaser__cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
   {/* ===== PINNACLE MANIFESTO — combined editorial moment on navy ===== */}
   <section class="pm" id="manifesto">
     <div class="pm__inner">
