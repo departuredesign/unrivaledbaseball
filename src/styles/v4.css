@@ -426,10 +426,9 @@ body.v4 .v4__pillar-grid {
     overflow: hidden;
     background: var(--color-navy);
     color: var(--color-white);
-    /* Reads as a secondary moment, not a second hero — capped well below the hero's 880px. */
-    aspect-ratio: 5 / 2;
-    min-height: 420px;
-    max-height: 600px;
+    width: 100%;
+    /* Stays full-bleed; reads as a secondary moment (capped below the hero's 880px). */
+    height: clamp(420px, 40vw, 600px);
 }
 @media (max-width: 767px) {
     .about-teaser { aspect-ratio: 4 / 5; min-height: 560px; }
