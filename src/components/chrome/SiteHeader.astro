@@ -137,16 +137,21 @@ const topNav = liveOnly(TOP_NAV);
   }
   /* Invisible hover bridge across the 12px gap between the trigger and the
      menu. Without this, moving the cursor down from "Ways to Play" toward
-     the menu leaves .nav-dropdown's hit area and the menu closes before
-     you can reach an item. The bridge is part of .nav-dropdown's tree so
-     hovering it keeps .nav-dropdown:hover true. */
+     a menu item leaves .nav-dropdown's hit area and the menu closes before
+     the cursor reaches it. The bridge is part of .nav-dropdown's tree so
+     hovering it keeps .nav-dropdown:hover true.
+
+     Width must cover the MENU's footprint, not just the trigger — the
+     menu is min-width 320px and left-aligned to the trigger, so a
+     diagonal cursor path lands outside a trigger-width bridge. We size
+     to 340px (menu width + 20px forgiveness). */
   .nav-dropdown::after {
     content: '';
     position: absolute;
     top: 100%;
     left: -8px;
-    right: -8px;
-    height: 14px;
+    width: 340px;
+    height: 16px;
     /* pointer-events: auto (default) — captures hover, extends hit area. */
   }
   .nav-dropdown__menu {
