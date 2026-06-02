@@ -46,13 +46,19 @@ html.motion-js img.is-loaded {
    between adjacent sections during fast scroll. By animating the children
    instead, the section box (and its background, including aria-hidden bg/
    overlay divs) stays in place; only the text/CTA inside fades + slides. */
+/* Easing + timing tuned for "premium settle":
+     • cubic-bezier(0.16, 1, 0.3, 1) is easeOutExpo — strong front-loaded
+       motion, long graceful tail. The element arrives ~80% in the first
+       third, then drifts into final position. Removes the abrupt snap.
+     • Decoupled: opacity finishes at 500ms (presence first), transform at
+       700ms (slow settle). Looks soft without feeling slow. */
 [data-reveal] > *:not([aria-hidden="true"]),
 [data-reveal-stagger] > * {
     opacity: 0;
     transform: translateY(24px);
     transition:
-        opacity 600ms cubic-bezier(0.215, 0.61, 0.355, 1),
-        transform 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+        opacity   500ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 [data-reveal].is-revealed > *:not([aria-hidden="true"]),
@@ -61,15 +67,16 @@ html.motion-js img.is-loaded {
     transform: none;
 }
 
-/* Stagger delays — applied to direct children once the parent is revealed. */
+/* Stagger delays — 60ms between siblings keeps the cascade brisk even
+   though each child's own settle is now 700ms. */
 [data-reveal-stagger].is-revealed > *:nth-child(1) { transition-delay:   0ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(2) { transition-delay:  80ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(3) { transition-delay: 160ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(4) { transition-delay: 240ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(5) { transition-delay: 320ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(6) { transition-delay: 400ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(7) { transition-delay: 480ms; }
-[data-reveal-stagger].is-revealed > *:nth-child(8) { transition-delay: 560ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(2) { transition-delay:  60ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(3) { transition-delay: 120ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(4) { transition-delay: 180ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(5) { transition-delay: 240ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(6) { transition-delay: 300ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(7) { transition-delay: 360ms; }
+[data-reveal-stagger].is-revealed > *:nth-child(8) { transition-delay: 420ms; }
 
 /* ----- 4. Reduced-motion gate -----
    Disable every motion behavior introduced by this file (and any future wave). */
