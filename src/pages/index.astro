@@ -156,11 +156,11 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
   </section>
 
   {/* ===== FOUR WAYS TO PLAY — pillar cards with photo top half ===== */}
-  <section class="portfolio">
+  <section class="portfolio" data-reveal>
     <div class="portfolio__inner">
       <p class="portfolio__eyebrow text-eyebrow">FOUR WAYS TO PLAY</p>
       <h2 class="portfolio__headline">One brand across the entire arc of the journey.</h2>
-      <div class="v4__pillar-grid">
+      <div class="v4__pillar-grid" data-reveal-stagger>
         {PILLARS.map(p => <PillarCardV4 {...p} />)}
       </div>
     </div>
@@ -172,7 +172,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
          <source src="/videos/about-bg.mp4" type="video/mp4" />
        </video>
        The .about-teaser__bg currently shows a poster image — same slot. */}
-  <section class="about-teaser">
+  <section class="about-teaser" data-reveal>
     <div class="about-teaser__bg" aria-hidden="true"></div>
     <div class="about-teaser__overlay" aria-hidden="true"></div>
     <div class="about-teaser__inner">
@@ -186,7 +186,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
   </section>
 
   {/* ===== PINNACLE MANIFESTO — combined editorial moment on navy ===== */}
-  <section class="pm" id="manifesto">
+  <section class="pm" id="manifesto" data-reveal>
     <div class="pm__inner">
       <div class="pm__head">
         <p class="pm__eyebrow text-eyebrow">WHY WE BUILT THIS</p>
@@ -207,7 +207,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
   </section>
 
   {/* ===== FOUNDING ===== */}
-  <section class="founding-wrap">
+  <section class="founding-wrap" data-reveal>
     <div class="founding-wrap__inner">
       <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
       <h2 class="founding-wrap__headline text-h1">A world-class tournament at the birthplace of baseball.</h2>
@@ -223,34 +223,34 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
   </section>
 
   {/* ===== VENUE WALL ===== */}
-  <section class="venue-wall">
+  <section class="venue-wall" data-reveal>
     <div class="venue-wall__inner">
       <div class="venue-wall__head">
         <p class="venue-wall__eyebrow text-eyebrow">OUR VENUES</p>
         <h2 class="venue-wall__headline text-h1">Eight properties. One standard.</h2>
       </div>
-      <div class="venue-wall__grid">
+      <div class="venue-wall__grid" data-reveal-stagger>
         {VENUES.map(v => <VenueCard {...v} />)}
       </div>
     </div>
   </section>
 
   {/* ===== TESTIMONIALS — video voice cards ===== */}
-  <section class="testimonials">
+  <section class="testimonials" data-reveal>
     <div class="testimonials__inner">
       <div class="testimonials__head">
         <p class="testimonials__eyebrow text-eyebrow">VOICES FROM THE STANDS</p>
         <h2 class="testimonials__headline text-h1">Unrivaled Baseball in their own words.</h2>
         <a class="testimonials__view" href="/stories/">SEE ALL STORIES →</a>
       </div>
-      <div class="vv-grid">
+      <div class="vv-grid" data-reveal-stagger>
         {VOICES.map(v => <VoiceCard {...v} />)}
       </div>
     </div>
   </section>
 
   {/* ===== PARTNERS ===== */}
-  <section class="partners-strip">
+  <section class="partners-strip" data-reveal>
     <div class="partners-strip__inner">
       <p class="partners-strip__label text-eyebrow">PARTNERS</p>
       <div class="partners-strip__row">

@@ -45,7 +45,7 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="ubn-x">
+    <section class="ubn-x" data-reveal>
       <div class="ubn-x__inner">
         <div>
           <p class="ubn-x__eyebrow text-eyebrow">WHAT IS UBN</p>
@@ -65,11 +65,11 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="ngallery">
+    <section class="ngallery" data-reveal>
       <div class="ngallery__inner">
         <p class="ngallery__eyebrow text-eyebrow">THE UBN NETWORK</p>
         <h2 class="ngallery__headline">Weekend baseball, coast to coast.</h2>
-        <div class="ngallery__grid">
+        <div class="ngallery__grid" data-reveal-stagger>
           {['dust and dugouts', 'a walk-off win', 'opening Saturday', 'the bracket board', 'trophy presentation'].map((cap, i) => (
             <span class="ngallery__tile" style={`background-image:url('${['/images/v4/photo-flags.png','/images/v4/photo-running.png','/images/v4/photo-batter.png','/images/v4/photo-pitcher.png','/images/v4/photo-celebrate.png'][i]}')`}><span class="ngallery__cap">[ {cap} ]</span></span>
           ))}
@@ -77,11 +77,11 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="regions sec">
+    <section class="regions sec" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">OUR REGIONS</p>
         <h2 class="sec__headline">Local play. Regional reach.</h2>
-        <div class="regions__grid">
+        <div class="regions__grid" data-reveal-stagger>
           {REGIONS.map(r => (
             <a class="region-card" href="/events/">
               <span class="region-card__bar" aria-hidden="true"></span>
@@ -98,7 +98,7 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="pevents">
+    <section class="pevents" data-reveal>
       <div class="sec__inner">
         <h2 class="sec__headline">Upcoming local events.</h2>
         {EVENTS.map(e => (
@@ -112,11 +112,11 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="xsell">
+    <section class="xsell" data-reveal>
       <div class="xsell__inner">
         <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
         <h2 class="xsell__headline">More ways to play.</h2>
-        <div class="xsell__grid">
+        <div class="xsell__grid" data-reveal-stagger>
           {CROSS_SELL.map(c => (
             <a class="xcard" href={c.href}>
               <span class="xcard__tag">{c.tag}</span>
@@ -129,7 +129,7 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="ctaband">
+    <section class="ctaband" data-reveal>
       <div class="ctaband__inner">
         <h2 class="ctaband__headline">Find a weekend near you.</h2>
         <a class="ctaband__btn" href="/events/">See all events →</a>

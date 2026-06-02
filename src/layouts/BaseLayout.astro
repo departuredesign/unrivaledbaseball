@@ -49,14 +49,16 @@ const hideFromSearch = isPageHidden(Astro.url.pathname);
       <slot />
     </main>
     <SiteFooter />
-    {/* Image fade-in handler. Adds .is-loaded to each <img> once it finishes
-        decoding (or immediately if it was cached). Wave 1 of the progressive
-        motion work; Waves 2 and 3 will extend this with reveal observers
-        and a parallax rAF loop. */}
+    {/* Motion handlers — Waves 1 & 2.
+        Wave 1: image fade-in (mark <img> as .is-loaded once decoded).
+        Wave 2: progressive reveal (add .is-revealed to elements with
+                data-reveal / data-reveal-stagger as they enter the viewport).
+        Wave 3 will add a parallax rAF loop here. */}
     <script is:inline>
       (function () {
+        // ----- Wave 1: image fade-in -----
         function markLoaded(img) { img.classList.add('is-loaded'); }
-        function init() {
+        function initImages() {
           var imgs = document.querySelectorAll('img');
           for (var i = 0; i < imgs.length; i++) {
             var img = imgs[i];
@@ -67,6 +69,37 @@ const hideFromSearch = isPageHidden(Astro.url.pathname);
               img.addEventListener('error', function () { markLoaded(this); }, { once: true });
             }
           }
+        }
+
+        // ----- Wave 2: progressive reveal -----
+        function initReveal() {
+          var targets = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
+          if (!targets.length) return;
+          // Fallback for old browsers: just show everything immediately.
+          if (!('IntersectionObserver' in window)) {
+            for (var i = 0; i < targets.length; i++) targets[i].classList.add('is-revealed');
+            return;
+          }
+          var observer = new IntersectionObserver(function (entries) {
+            for (var i = 0; i < entries.length; i++) {
+              if (entries[i].isIntersecting) {
+                entries[i].target.classList.add('is-revealed');
+                observer.unobserve(entries[i].target);
+              }
+            }
+          }, {
+            // Trigger when the element is ~50px into the viewport from the
+            // bottom — gives the animation a beat of runway before the user
+            // notices it.
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0
+          });
+          for (var j = 0; j < targets.length; j++) observer.observe(targets[j]);
+        }
+
+        function init() {
+          initImages();
+          initReveal();
         }
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', init);

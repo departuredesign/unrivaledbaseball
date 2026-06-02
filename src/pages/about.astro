@@ -48,7 +48,7 @@ const LEADERSHIP = [
       </div>
     </section>
 
-    <section class="story">
+    <section class="story" data-reveal>
       <div class="story__inner">
         <div>
           <p class="story__eyebrow text-eyebrow">OUR STORY</p>
@@ -59,11 +59,11 @@ const LEADERSHIP = [
       </div>
     </section>
 
-    <section class="btns">
+    <section class="btns" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">BY THE NUMBERS</p>
         <h2 class="sec__headline" style="color:var(--color-white)">Two decades, one standard.</h2>
-        <div class="btns__grid">
+        <div class="btns__grid" data-reveal-stagger>
           {STATS.map(s => (
             <div><div class="btns__num">{s.num}</div><div class="btns__label">{s.label}</div></div>
           ))}
@@ -71,11 +71,11 @@ const LEADERSHIP = [
       </div>
     </section>
 
-    <section class="wte sec">
+    <section class="wte sec" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">OUR PROMISE</p>
         <h2 class="sec__headline">The standard parents and coaches count on.</h2>
-        <div class="wte__grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="wte__grid" data-reveal-stagger style="grid-template-columns:repeat(3,1fr)">
           {PROMISE.map(p => (
             <div class="wte-card"><h3 class="wte-card__title">{p.title}</h3><p class="wte-card__desc">{p.desc}</p></div>
           ))}
@@ -83,7 +83,7 @@ const LEADERSHIP = [
       </div>
     </section>
 
-    <section class="tline">
+    <section class="tline" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">THE TIMELINE</p>
         <h2 class="sec__headline" style="color:var(--color-white)">Brought together over forty years.</h2>
@@ -96,11 +96,11 @@ const LEADERSHIP = [
       </div>
     </section>
 
-    <section class="lead-sec sec">
+    <section class="lead-sec sec" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">LEADERSHIP</p>
         <h2 class="sec__headline">The team behind the standard.</h2>
-        <div class="lead__grid">
+        <div class="lead__grid" data-reveal-stagger>
           {LEADERSHIP.map(p => (
             <div><div class="lead-card__photo" aria-hidden="true"></div><div class="lead-card__name">{p.name}</div><div class="lead-card__role">{p.role}</div></div>
           ))}

@@ -67,7 +67,7 @@ const CROSS_SELL = [
     </section>
 
     {/* EXPLAINER — the Ripken portfolio */}
-    <section class="ubn-x">
+    <section class="ubn-x" data-reveal>
       <div class="ubn-x__inner">
         <div>
           <p class="ubn-x__eyebrow text-eyebrow">THE RIPKEN PORTFOLIO</p>
@@ -88,11 +88,11 @@ const CROSS_SELL = [
     </section>
 
     {/* THE RIPKEN EXPERIENCE — 3 property cards */}
-    <section class="regions sec">
+    <section class="regions sec" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">THE RIPKEN EXPERIENCE</p>
         <h2 class="sec__headline">Three Big League Experience properties.</h2>
-        <div class="regions__grid">
+        <div class="regions__grid" data-reveal-stagger>
           {EXPERIENCES.map(e => (
             <div class="region-card" style={CURRENT_PHASE < 2 ? 'transform:none;cursor:default' : undefined}>
               <span class="region-card__bar" aria-hidden="true"></span>
@@ -113,7 +113,7 @@ const CROSS_SELL = [
     </section>
 
     {/* RIPKEN NATIONALS — championship feature */}
-    <section class="pinnacle">
+    <section class="pinnacle" data-reveal>
       <div class="pinnacle__inner">
         <p class="pinnacle__eyebrow text-eyebrow">RIPKEN NATIONAL CHAMPIONSHIPS</p>
         <h2 class="pinnacle__headline">A pinnacle moment.</h2>
@@ -121,11 +121,11 @@ const CROSS_SELL = [
       </div>
     </section>
 
-    <section class="htq">
+    <section class="htq" data-reveal>
       <div class="sec__inner" style="display:flex;flex-direction:column;">
         <p class="sec__eyebrow text-eyebrow" style="color:var(--color-gold)">THE CHAMPIONSHIP, BY THE NUMBERS</p>
         <h2 class="sec__headline" style="color:var(--color-white)">Sixteen teams. One title.</h2>
-        <div class="htq__grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="htq__grid" data-reveal-stagger style="grid-template-columns:repeat(3,1fr)">
           {NATIONALS_STATS.map(s => (
             <div class="htq-card">
               <span class="htq-card__bids">{s.label}</span>
@@ -140,7 +140,7 @@ const CROSS_SELL = [
     </section>
 
     {/* ALL-RIPKEN GAMES */}
-    <section class="story">
+    <section class="story" data-reveal>
       <div class="story__inner">
         <div>
           <p class="story__eyebrow text-eyebrow">ALL-RIPKEN GAMES</p>
@@ -155,11 +155,11 @@ const CROSS_SELL = [
     </section>
 
     {/* CROSS-SELL — Phase 1 destinations only */}
-    <section class="xsell">
+    <section class="xsell" data-reveal>
       <div class="xsell__inner">
         <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
         <h2 class="xsell__headline">More ways to play.</h2>
-        <div class="xsell__grid">
+        <div class="xsell__grid" data-reveal-stagger>
           {CROSS_SELL.map(c => (
             <a class="xcard" href={c.href}>
               <span class="xcard__tag">{c.tag}</span>
@@ -173,7 +173,7 @@ const CROSS_SELL = [
     </section>
 
     {/* CTA BAND */}
-    <section class="ctaband">
+    <section class="ctaband" data-reveal>
       <div class="ctaband__inner">
         <h2 class="ctaband__headline">Plan your Ripken summer.</h2>
         <a class="ctaband__btn" href="/about/">Start planning →</a>
