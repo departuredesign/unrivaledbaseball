@@ -40,7 +40,13 @@ html.motion-js img.is-loaded {
    as a block, then the grid's cards stagger in moments later).
    The IntersectionObserver in BaseLayout adds .is-revealed
    exactly once per element. */
-[data-reveal],
+/* Target the SECTION'S CONTENT (direct children), not the section itself.
+   Putting opacity/transform on the section would create a 24px vertical gap
+   above each not-yet-revealed section — body bg (white) would briefly show
+   between adjacent sections during fast scroll. By animating the children
+   instead, the section box (and its background, including aria-hidden bg/
+   overlay divs) stays in place; only the text/CTA inside fades + slides. */
+[data-reveal] > *:not([aria-hidden="true"]),
 [data-reveal-stagger] > * {
     opacity: 0;
     transform: translateY(24px);
@@ -49,7 +55,7 @@ html.motion-js img.is-loaded {
         transform 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
     will-change: opacity, transform;
 }
-[data-reveal].is-revealed,
+[data-reveal].is-revealed > *:not([aria-hidden="true"]),
 [data-reveal-stagger].is-revealed > * {
     opacity: 1;
     transform: none;
@@ -71,7 +77,7 @@ html.motion-js img.is-loaded {
     html { scroll-behavior: auto; }
     html.motion-js img { opacity: 1; transition: none; }
 
-    [data-reveal],
+    [data-reveal] > *,
     [data-reveal-stagger] > * {
         opacity: 1 !important;
         transform: none !important;
