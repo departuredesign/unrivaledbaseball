@@ -1,0 +1,48 @@
+/* ============================================================
+   MOTION — Wave 1
+   Smooth scrolling, reduced-motion gate, image fade-in.
+
+   Wave 2 (progressive reveal) and Wave 3 (parallax + card-hover
+   image scale) will layer on top of this file via additional
+   rules and a small companion <script> in BaseLayout.
+   ============================================================ */
+
+/* ----- 1. Smooth scrolling for anchor jumps + scrollIntoView() ----- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ----- 2. Image fade-in -----
+   Avoid the jarring "pop" of large JPEGs as they finish decoding.
+   Gated on `html.motion-js` so that if our inline script in
+   BaseLayout never executes (JS disabled, parse error, etc.), images
+   render normally instead of staying invisible forever.
+
+   The companion script:
+     • Adds `motion-js` to <html> as early as possible (before paint)
+     • For each <img>, adds .is-loaded once `load` fires
+     • Marks already-cached images on init via img.complete check */
+html.motion-js img {
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+html.motion-js img.is-loaded {
+    opacity: 1;
+}
+
+/* ----- 3. Reduced-motion gate -----
+   For users who set prefers-reduced-motion: reduce, disable every
+   motion behavior introduced by this file (and any future wave). */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    html.motion-js img { opacity: 1; transition: none; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

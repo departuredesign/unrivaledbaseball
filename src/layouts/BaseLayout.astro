@@ -3,6 +3,7 @@ import '../styles/fonts.css';
 import '../styles/reset.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import '../styles/motion.css';
 import SiteHeader from '../components/chrome/SiteHeader.astro';
 import SiteFooter from '../components/chrome/SiteFooter.astro';
 import { isPageHidden } from '../lib/phase';
@@ -38,6 +39,9 @@ const hideFromSearch = isPageHidden(Astro.url.pathname);
     <meta name="description" content={description} />
     {hideFromSearch && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/* Set motion-js *before* paint so the CSS image fade-in rule applies
+        from the first frame. Kept tiny so it doesn't delay anything. */}
+    <script is:inline>document.documentElement.classList.add('motion-js');</script>
   </head>
   <body class={bodyClass} data-transparent-nav={transparentNav ? 'true' : undefined}>
     <SiteHeader activeNav={activeNav} />
@@ -45,5 +49,31 @@ const hideFromSearch = isPageHidden(Astro.url.pathname);
       <slot />
     </main>
     <SiteFooter />
+    {/* Image fade-in handler. Adds .is-loaded to each <img> once it finishes
+        decoding (or immediately if it was cached). Wave 1 of the progressive
+        motion work; Waves 2 and 3 will extend this with reveal observers
+        and a parallax rAF loop. */}
+    <script is:inline>
+      (function () {
+        function markLoaded(img) { img.classList.add('is-loaded'); }
+        function init() {
+          var imgs = document.querySelectorAll('img');
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i];
+            if (img.complete && img.naturalWidth > 0) {
+              markLoaded(img);
+            } else {
+              img.addEventListener('load',  function () { markLoaded(this); }, { once: true });
+              img.addEventListener('error', function () { markLoaded(this); }, { once: true });
+            }
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
   </body>
 </html>
