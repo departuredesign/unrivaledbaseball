@@ -41,15 +41,38 @@ const topNav = liveOnly(TOP_NAV);
 
     <a class="nav-cta" href="/events/">Start Planning</a>
 
-    <button class="site-header__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+    <button class="site-header__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
   </div>
 
-  <div class="site-header__mobile" id="mobile-nav" hidden>
-    {pillars.map(p => <a class="mnav__link" href={p.href}>{p.name}</a>)}
-    <span class="mnav__divider" aria-hidden="true"></span>
-    {topNav.map(l => <a class="mnav__link" href={l.href}>{l.label}</a>)}
+  {/* ===== Mobile full-screen overlay (slides in from right) =====
+       Adapted from the unrivaledsports.com corporate pattern: gold→navy,
+       Review Poster→Baseball's display-poster, stagger animation kept,
+       footer block carries the Start Planning CTA + a contact email. */}
+  <div class="mobile-menu" id="mobile-menu" data-open="false" aria-hidden="true">
+    <div class="mobile-menu__overlay">
+      <div class="mobile-menu__header">
+        <a class="mobile-menu__logo" href="/" aria-label="Unrivaled Baseball — Home">
+          <img src="/images/logo.png" alt="" width="56" height="34" />
+        </a>
+        <button class="mobile-menu__close" type="button" aria-label="Close menu"></button>
+      </div>
+      <nav class="mobile-menu__nav" aria-label="Mobile">
+        {pillars.map(p => <a class="mobile-menu__item" href={p.href}>{p.name}</a>)}
+        {topNav.map(l => <a class="mobile-menu__item" href={l.href}>{l.label}</a>)}
+      </nav>
+      <div class="mobile-menu__footer">
+        <a class="mobile-menu__cta" href="/events/">
+          <span>Start Planning</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <div class="mobile-menu__contact">
+          <p class="mobile-menu__contact-label">Contact</p>
+          <a class="mobile-menu__contact-email" href="mailto:hello@unrivaledbaseball.com">hello@unrivaledbaseball.com</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -58,13 +81,30 @@ const topNav = liveOnly(TOP_NAV);
     var header = document.querySelector('.site-header');
     if (!header) return;
     var burger = header.querySelector('.site-header__burger');
-    var panel = header.querySelector('.site-header__mobile');
-    if (!burger || !panel) return;
-    burger.addEventListener('click', function () {
-      var open = header.classList.toggle('is-open');
+    var menu   = header.querySelector('.mobile-menu');
+    if (!burger || !menu) return;
+    var close  = menu.querySelector('.mobile-menu__close');
+    var links  = menu.querySelectorAll('a');
+
+    function setOpen(open) {
+      menu.setAttribute('data-open', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      panel.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+    }
+
+    burger.addEventListener('click', function () {
+      var isOpen = menu.getAttribute('data-open') === 'true';
+      setOpen(!isOpen);
+    });
+    if (close) close.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false);
+    });
+    // Close after the user taps a destination, so back-nav feels normal.
+    Array.prototype.forEach.call(links, function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
     });
   })();
 </script>
@@ -251,27 +291,163 @@ const topNav = liveOnly(TOP_NAV);
     .site-header__burger { display: none; }
   }
 
-  .site-header__mobile {
-    display: none;
-    flex-direction: column;
-    padding: 4px var(--margin-mobile) 20px;
-    background: var(--color-white);
-    border-top: 1px solid var(--gray-200);
+  /* ===== Mobile full-screen overlay menu ===== */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
   }
-  .site-header.is-open .site-header__mobile { display: flex; }
+  .mobile-menu[data-open="true"] {
+    pointer-events: auto;
+  }
   @media (min-width: 1024px) {
-    .site-header__mobile { display: none !important; }
+    .mobile-menu { display: none; }
   }
-  .mnav__link {
-    padding: 13px 2px;
+
+  .mobile-menu__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: 22px 24px 32px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 400ms cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  .mobile-menu[data-open="true"] .mobile-menu__overlay {
+    transform: translateX(0);
+  }
+
+  .mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .mobile-menu__logo img {
+    height: 34px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1); /* white wordmark on navy */
+  }
+  .mobile-menu__close {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .mobile-menu__close::before,
+  .mobile-menu__close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 2px;
+    background: var(--color-white);
+  }
+  .mobile-menu__close::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .mobile-menu__close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+
+  .mobile-menu__nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 28px;
+  }
+  .mobile-menu__item {
+    display: block;
+    padding: 22px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    font-size: clamp(44px, 12.5vw, 72px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .mobile-menu__item:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .mobile-menu__item:hover,
+  .mobile-menu__item:focus-visible {
+    color: var(--color-red);
+  }
+
+  /* Stagger items in when the overlay opens. */
+  .mobile-menu[data-open="true"] .mobile-menu__item {
+    animation: mobile-menu-item-in 400ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  }
+  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(1) { animation-delay: 100ms; }
+  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(2) { animation-delay: 150ms; }
+  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(3) { animation-delay: 200ms; }
+  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(4) { animation-delay: 250ms; }
+  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(5) { animation-delay: 300ms; }
+  @keyframes mobile-menu-item-in {
+    from { opacity: 0; transform: translateX(28px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .mobile-menu__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .mobile-menu__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--color-red);
+    color: var(--color-white);
     font-family: var(--font-body);
     font-weight: var(--weight-bold);
-    font-size: 14px;
-    letter-spacing: 0.06em;
+    font-size: 13px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-navy);
-    border-bottom: 1px solid var(--gray-100);
+    text-decoration: none;
+    transition: background 150ms ease, color 150ms ease;
   }
-  .mnav__link:hover { color: var(--color-red); }
-  .mnav__divider { height: 10px; }
+  .mobile-menu__cta:hover {
+    background: var(--color-white);
+    color: var(--color-navy);
+  }
+  .mobile-menu__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+  .mobile-menu__contact-label {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: var(--weight-bold);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .mobile-menu__contact-email {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+  .mobile-menu__contact-email:hover { color: var(--color-red); }
+
+  /* Lock background scroll while the overlay is open — applied to <body>
+     by the script so the menu is the only thing the user can interact with. */
+  :global(body.menu-open) { overflow: hidden; }
 </style>
