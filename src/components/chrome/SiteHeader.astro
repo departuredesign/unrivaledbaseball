@@ -59,7 +59,33 @@ const topNav = liveOnly(TOP_NAV);
         <button class="mobile-menu__close" type="button" aria-label="Close menu"></button>
       </div>
       <nav class="mobile-menu__nav" aria-label="Mobile">
-        {pillars.map(p => <a class="mobile-menu__item" href={p.href}>{p.name}</a>)}
+        {/* Pillars are wrapped in a collapsible "Ways to Play" group so the
+            mobile menu mirrors the desktop dropdown hierarchy 1:1. Collapsed
+            by default; tap the trigger to reveal the 4 pillars with their
+            meta lines (UBN · USSSA-sanctioned play, etc.). */}
+        <div class="mobile-menu__group" data-expanded="false">
+          <button class="mobile-menu__group-trigger" type="button"
+                  aria-expanded="false" aria-controls="mobile-menu-pillars">
+            <span>Ways to Play</span>
+            <svg class="mobile-menu__chevron" viewBox="0 0 24 24"
+                 width="26" height="26" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="mobile-menu__sublist" id="mobile-menu-pillars"
+               role="region" aria-label="Ways to Play">
+            {pillars.map(p => (
+              <a class="mobile-menu__subitem" href={p.href}>
+                <span class="pillar-dot" data-pillar={p.pillar} aria-hidden="true"></span>
+                <span class="mobile-menu__subitem-text">
+                  <span class="mobile-menu__subitem-name">{p.name}</span>
+                  <span class="mobile-menu__subitem-meta">{p.meta}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
         {topNav.map(l => <a class="mobile-menu__item" href={l.href}>{l.label}</a>)}
       </nav>
       <div class="mobile-menu__footer">
@@ -92,6 +118,15 @@ const topNav = liveOnly(TOP_NAV);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.classList.toggle('menu-open', open);
+      // Reset any expanded groups when the overlay closes, so the next
+      // open shows the menu in its collapsed default state.
+      if (!open) {
+        Array.prototype.forEach.call(menu.querySelectorAll('.mobile-menu__group'), function (g) {
+          g.setAttribute('data-expanded', 'false');
+          var t = g.querySelector('.mobile-menu__group-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
     }
 
     burger.addEventListener('click', function () {
@@ -102,6 +137,18 @@ const topNav = liveOnly(TOP_NAV);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false);
     });
+
+    // Expand/collapse triggers for any nested groups (Ways to Play).
+    Array.prototype.forEach.call(menu.querySelectorAll('.mobile-menu__group'), function (group) {
+      var trigger = group.querySelector('.mobile-menu__group-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        var expanded = group.getAttribute('data-expanded') === 'true';
+        group.setAttribute('data-expanded', expanded ? 'false' : 'true');
+        trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+    });
+
     // Close after the user taps a destination, so back-nav feels normal.
     Array.prototype.forEach.call(links, function (a) {
       a.addEventListener('click', function () { setOpen(false); });
@@ -361,7 +408,9 @@ const topNav = liveOnly(TOP_NAV);
     flex-direction: column;
     padding: 40px 0 28px;
   }
-  .mobile-menu__item {
+  /* Shared base for top-level poster items AND the Ways-to-Play group trigger. */
+  .mobile-menu__item,
+  .mobile-menu__group-trigger {
     display: block;
     padding: 22px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
@@ -375,25 +424,119 @@ const topNav = liveOnly(TOP_NAV);
     text-decoration: none;
     transition: color 150ms ease;
   }
+  /* The About row sits below the group — give it a closing bottom rule. */
   .mobile-menu__item:last-child {
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   }
   .mobile-menu__item:hover,
-  .mobile-menu__item:focus-visible {
+  .mobile-menu__item:focus-visible,
+  .mobile-menu__group-trigger:hover,
+  .mobile-menu__group-trigger:focus-visible {
     color: var(--color-red);
   }
 
-  /* Stagger items in when the overlay opens. */
+  /* Ways-to-Play group: collapsible trigger + sublist. */
+  .mobile-menu__group-trigger {
+    /* Button reset — keep only the borders we want from the shared rule. */
+    background: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mobile-menu__chevron {
+    flex-shrink: 0;
+    transition: transform 250ms ease;
+  }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu__sublist {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 350ms ease, opacity 200ms ease;
+  }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__sublist {
+    max-height: 480px; /* enough for 4 sub-items at the largest viewport */
+    opacity: 1;
+  }
+
+  .mobile-menu__subitem {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0 16px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color 150ms ease, padding-left 150ms ease;
+  }
+  .mobile-menu__subitem:first-child { border-top: 0; }
+  .mobile-menu__subitem:hover,
+  .mobile-menu__subitem:focus-visible {
+    color: var(--color-red);
+    padding-left: 14px;
+  }
+  .mobile-menu__subitem .pillar-dot {
+    margin-top: 14px; /* aligns with the cap-height of the sub-name */
+    width: 10px;
+    height: 10px;
+  }
+  .mobile-menu__subitem-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .mobile-menu__subitem-name {
+    font-family: var(--font-display-poster);
+    font-weight: var(--weight-poster-heavy);
+    font-size: clamp(24px, 6.5vw, 36px);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .mobile-menu__subitem-meta {
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Stagger top-level items in when the overlay opens. */
+  .mobile-menu[data-open="true"] .mobile-menu__group-trigger,
   .mobile-menu[data-open="true"] .mobile-menu__item {
     animation: mobile-menu-item-in 400ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
   }
-  .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(1) { animation-delay: 100ms; }
+  .mobile-menu[data-open="true"] .mobile-menu__group-trigger { animation-delay: 100ms; }
   .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(2) { animation-delay: 150ms; }
   .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(3) { animation-delay: 200ms; }
   .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(4) { animation-delay: 250ms; }
   .mobile-menu[data-open="true"] .mobile-menu__item:nth-child(5) { animation-delay: 300ms; }
   @keyframes mobile-menu-item-in {
     from { opacity: 0; transform: translateX(28px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Stagger sub-items in when the group expands. */
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__subitem {
+    animation: mobile-menu-subitem-in 350ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__subitem:nth-child(1) { animation-delay: 80ms; }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__subitem:nth-child(2) { animation-delay: 130ms; }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__subitem:nth-child(3) { animation-delay: 180ms; }
+  .mobile-menu__group[data-expanded="true"] .mobile-menu__subitem:nth-child(4) { animation-delay: 230ms; }
+  @keyframes mobile-menu-subitem-in {
+    from { opacity: 0; transform: translateX(20px); }
     to   { opacity: 1; transform: translateX(0); }
   }
 
