@@ -4,12 +4,13 @@ interface Props {
   loc: string;
   href: string;
   founding?: boolean;
+  photo?: string;
 }
-const { name, loc, href, founding = false } = Astro.props;
+const { name, loc, href, founding = false, photo } = Astro.props;
 ---
 
 <a class="venue-card" href={href}>
-  <div class="venue-card__img" aria-hidden="true"></div>
+  <div class="venue-card__img" aria-hidden="true" style={photo ? `background-image:url('${photo}')` : undefined}></div>
   <div class="venue-card__content">
     <p class="venue-card__name text-body-sm">{name}</p>
     <p class="venue-card__loc text-meta">{loc}</p>
@@ -36,6 +37,8 @@ const { name, loc, href, founding = false } = Astro.props;
   .venue-card__img {
     aspect-ratio: 4 / 3;
     background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+    background-size: cover;
+    background-position: center;
   }
   .venue-card__content {
     padding: 16px;

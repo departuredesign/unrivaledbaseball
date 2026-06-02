@@ -5,14 +5,15 @@ interface Props {
   line: string;
   cta: string;
   href: string;
+  photo?: string;
   imageLabel?: string;
 }
-const { name, meta, line, cta, href, imageLabel = '[ photo ]' } = Astro.props;
+const { name, meta, line, cta, href, photo, imageLabel = '[ photo ]' } = Astro.props;
 ---
 
 <a class="founding-card" href={href}>
-  <div class="founding-card__img" aria-hidden="true">
-    <span class="founding-card__img-label text-meta">{imageLabel}</span>
+  <div class="founding-card__img" aria-hidden="true" style={photo ? `background-image:url('${photo}')` : undefined}>
+    {!photo && <span class="founding-card__img-label text-meta">{imageLabel}</span>}
   </div>
   <div class="founding-card__content">
     <p class="founding-card__tag">
@@ -47,6 +48,8 @@ const { name, meta, line, cta, href, imageLabel = '[ photo ]' } = Astro.props;
   .founding-card__img {
     aspect-ratio: 4 / 3;
     background: linear-gradient(135deg, var(--gray-600), var(--color-black));
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: flex-start;
     padding: 20px;

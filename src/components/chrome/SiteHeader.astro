@@ -135,6 +135,20 @@ const topNav = liveOnly(TOP_NAV);
   .nav-dropdown {
     position: relative;
   }
+  /* Invisible hover bridge across the 12px gap between the trigger and the
+     menu. Without this, moving the cursor down from "Ways to Play" toward
+     the menu leaves .nav-dropdown's hit area and the menu closes before
+     you can reach an item. The bridge is part of .nav-dropdown's tree so
+     hovering it keeps .nav-dropdown:hover true. */
+  .nav-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -8px;
+    right: -8px;
+    height: 14px;
+    /* pointer-events: auto (default) — captures hover, extends hit area. */
+  }
   .nav-dropdown__menu {
     display: none;
     position: absolute;
@@ -148,7 +162,8 @@ const topNav = liveOnly(TOP_NAV);
     z-index: 10;
   }
   .nav-dropdown:hover .nav-dropdown__menu,
-  .nav-dropdown:focus-within .nav-dropdown__menu {
+  .nav-dropdown:focus-within .nav-dropdown__menu,
+  .nav-dropdown__menu:hover {
     display: block;
   }
   .nav-dropdown__item {

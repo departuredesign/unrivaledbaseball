@@ -74,15 +74,16 @@ const VOICES = [
 ];
 
 // Venue wall — links resolve to pillar pages in Phase 1, deep pages in Phase 2.
+// Each venue uses one of the existing v4 photos as a placeholder until real property shots arrive.
 const VENUES = [
-  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  href: phaseLink('/cooperstown/',                    '/destinations/') },
-  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  href: phaseLink('/ripken-aberdeen/',                '/ripken/') },
-  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, href: phaseLink('/ripken-myrtle-beach/',            '/ripken/') },
-  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, href: phaseLink('/ripken-pigeon-forge/',            '/ripken/') },
-  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, href: phaseLink('/sports-force-parks-cedar-point/', '/destinations/') },
-  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, href: phaseLink('/sports-force-parks-manteca/',     '/destinations/') },
-  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  href: phaseLink('/rocker-b/',                       '/destinations/') },
-  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, href: phaseLink('/baseball-factory/',               '/training/') },
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  photo: '/images/v4/photo-dugout.png',    href: phaseLink('/cooperstown/',                    '/destinations/') },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  photo: '/images/v4/photo-celebrate.png', href: phaseLink('/ripken-aberdeen/',                '/ripken/') },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, photo: '/images/v4/photo-running.png',   href: phaseLink('/ripken-myrtle-beach/',            '/ripken/') },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, photo: '/images/v4/photo-batter.png',    href: phaseLink('/ripken-pigeon-forge/',            '/ripken/') },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, photo: '/images/v4/photo-field.png',     href: phaseLink('/sports-force-parks-cedar-point/', '/destinations/') },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, photo: '/images/v4/photo-glove.png',     href: phaseLink('/sports-force-parks-manteca/',     '/destinations/') },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  photo: '/images/v4/photo-flags.png',     href: phaseLink('/rocker-b/',                       '/destinations/') },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, photo: '/images/v4/photo-pitcher.png',   href: phaseLink('/baseball-factory/',               '/training/') },
 ];
 
 const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', 'Marucci'];
@@ -211,6 +212,7 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
       <p class="founding-wrap__eyebrow text-eyebrow">★ THE FOUNDING STAR</p>
       <h2 class="founding-wrap__headline text-h1">A world-class tournament at the birthplace of baseball.</h2>
       <FoundingCard
+        photo="/images/v4/20250629_Ripken_Volunteer-Week_AF_098.jpeg"
         name="Cooperstown All Star Village"
         meta="Cooperstown, NY · Founded 2001"
         line="The bar that founded the brand. Every property, every event, every season."
