@@ -94,7 +94,7 @@ const CROSS_SELL = [
         <h2 class="sec__headline">Three Big League Experience properties.</h2>
         <div class="regions__grid" data-reveal-stagger>
           {EXPERIENCES.map(e => (
-            <div class="region-card" style={CURRENT_PHASE < 2 ? 'transform:none;cursor:default' : undefined}>
+            <div class="region-card">
               <span class="region-card__bar" aria-hidden="true"></span>
               <span class="region-card__photo" style={`background-image:url('${e.photo}')`} aria-hidden="true"></span>
               <span class="region-card__body">
@@ -102,9 +102,7 @@ const CROSS_SELL = [
                 <h3 class="region-card__name">{e.name}</h3>
                 <span class="region-card__count">{e.count}</span>
                 <p class="region-card__states">{e.line}</p>
-                {CURRENT_PHASE >= 2 && (
-                  <a class="region-card__cta" href={e.href}>Learn more →</a>
-                )}
+                <a class="region-card__cta" href={e.href}>Learn more →</a>
               </span>
             </div>
           ))}
@@ -146,9 +144,7 @@ const CROSS_SELL = [
           <p class="story__eyebrow text-eyebrow">ALL-RIPKEN GAMES</p>
           <h2 class="story__headline">The best players in each class, in one game.</h2>
           <p class="story__body text-body">An invitation-only showcase that gathers the top players from across the country by age class. Played at Ripken properties on the heels of the championship round — the All-Ripken Games are where the next pinnacle moment begins.</p>
-          {CURRENT_PHASE >= 2 && (
-            <p style="margin-top:16px"><a class="qrow__link" href="/all-ripken/" style="color:var(--accent)">Learn more about All-Ripken →</a></p>
-          )}
+          <p style="margin-top:16px"><a class="qrow__link" href="/all-ripken/" style="color:var(--accent)">Learn more about All-Ripken →</a></p>
         </div>
         <div class="story__photo" style="background-image:url('/images/v4/photo-batter.png')" aria-hidden="true"></div>
       </div>
