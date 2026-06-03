@@ -10,17 +10,19 @@ import { phaseLink } from '../lib/phase';
 import '../styles/v4.css';
 
 const PILLARS = [
-  { pillar: 'local'        as const, num: '01', name: 'Local Tournaments',       desc: 'UBN · USSSA-Sanctioned Play',           href: '/local/' },
-  { pillar: 'destinations' as const, num: '02', name: 'Destinations',            desc: 'Weeklong at our properties',            href: '/destinations/' },
-  { pillar: 'ripken'       as const, num: '03', name: 'Ripken',                  desc: 'Experiences · Nationals · All-Ripken',  href: '/ripken/' },
-  { pillar: 'training'     as const, num: '04', name: 'Training & Development',  desc: 'Baseball Factory · Prospect Select',    href: '/training/' },
+  { pillar: 'local'        as const, num: '01', name: 'Local and Regional Weekend Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
+  { pillar: 'destinations' as const, num: '02', name: 'Destinations',                           desc: 'Weeklong at our properties',          href: '/destinations/' },
+  { pillar: 'ripken'       as const, num: '03', name: 'Ripken Nationals',                       desc: '16-Team Championship · Cooperstown',  href: '/ripken/' },
+  { pillar: 'training'     as const, num: '04', name: 'Training & Development',                 desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
 ];
 
+// Chronological, all future-dated, one per pillar.
+// Section is `hidden` in Phase 1 — content kept current for when it surfaces.
 const NEXT_UP = [
-  { pillar: 'local'        as const, title: 'UBN Mid-Atlantic Spring Classic', loc: 'Aberdeen, MD',    date: 'May 17' },
-  { pillar: 'destinations' as const, title: 'Cooperstown Week 7',              loc: 'Cooperstown, NY', date: 'Aug 3–9' },
+  { pillar: 'local'        as const, title: 'UBN Mid-Atlantic Spring Classic', loc: 'Baltimore, MD',   date: 'Jun 6–7' },
   { pillar: 'ripken'       as const, title: 'Ripken National Championships',   loc: 'Cooperstown, NY', date: 'Jun 29 – Jul 5' },
   { pillar: 'training'     as const, title: 'Prospect Select Las Vegas',       loc: 'Las Vegas, NV',   date: 'Jul 18' },
+  { pillar: 'destinations' as const, title: 'Cooperstown Week 7',              loc: 'Cooperstown, NY', date: 'Aug 3–9' },
 ];
 
 // Pinnacle carousel — hrefs route to pillar pages until Phase 2 lights up the deep pages.
