@@ -32,9 +32,9 @@ export type WayToPlay = Phased<{
 }>;
 
 export const WAYS_TO_PLAY: readonly WayToPlay[] = [
-  { slug: 'local',        href: '/local/',        name: 'Local and Regional Weekend Tournaments', meta: 'UBN · USSSA-sanctioned play',           pillar: 'local',        phase: 1 },
-  { slug: 'destinations', href: '/destinations/', name: 'Destinations',                           meta: 'Cooperstown · Rocker B · Sports Force', pillar: 'destinations', phase: 1 },
-  { slug: 'ripken',       href: '/ripken/',       name: 'Ripken Nationals',                       meta: '16-Team Championship · Cooperstown',    pillar: 'ripken',       phase: 1 },
+  { slug: 'local',        href: '/local/',        name: 'Local and Regional Weekend Tournaments', meta: 'Unrivaled Baseball Network · USSSA-sanctioned play', pillar: 'local',        phase: 1 },
+  { slug: 'destinations', href: '/destinations/', name: 'Destination Experiences',                meta: 'Cooperstown · Aberdeen · Rocker B',                  pillar: 'destinations', phase: 1 },
+  { slug: 'ripken',       href: '/ripken/',       name: 'Ripken Nationals',                       meta: '16-Team Championship · Cooperstown',                 pillar: 'ripken',       phase: 1 },
   { slug: 'training',     href: '/training/',     name: 'Training & Development',  meta: 'Baseball Factory · Prospect Select',    pillar: 'training',     phase: 1 },
   { slug: 'nationals',    href: '/nationals/',    name: 'Ripken Nationals',        meta: '16-team Championship',                  pillar: 'nationals',    phase: 2 },
 ];
@@ -57,12 +57,13 @@ export const TOP_NAV: readonly TopNavLink[] = [
 export type FooterLink = Phased<{ label: string; href: string }>;
 
 export const FOOTER = {
+  // Footer column order matches the wireframe: Local → Destinations → Training → Ripken.
   waysToPlay: [
     { label: 'Local and Regional Weekend Tournaments', href: '/local/',        phase: 1 },
-    { label: 'Destinations',                           href: '/destinations/', phase: 1 },
+    { label: 'Destination Experiences',                href: '/destinations/', phase: 1 },
+    { label: 'Training & Development',                 href: '/training/',     phase: 1 },
     { label: 'Ripken Nationals',                       href: '/ripken/',       phase: 1 },
-    { label: 'Training & Development', href: '/training/',     phase: 1 },
-    { label: 'Nationals',              href: '/nationals/',    phase: 2 },
+    { label: 'Nationals',                              href: '/nationals/',    phase: 2 },
   ],
   properties: [
     { label: 'Cooperstown',            href: '/cooperstown/',                    phase: 1 },

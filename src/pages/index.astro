@@ -9,11 +9,14 @@ import PillarDot from '../components/atoms/PillarDot.astro';
 import { phaseLink } from '../lib/phase';
 import '../styles/v4.css';
 
+// Order, names, and desc lines match the wireframe Ways to Play module exactly.
+// This is the "journey arc" order (Local → Training → Destinations → Championship)
+// and is intentionally different from the nav and footer orders.
 const PILLARS = [
-  { pillar: 'local'        as const, num: '01', name: 'Local and Regional Weekend Tournaments', desc: 'UBN · USSSA-Sanctioned Play',         href: '/local/' },
-  { pillar: 'destinations' as const, num: '02', name: 'Destinations',                           desc: 'Weeklong at our properties',          href: '/destinations/' },
-  { pillar: 'ripken'       as const, num: '03', name: 'Ripken Nationals',                       desc: '16-Team Championship · Cooperstown',  href: '/ripken/' },
-  { pillar: 'training'     as const, num: '04', name: 'Training & Development',                 desc: 'Baseball Factory · Prospect Select',  href: '/training/' },
+  { pillar: 'local'        as const, num: '01', name: 'Local and Regional Weekend Tournaments', desc: 'Unrivaled Baseball Network · USSSA-Sanctioned Play',                                href: '/local/' },
+  { pillar: 'training'     as const, num: '02', name: 'Training & Development',                 desc: 'Baseball Factory · All-Ripken · Prospect Select · Spring Training',                href: '/training/' },
+  { pillar: 'destinations' as const, num: '03', name: 'Destination Experiences',                desc: 'Cooperstown · Aberdeen · Myrtle Beach · Pigeon Forge · Rocker B · Sports Parks',    href: '/destinations/' },
+  { pillar: 'ripken'       as const, num: '04', name: 'Ripken Nationals',                       desc: '16-Team Championship · Cooperstown All Star Village',                              href: '/ripken/' },
 ];
 
 // Chronological, all future-dated, one per pillar.
