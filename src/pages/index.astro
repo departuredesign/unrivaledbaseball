@@ -43,7 +43,7 @@ const PINNACLE_PROGRAMS = [
     photoBrief: '[ Rocker B Ranch image · Byrd Family Field at golden hour ]',
     photo: '/images/v4/photo-flags.png',
     blurb: 'The 325-acre Texas ranch where weekend tournaments meet resort lodging. Pool. Pond. Music venue. The Byrd Family Field at the center of all of it.',
-    href: phaseLink('/rocker-b/', '/destinations/'),
+    href: '/rocker-b/',
   },
   {
     pillar: 'destinations' as const,
@@ -53,7 +53,7 @@ const PINNACLE_PROGRAMS = [
     photoBrief: '[ Cooperstown All Star Village image · opening pin trade ]',
     photo: '/images/v4/photo-dugout.png',
     blurb: 'The 12U pilgrimage. Twelve weeks every summer, hundreds of teams, the Hall of Fame minutes away. The week families plan around for years.',
-    href: phaseLink('/cooperstown/', '/destinations/'),
+    href: '/cooperstown/',
   },
   {
     pillar: 'ripken' as const,
@@ -63,7 +63,7 @@ const PINNACLE_PROGRAMS = [
     photoBrief: '[ Myrtle Beach Madness image · the nine-field complex from above ]',
     photo: '/images/v4/photo-running.png',
     blurb: 'The Big League Experience a few stoplights from the beach. Nine replica MLB fields. A coastal vacation week the family plans around.',
-    href: phaseLink('/ripken-myrtle-beach/', '/ripken/'),
+    href: '/ripken-myrtle-beach/',
   },
 ];
 
@@ -75,15 +75,16 @@ const VOICES = [
 
 // Venue wall — links resolve to pillar pages in Phase 1, deep pages in Phase 2.
 // Each venue uses one of the existing v4 photos as a placeholder until real property shots arrive.
+// 7 destinations are now direct Phase 1 links; Baseball Factory HQ (training pillar) stays phaseLink-gated.
 const VENUES = [
-  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  photo: '/images/v4/photo-dugout.png',    href: phaseLink('/cooperstown/',                    '/destinations/') },
-  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  photo: '/images/v4/photo-celebrate.png', href: phaseLink('/ripken-aberdeen/',                '/ripken/') },
-  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, photo: '/images/v4/photo-running.png',   href: phaseLink('/ripken-myrtle-beach/',            '/ripken/') },
-  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, photo: '/images/v4/photo-batter.png',    href: phaseLink('/ripken-pigeon-forge/',            '/ripken/') },
-  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, photo: '/images/v4/photo-field.png',     href: phaseLink('/sports-force-parks-cedar-point/', '/destinations/') },
-  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, photo: '/images/v4/photo-glove.png',     href: phaseLink('/sports-force-parks-manteca/',     '/destinations/') },
-  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  photo: '/images/v4/photo-flags.png',     href: phaseLink('/rocker-b/',                       '/destinations/') },
-  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, photo: '/images/v4/photo-pitcher.png',   href: phaseLink('/baseball-factory/',               '/training/') },
+  { name: 'Cooperstown All Star Village',   loc: 'Cooperstown, NY',  founding: true,  photo: '/images/v4/photo-dugout.png',    href: '/cooperstown/' },
+  { name: 'Ripken Experience Aberdeen',     loc: 'Aberdeen, MD',     founding: true,  photo: '/images/v4/photo-celebrate.png', href: '/ripken-aberdeen/' },
+  { name: 'Ripken Experience Myrtle Beach', loc: 'Myrtle Beach, SC', founding: false, photo: '/images/v4/photo-running.png',   href: '/ripken-myrtle-beach/' },
+  { name: 'Ripken Experience Pigeon Forge', loc: 'Pigeon Forge, TN', founding: false, photo: '/images/v4/photo-batter.png',    href: '/ripken-pigeon-forge/' },
+  { name: 'Sports Force Parks Cedar Point', loc: 'Sandusky, OH',     founding: false, photo: '/images/v4/photo-field.png',     href: '/sports-force-parks-cedar-point/' },
+  { name: 'Sports Force Parks Manteca',     loc: 'Manteca, CA',      founding: false, photo: '/images/v4/photo-glove.png',     href: '/sports-force-parks-manteca/' },
+  { name: 'Rocker B Ranch',                 loc: 'West Texas',       founding: true,  photo: '/images/v4/photo-flags.png',     href: '/rocker-b/' },
+  { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, photo: '/images/v4/photo-pitcher.png',   href: phaseLink('/baseball-factory/', '/training/') },
 ];
 
 // Partner logos sourced from cooperstown.com — same set the Cooperstown
@@ -224,7 +225,7 @@ const PARTNERS: Array<{ name: string; logo?: string }> = [
         meta="Cooperstown, NY · Founded 2001"
         line="The bar that founded the brand. Every property, every event, every season."
         cta="Plan Cooperstown"
-        href={phaseLink('/cooperstown/', '/destinations/')}
+        href="/cooperstown/"
       />
     </div>
   </section>
