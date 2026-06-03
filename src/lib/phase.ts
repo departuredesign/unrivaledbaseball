@@ -69,7 +69,7 @@ export const FOOTER = {
     { label: 'Rocker B Ranch',         href: '/rocker-b/',                       phase: 1 },
     { label: 'Ripken Experience',      href: '/ripken-aberdeen/',                phase: 1 },
     { label: 'Sports Force Parks',     href: '/sports-force-parks-cedar-point/', phase: 1 },
-    { label: 'Baseball Factory',       href: '/baseball-factory/',               phase: 2 },
+    { label: 'Baseball Factory',       href: '/baseball-factory/',               phase: 1 },
   ],
   forYou: [
     { label: 'Players',  href: '#', phase: 1 },
@@ -92,11 +92,7 @@ export const PAGE_PHASES: Readonly<Record<string, Phase>> = {
   '/events/':                            2,
   '/stories/':                           2,
   '/nationals/':                         2,
-  // 7 destination sub-properties promoted to Phase 1 (indexable, linked).
-  '/baseball-factory/':                  2,
-  '/all-ripken/':                        2,
-  '/prospect-select/':                   2,
-  '/spring-training/':                   2,
+  // 7 destination + 4 training sub-properties promoted to Phase 1 (indexable, linked).
   // Legacy/internal homepage variants
   '/home-a/':                            2,
   '/home-b/':                            2,
