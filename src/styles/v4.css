@@ -787,24 +787,35 @@ body.v4 .vv-grid {
 body.v4 .partners-strip { background: var(--color-white); border-top: 1px solid var(--gray-200); }
 body.v4 .partners-strip__inner {
     max-width: var(--content-max-width); margin: 0 auto;
-    padding: 56px var(--margin);
-    display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center;
+    padding: 64px var(--margin);
+    display: flex; flex-direction: column; align-items: center; gap: 36px;
+    text-align: center;
 }
 @media (max-width: 767px) {
-    body.v4 .partners-strip__inner { grid-template-columns: 1fr; gap: 24px; }
+    body.v4 .partners-strip__inner { padding: 48px var(--margin); gap: 24px; }
 }
 body.v4 .partners-strip__label { color: var(--gray-500); margin: 0; }
 body.v4 .partners-strip__row {
-    display: flex; flex-wrap: wrap; gap: 40px 56px;
-    align-items: center;
+    display: flex; flex-wrap: wrap; gap: 40px 72px;
+    align-items: center; justify-content: center;
+}
+@media (max-width: 767px) {
+    body.v4 .partners-strip__row { gap: 32px 48px; }
 }
 body.v4 .partners-strip__logo {
-    height: 44px; width: auto; max-width: 180px;
+    height: 56px; width: auto; max-width: 220px;
     object-fit: contain;
     display: block;
 }
+/* Rawlings ships as an embroidered patch — the wordmark only fills ~60% of
+   the canvas, so at the same height it reads as tiny next to UA/Gatorade.
+   Boost it ~1.4× so the wordmark inside renders at a similar size. */
+body.v4 .partners-strip__logo[src*="rawlings"] {
+    height: 80px; max-width: 260px;
+}
 @media (max-width: 767px) {
-    body.v4 .partners-strip__logo { height: 36px; max-width: 140px; }
+    body.v4 .partners-strip__logo { height: 44px; max-width: 160px; }
+    body.v4 .partners-strip__logo[src*="rawlings"] { height: 64px; max-width: 200px; }
 }
 body.v4 .partners-strip__name {
     font-family: var(--font-display-poster);
