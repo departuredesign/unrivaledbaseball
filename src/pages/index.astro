@@ -86,7 +86,14 @@ const VENUES = [
   { name: 'Baseball Factory HQ',            loc: 'Columbia, MD',     founding: false, photo: '/images/v4/photo-pitcher.png',   href: phaseLink('/baseball-factory/',               '/training/') },
 ];
 
-const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', 'Marucci'];
+// Partner logos sourced from cooperstown.com — same set the Cooperstown
+// All Star Village site shows. Each entry can carry a `logo` path; text
+// falls back if no logo is provided.
+const PARTNERS: Array<{ name: string; logo?: string }> = [
+  { name: 'Under Armour', logo: '/images/v4/logos/under-armour.png' },
+  { name: 'Gatorade',     logo: '/images/v4/logos/gatorade.png' },
+  { name: 'Rawlings',     logo: '/images/v4/logos/rawlings.png' },
+];
 ---
 
 <BaseLayout title="Home" activeNav="home" bodyClass="v4" transparentNav={true}>
@@ -254,7 +261,11 @@ const PARTNERS = ['USSSA', 'Cal Ripken, Sr. Foundation', 'Easton', 'Rawlings', '
     <div class="partners-strip__inner">
       <p class="partners-strip__label text-eyebrow">PARTNERS</p>
       <div class="partners-strip__row">
-        {PARTNERS.map(p => <span class="partners-strip__name">{p}</span>)}
+        {PARTNERS.map(p => (
+          p.logo
+            ? <img class="partners-strip__logo" src={p.logo} alt={p.name} loading="lazy" />
+            : <span class="partners-strip__name">{p.name}</span>
+        ))}
       </div>
     </div>
   </section>

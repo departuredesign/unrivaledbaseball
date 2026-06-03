@@ -798,6 +798,14 @@ body.v4 .partners-strip__row {
     display: flex; flex-wrap: wrap; gap: 40px 56px;
     align-items: center;
 }
+body.v4 .partners-strip__logo {
+    height: 44px; width: auto; max-width: 180px;
+    object-fit: contain;
+    display: block;
+}
+@media (max-width: 767px) {
+    body.v4 .partners-strip__logo { height: 36px; max-width: 140px; }
+}
 body.v4 .partners-strip__name {
     font-family: var(--font-display-poster);
     font-weight: var(--weight-poster-heavy);
