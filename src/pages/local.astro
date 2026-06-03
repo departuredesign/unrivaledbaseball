@@ -3,26 +3,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
 import '../styles/v4-extra.css';
 
+// 5-region taxonomy matches the wireframe (replaces our 6-region split).
 const REGIONS = [
-  { name: 'Northeast',     count: '5 STATES', states: 'Massachusetts · Connecticut · New York · New Jersey · Pennsylvania', photo: '/images/v4/photo-flags.png' },
-  { name: 'Mid-Atlantic',  count: '4 STATES', states: 'Maryland · Delaware · Washington DC · Virginia',                    photo: '/images/v4/photo-dugout.png' },
-  { name: 'Southeast',     count: '5 STATES', states: 'Georgia · North Carolina · South Carolina · Florida · Tennessee',   photo: '/images/v4/photo-running.png' },
-  { name: 'Midwest',       count: '4 STATES', states: 'Ohio · Michigan · Indiana · Illinois',                              photo: '/images/v4/photo-batter.png' },
-  { name: 'Mountain West', count: '4 STATES', states: 'Colorado · Utah · New Mexico · Arizona',                            photo: '/images/v4/photo-pitcher.png' },
-  { name: 'West Coast',    count: '4 STATES', states: 'California · Oregon · Washington · Nevada',                         photo: '/images/v4/photo-field.png' },
+  { name: 'West',                     count: '5 STATES', states: 'California North · California Central · California South · Nevada · Arizona', photo: '/images/v4/photo-flags.png' },
+  { name: 'South Central',            count: '2 STATES', states: 'Texas · Louisiana',                                                            photo: '/images/v4/photo-dugout.png' },
+  { name: 'Southeast',                count: '5 STATES', states: 'Florida · Georgia · South Carolina · North Carolina · Tennessee',             photo: '/images/v4/photo-running.png' },
+  { name: 'Midwest',                  count: '4 STATES', states: 'Iowa · Kansas · Missouri · Ohio',                                              photo: '/images/v4/photo-batter.png' },
+  { name: 'Northeast / Mid-Atlantic', count: '3 STATES', states: 'New York · New Jersey · Maryland',                                             photo: '/images/v4/photo-pitcher.png' },
 ];
 
-const EVENTS = [
-  { mon: 'JUN', day: '07', title: 'UBN Mid-Atlantic Spring Classic', cat: 'Local & Regional · UBN Network', loc: 'Baltimore, MD',  age: '10U–14U' },
-  { mon: 'JUN', day: '23', title: 'UBN Northeast Summer Qualifier',  cat: 'Local & Regional · UBN Network', loc: 'Flemington, NJ', age: '10U–14U' },
-  { mon: 'JUL', day: '12', title: 'UBN Southeast Championship',      cat: 'Local & Regional · UBN Network', loc: 'Atlanta, GA',    age: '12U' },
-  { mon: 'JUL', day: '26', title: 'UBN Midwest Open',                cat: 'Local & Regional · UBN Network', loc: 'Columbus, OH',   age: '10U–16U' },
+// 12 events grouped by month — matches the wireframe Upcoming Events section.
+const EVENT_GROUPS = [
+  {
+    label: 'June 2026',
+    events: [
+      { mon: 'JUN', day: '06', title: 'UBN Northeast Spring Classic',    cat: 'Northeast / Mid-Atlantic · USSSA', loc: 'Flemington, NJ',     dates: 'Jun 6–7',   age: '10U–14U' },
+      { mon: 'JUN', day: '13', title: 'Carolinas Summer Slam',            cat: 'Southeast · USSSA',                loc: 'Mooresville, NC',    dates: 'Jun 13–14', age: '10U–14U' },
+      { mon: 'JUN', day: '20', title: 'California Coast Classic',         cat: 'West · USSSA',                     loc: 'Irvine, CA',         dates: 'Jun 20–21', age: '8U–12U' },
+      { mon: 'JUN', day: '27', title: 'Texas Lone Star Championship',     cat: 'South Central · USSSA',            loc: 'Graford, TX',        dates: 'Jun 27–28', age: '12U–16U' },
+    ],
+  },
+  {
+    label: 'July 2026',
+    events: [
+      { mon: 'JUL', day: '11', title: 'Midwest Showdown',                 cat: 'Midwest · USSSA',                  loc: 'Sandusky, OH',       dates: 'Jul 11–12', age: '10U–14U' },
+      { mon: 'JUL', day: '18', title: 'Florida Sunshine Series',          cat: 'Southeast · USSSA',                loc: 'St. Petersburg, FL', dates: 'Jul 18–19', age: '8U–14U' },
+      { mon: 'JUL', day: '25', title: 'Mid-Atlantic Mid-Summer Classic',  cat: 'Northeast / Mid-Atlantic · USSSA', loc: 'Aberdeen, MD',       dates: 'Jul 25–26', age: '12U–16U' },
+    ],
+  },
+  {
+    label: 'August 2026',
+    events: [
+      { mon: 'AUG', day: '01', title: 'Pacific Northwest Open',           cat: 'Midwest · USSSA',                  loc: 'Sandusky, OH',       dates: 'Aug 1–2',   age: '10U–14U' },
+      { mon: 'AUG', day: '08', title: 'Texas End of Summer Showdown',     cat: 'South Central · USSSA',            loc: 'Graford, TX',        dates: 'Aug 8–9',   age: '12U–18U' },
+      { mon: 'AUG', day: '15', title: 'Cali Last Chance Qualifier',       cat: 'West · USSSA',                     loc: 'Manteca, CA',        dates: 'Aug 15–16', age: '13U–17U' },
+      { mon: 'AUG', day: '22', title: 'Southeast End of Summer Slam',     cat: 'Southeast · USSSA',                loc: 'Sanford, FL',        dates: 'Aug 22–23', age: '8U–14U' },
+      { mon: 'AUG', day: '29', title: 'UBN Labor Day Classic',            cat: 'Midwest · USSSA',                  loc: 'Sioux Falls, IA',    dates: 'Aug 29–30', age: '10U–14U' },
+    ],
+  },
 ];
 
+// Cross-sells now point at specific sub-programs (matches wireframe) — sub-property
+// pages went live in the previous batch, so all 3 targets are real Phase 1 URLs.
 const CROSS_SELL = [
-  { tag: 'DESTINATIONS',           name: 'Destination Experiences', meta: 'Weeklong tournaments at our properties',  href: '/destinations/' },
-  { tag: 'RIPKEN',                 name: 'Ripken Nationals',       meta: '16-Team Championship · Cooperstown',      href: '/ripken/' },
-  { tag: 'TRAINING & DEVELOPMENT', name: 'Training & Development', meta: 'Baseball Factory · Prospect Select',       href: '/training/' },
+  { tag: 'TRAINING & DEVELOPMENT',  name: 'Baseball Factory Camps',       meta: 'Develop the skills that win regional play.',         href: '/baseball-factory/' },
+  { tag: 'DESTINATION EXPERIENCES', name: 'Ripken Experience Weeks',      meta: 'Trade your home field for the rite of passage.',     href: '/ripken-aberdeen/' },
+  { tag: 'DESTINATION EXPERIENCES', name: 'Cooperstown All Star Village', meta: 'The trip every regional season is building toward.', href: '/cooperstown/' },
 ];
 ---
 
@@ -48,31 +74,41 @@ const CROSS_SELL = [
     <section class="ubn-x" data-reveal>
       <div class="ubn-x__inner">
         <div>
-          <p class="ubn-x__eyebrow text-eyebrow">WHAT IS UBN</p>
-          <h2 class="ubn-x__headline">Sanctioned weekend play, region by region.</h2>
-          <p class="ubn-x__body text-body">The Unrivaled Baseball Network is the regional weekend tournament circuit inside Unrivaled. Every event runs under USSSA rules, with a qualifying ladder that leads toward Ripken Nationals.</p>
-          <ul class="ubn-x__bullets">
-            <li class="text-body-sm">Built on the UBN qualifying ladder.</li>
-            <li class="text-body-sm">Year-round play across every region.</li>
-            <li class="text-body-sm">One standard, one schedule, one brand.</li>
-          </ul>
+          <p class="ubn-x__eyebrow text-eyebrow">SANCTIONED PLAY</p>
+          <h2 class="ubn-x__headline">Every Unrivaled Baseball Network weekend runs under USSSA rules.</h2>
+          <p class="ubn-x__body text-body">The Unrivaled Baseball Network operates under USSSA, the United States Specialty Sports Association, the nation's most established sanctioning body for youth and travel baseball. Every UBN tournament follows USSSA-standardized rules, age divisions, and pitch count protocols, and points earned at our events count toward USSSA national rankings. For parents and coaches, that means a consistent format from your first weekend to the World Series qualifiers. Standard age cutoffs. Standard pitch limits. Standard rosters. Every game played in the network counts toward something larger, both the player's season and their long-term USSSA standing.</p>
+          <a class="text-eyebrow" href="https://usssa.com/" target="_blank" rel="noopener" style="display:inline-block;margin-top:20px;color:var(--accent);text-decoration:underline;text-underline-offset:4px">Learn more about USSSA at usssa.com →</a>
         </div>
         <div class="ubn-x__aside">
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">16</span><span class="ubn-x__stat-label">States active nationwide</span></div>
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">200+</span><span class="ubn-x__stat-label">Sanctioned weekend events</span></div>
-          <div class="ubn-x__stat"><span class="ubn-x__stat-num">10U–16U</span><span class="ubn-x__stat-label">Age divisions</span></div>
+          <div style="padding:32px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--color-white)">
+            <p class="text-eyebrow" style="color:var(--accent);margin:0">USSSA</p>
+            <p style="font-family:var(--font-display-poster);font-weight:var(--weight-poster-heavy);font-size:clamp(28px,4vw,40px);line-height:0.95;text-transform:uppercase;margin:8px 0 0">Official Sanctioning Partner</p>
+            <p class="text-meta" style="color:var(--gray-500);margin:12px 0 0">United States Specialty Sports Association</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="ngallery" data-reveal>
       <div class="ngallery__inner">
-        <p class="ngallery__eyebrow text-eyebrow">THE UBN NETWORK</p>
-        <h2 class="ngallery__headline">Weekend baseball, coast to coast.</h2>
+        <p class="ngallery__eyebrow text-eyebrow">FROM THE FIELD</p>
+        <h2 class="ngallery__headline">UBN in motion.</h2>
         <div class="ngallery__grid" data-reveal-stagger>
-          {['dust and dugouts', 'a walk-off win', 'opening Saturday', 'the bracket board', 'trophy presentation'].map((cap, i) => (
-            <span class="ngallery__tile" style={`background-image:url('${['/images/v4/photo-flags.png','/images/v4/photo-running.png','/images/v4/photo-batter.png','/images/v4/photo-pitcher.png','/images/v4/photo-celebrate.png'][i]}')`}><span class="ngallery__cap">[ {cap} ]</span></span>
-          ))}
+          {[
+            'team huddle before bracket play',
+            '12U team celebrating a win',
+            'umpire calling strike three',
+            'parents in the stands at sunset',
+            'dugout high-fives after a home run',
+            'team photo with championship banner',
+            'coach addressing the team',
+            'kid running out a triple',
+            'regional championship trophy presentation',
+            'USSSA tournament check-in',
+          ].map((cap, i) => {
+            const photos = ['/images/v4/photo-flags.png','/images/v4/photo-running.png','/images/v4/photo-batter.png','/images/v4/photo-pitcher.png','/images/v4/photo-celebrate.png'];
+            return <span class="ngallery__tile" style={`background-image:url('${photos[i % photos.length]}')`}><span class="ngallery__cap">[ {cap} ]</span></span>;
+          })}
         </div>
       </div>
     </section>
@@ -100,15 +136,25 @@ const CROSS_SELL = [
 
     <section class="pevents" data-reveal>
       <div class="sec__inner">
-        <h2 class="sec__headline">Upcoming local events.</h2>
-        {EVENTS.map(e => (
-          <div class="evrow">
-            <span class="evrow__date"><span class="evrow__mon">{e.mon}</span><span class="evrow__day">{e.day}</span></span>
-            <span class="evrow__main"><h3 class="evrow__title">{e.title}</h3><span class="evrow__cat">{e.cat} · {e.age}</span></span>
-            <span class="evrow__loc">{e.loc}</span>
-            <a class="evrow__reg" href="/events/">Register →</a>
+        <p class="sec__eyebrow text-eyebrow" style="color:var(--gray-500)">UPCOMING</p>
+        <h2 class="sec__headline">The next three months.</h2>
+        <p class="text-body" style="margin:0 0 32px;max-width:640px">A rolling look at the UBN tournament calendar across all five regions.</p>
+        {EVENT_GROUPS.map(g => (
+          <div style="margin-top:24px">
+            <h3 class="text-eyebrow" style="color:var(--gray-500);margin:0 0 12px;letter-spacing:0.12em">{g.label}</h3>
+            {g.events.map(e => (
+              <div class="evrow">
+                <span class="evrow__date"><span class="evrow__mon">{e.mon}</span><span class="evrow__day">{e.day}</span></span>
+                <span class="evrow__main"><h4 class="evrow__title">{e.title}</h4><span class="evrow__cat">{e.cat} · {e.age}</span></span>
+                <span class="evrow__loc">{e.loc} · {e.dates}</span>
+                <a class="evrow__reg" href="/events/">Register →</a>
+              </div>
+            ))}
           </div>
         ))}
+        <p style="text-align:center;margin-top:40px">
+          <a class="text-eyebrow" href="/events/" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px">SEE THE FULL CALENDAR →</a>
+        </p>
       </div>
     </section>
 
@@ -116,6 +162,7 @@ const CROSS_SELL = [
       <div class="xsell__inner">
         <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
         <h2 class="xsell__headline">More ways to play.</h2>
+        <p class="text-body" style="margin:0 0 24px;opacity:0.85">Other ways your kid can play in the Unrivaled portfolio:</p>
         <div class="xsell__grid" data-reveal-stagger>
           {CROSS_SELL.map(c => (
             <a class="xcard" href={c.href}>
@@ -131,7 +178,8 @@ const CROSS_SELL = [
 
     <section class="ctaband" data-reveal hidden>
       <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Find a weekend near you.</h2>
+        <h2 class="ctaband__headline">Ready to find what fits?</h2>
+        <p style="opacity:0.85;margin:8px 0 24px">Browse the full calendar or start planning the season.</p>
         <a class="ctaband__btn" href="/events/">See all events →</a>
       </div>
     </section>
