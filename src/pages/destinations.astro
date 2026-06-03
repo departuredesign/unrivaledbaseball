@@ -2,19 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/v4-pillar.css';
 
+// 7-property order + content matches wireframe exactly.
+// Card format: city/location is the headline, state is the subhead,
+// sub-brand is the bottom line (e.g. COOPERSTOWN / NEW YORK / All Star Village).
 const PROPERTIES = [
-  { name: 'Cooperstown All Star Village',     count: 'ONEONTA, NY',     line: 'A pilgrimage at the birthplace of baseball. 12 summer weeks.', href: '/cooperstown/',                    photo: '/images/v4/photo-dugout.png' },
-  { name: 'Rocker B Ranch',                   count: 'GRAFORD, TX',     line: 'The 325-acre Texas ranch built for baseball memories.',       href: '/rocker-b/',                       photo: '/images/v4/photo-flags.png' },
-  { name: 'Ripken Experience · Aberdeen',     count: 'ABERDEEN, MD',    line: 'Where the Ripken family started. Replica big-league fields.', href: '/ripken-aberdeen/',                photo: '/images/v4/photo-celebrate.png' },
-  { name: 'Ripken Experience · Myrtle Beach', count: 'MYRTLE BEACH, SC', line: 'The baseball vacation built into the season.',               href: '/ripken-myrtle-beach/',            photo: '/images/v4/photo-running.png' },
-  { name: 'Ripken Experience · Pigeon Forge', count: 'PIGEON FORGE, TN', line: 'Big-league baseball in the foothills of the Smokies.',       href: '/ripken-pigeon-forge/',            photo: '/images/v4/photo-batter.png' },
-  { name: 'Sports Force Parks · Cedar Point', count: 'SANDUSKY, OH',    line: 'Where baseball week meets Cedar Point week.',                 href: '/sports-force-parks-cedar-point/', photo: '/images/v4/photo-field.png' },
+  { name: 'Cooperstown',  count: 'NEW YORK',       line: 'All Star Village',  href: '/cooperstown/',                    photo: '/images/v4/photo-dugout.png' },
+  { name: 'Rocker B',     count: 'TEXAS',          line: 'Rocker B Ranch',    href: '/rocker-b/',                       photo: '/images/v4/photo-flags.png' },
+  { name: 'Cedar Point',  count: 'OHIO',           line: 'Sports Parks',      href: '/sports-force-parks-cedar-point/', photo: '/images/v4/photo-field.png' },
+  { name: 'Manteca',      count: 'CALIFORNIA',     line: 'Sports Parks',      href: '/sports-force-parks-manteca/',     photo: '/images/v4/photo-glove.png' },
+  { name: 'Aberdeen',     count: 'MARYLAND',       line: 'Ripken Experience', href: '/ripken-aberdeen/',                photo: '/images/v4/photo-celebrate.png' },
+  { name: 'Myrtle Beach', count: 'SOUTH CAROLINA', line: 'Ripken Experience', href: '/ripken-myrtle-beach/',            photo: '/images/v4/photo-running.png' },
+  { name: 'Pigeon Forge', count: 'TENNESSEE',      line: 'Ripken Experience', href: '/ripken-pigeon-forge/',            photo: '/images/v4/photo-batter.png' },
 ];
 
+// Cross-sell points at specific sub-programs (matches wireframe), not pillar pages.
 const CROSS_SELL = [
-  { tag: 'LOCAL & REGIONAL',       name: 'Local and Regional Weekend Tournaments', meta: 'USSSA-sanctioned weekends',          href: '/local/' },
-  { tag: 'RIPKEN',                 name: 'Ripken Nationals',                       meta: '16-Team Championship · Cooperstown', href: '/ripken/' },
-  { tag: 'TRAINING & DEVELOPMENT', name: 'Training & Development',  meta: 'Baseball Factory · Prospect Select',  href: '/training/' },
+  { tag: 'DESTINATION EXPERIENCES', name: 'Ripken Experience Weeks',     meta: 'Weeklong tournaments at three iconic sites.',     href: '/ripken-aberdeen/' },
+  { tag: 'LOCAL & REGIONAL',        name: 'UBN Network',                 meta: 'Tournaments built around your home region.',      href: '/local/' },
+  { tag: 'TRAINING & DEVELOPMENT',  name: 'Prospect Select Showcases',   meta: 'Hosted at our destinations. Open to invited talent.', href: '/prospect-select/' },
 ];
 ---
 
@@ -26,9 +31,9 @@ const CROSS_SELL = [
       <div class="phv4__overlay" aria-hidden="true"></div>
       <div class="phv4__inner">
         <p class="phv4__eyebrow text-eyebrow">UNRIVALED BASEBALL / DESTINATION EXPERIENCES</p>
-        <span class="phv4__chip">DESTINATIONS</span>
+        <span class="phv4__chip">DESTINATION EXPERIENCES</span>
         <h1 class="phv4__headline">Where families travel to play.</h1>
-        <p class="phv4__sub">Weeklong tournaments at premier properties — Cooperstown, the Ripken Experience, Rocker B Ranch, and Sports Force Parks.</p>
+        <p class="phv4__sub">Cooperstown and the three Ripken Experience cities anchor our weeklong programming. Rocker B Ranch and Unrivaled Sports Parks bring weekend tournaments to premier facilities. Every property runs to a single standard.</p>
       </div>
     </section>
 
@@ -57,6 +62,7 @@ const CROSS_SELL = [
       <div class="xsell__inner">
         <p class="xsell__eyebrow text-eyebrow">CONTINUE THE JOURNEY</p>
         <h2 class="xsell__headline">More ways to play.</h2>
+        <p class="text-body" style="margin:0 0 24px;opacity:0.85">Other ways your kid can play in the Unrivaled portfolio:</p>
         <div class="xsell__grid" data-reveal-stagger>
           {CROSS_SELL.map(c => (
             <a class="xcard" href={c.href}>
@@ -72,8 +78,9 @@ const CROSS_SELL = [
 
     <section class="ctaband" data-reveal hidden>
       <div class="ctaband__inner">
-        <h2 class="ctaband__headline">Ready to find your week?</h2>
-        <a class="ctaband__btn" href="/events/">Browse destinations →</a>
+        <h2 class="ctaband__headline">Ready to find what fits?</h2>
+        <p style="opacity:0.85;margin:8px 0 24px">Browse the full calendar or start planning the season.</p>
+        <a class="ctaband__btn" href="/events/">See all events →</a>
       </div>
     </section>
 
