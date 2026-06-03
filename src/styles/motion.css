@@ -7,6 +7,12 @@
    rules and a small companion <script> in BaseLayout.
    ============================================================ */
 
+/* Defensive: enforce the `hidden` HTML attribute so future class
+   rules can't accidentally beat the UA stylesheet via specificity.
+   Used to gate "section temporarily hidden in Phase 1" markup so a
+   single attribute flip restores them — keep this guarantee solid. */
+[hidden] { display: none !important; }
+
 /* ----- 1. Smooth scrolling for anchor jumps + scrollIntoView() ----- */
 html {
     scroll-behavior: smooth;
